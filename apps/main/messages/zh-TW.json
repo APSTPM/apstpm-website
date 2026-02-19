@@ -8,17 +8,18 @@
     "contact": "聯絡"
   },
   "hero": {
-    "badge": "2026 賽季現已開放報名",
-    "title": "亞太智慧電網與能源管理研討會",
-    "subtitle": "探索未來能源解決方案，推動可持續發展",
-    "cta": "立即報名",
-    "ctaPrimary": "立即報名",
-    "ctaSecondary": "瀏覽賽事",
+    "badge": "澳科實踐會",
+    "title": "澳門科技實踐促進會",
+    "titleEn": "APSTPM",
+    "subtitle": "研究及協助提升澳門對科技實踐的認識，提高運用科技作教學及推廣的能力，推動會員自身發展，服務社會。",
+    "cta": "了解更多",
+    "ctaPrimary": "了解更多",
+    "ctaSecondary": "聯絡我們",
     "stats": {
-      "participants": "參賽者",
-      "teams": "參賽隊伍",
-      "countries": "國家與地區",
-      "prize": "總獎金"
+      "participants": "會員",
+      "teams": "活動",
+      "countries": "合作夥伴",
+      "prize": "服務年數"
     }
   },
   "common": {
@@ -39,43 +40,43 @@
     "description": "描述"
   },
   "home": {
-    "welcome": "歡迎來到 APSTPM",
+    "welcome": "歡迎來到澳門科技實踐促進會",
     "aboutSection": {
       "title": "關於我們",
-      "description": "亞太智慧電網與能源管理研討會致力於促進能源領域的創新與合作。"
+      "description": "澳門科技實踐促進會為非牟利團體，致力於研究及協助提升澳門對科技實踐的認識和提高運用科技作教學及推廣的能力。"
     },
     "eventsSection": {
-      "title": "精彩賽事",
-      "description": "參與我們舉辦的各類專業賽事，展現您的技術實力。"
+      "title": "近期活動",
+      "description": "參與我們舉辦的各類科技實踐活動，提升專業技能。"
     },
     "newsSection": {
       "title": "最新消息",
-      "description": "掌握能源產業的最新動態與發展趨勢。"
+      "description": "掌握科技實踐領域的最新動態與發展趨勢。"
     },
     "cta": {
-      "title": "準備好開始了嗎？",
-      "description": "加入我們，共同推動能源創新",
-      "button": "立即報名"
+      "title": "加入我們",
+      "description": "凡從事與科技相關的研究、管理、技術、教育之專業工作者，歡迎加入澳門科技實踐促進會。",
+      "button": "聯絡我們"
     }
   },
   "about": {
-    "title": "關於 APSTPM",
-    "subtitle": "攜手推動能源創新",
-    "missionTitle": "我們的使命",
-    "missionDescription": "APSTPM 致力於促進亞太地區能源領域的創新與合作。我們匯聚研究人員、產業專業人士和政策制定者，共同分享知識並推動可持續能源解決方案。",
-    "historyTitle": "發展歷程",
-    "historyDescription": "APSTPM 成立於 2015 年，從區域性會議發展成為亞太地區能源創新的重要平台。多年來，我們促成了眾多合作夥伴關係，並在智慧電網技術和能源管理方面推出了開創性的倡議。",
+    "title": "關於澳門科技實踐促進會",
+    "subtitle": "推動科技實踐，服務澳門社會",
+    "missionTitle": "宗旨",
+    "missionDescription": "本會為非牟利團體，宗旨是研究及協助提升澳門對科技實踐的認識和提高運用科技作教學及推廣的能力，推動本會會員的自身發展，以及服務社會。",
+    "historyTitle": "會員資格",
+    "historyDescription": "凡從事與科技相關的研究、管理、技術、教育之專業工作者，願意遵守本會章程，由其本人提出申請、遞交申請表及繳納入會會費，經理事會審核和批准後，可成為本會會員。",
     "valuesTitle": "核心價值",
     "values": {
-      "innovation": "創新",
-      "innovationDesc": "我們激勵創意解決能源挑戰。",
-      "collaboration": "協作",
-      "collaborationDesc": "我們相信合作夥伴關係和知識分享的力量。",
-      "sustainability": "可持續發展",
-      "sustainabilityDesc": "我們致力於推動環境友善的能源解決方案。"
+      "innovation": "科技實踐",
+      "innovationDesc": "提升澳門對科技實踐的認識和運用能力。",
+      "collaboration": "教學推廣",
+      "collaborationDesc": "提高運用科技作教學及推廣的能力。",
+      "sustainability": "服務社會",
+      "sustainabilityDesc": "推動會員自身發展，以及服務社會。"
     },
-    "teamTitle": "團隊介紹",
-    "teamDescription": "我們的專業團隊由來自不同領域的專家組成，包括電機工程、可再生能源和政策開發。"
+    "teamTitle": "聯絡我們",
+    "teamDescription": "會址：澳門黑沙環勞動節大馬路222號裕華大廈第七座4樓A室"
   },
   "competitions": {
     "title": "競賽",
@@ -173,7 +174,7 @@
     }
   },
   "footer": {
-    "description": "亞太科技與專案管理協會致力於促進科技創新與人才培養，透過舉辦國際賽事和學術交流，推動亞太地區科技教育發展。",
+    "description": "澳門科技實踐促進會（APSTPM）為非牟利團體，致力於研究及協助提升澳門對科技實踐的認識和提高運用科技作教學及推廣的能力。",
     "copyright": "版權所有",
     "privacy": "隱私政策",
     "terms": "服務條款",

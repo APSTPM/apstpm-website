@@ -184,7 +184,7 @@ export default function HomePage() {
               {tHome('cta.description')}
             </p>
             <Link
-              href="/competitions"
+              href="/contact"
               className="inline-flex items-center justify-center bg-brand-700 hover:bg-brand-800 text-white px-10 py-4 text-lg font-semibold rounded-lg transition-colors"
             >
               {tHome('cta.button')}

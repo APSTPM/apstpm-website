@@ -8,17 +8,18 @@
     "contact": "Contact"
   },
   "hero": {
-    "badge": "2026 Season Now Open for Registration",
-    "title": "Asia-Pacific Smart Grid and Power Management Conference",
-    "subtitle": "Exploring future energy solutions, driving sustainable development",
-    "cta": "Register Now",
-    "ctaPrimary": "Register Now",
-    "ctaSecondary": "View Events",
+    "badge": "APSTPM",
+    "title": "Association of Promotion of Science and Technology Practice in Macau",
+    "titleZh": "澳門科技實踐促進會",
+    "subtitle": "Researching and assisting in promoting awareness and practical application of science and technology in Macau for education and community development.",
+    "cta": "Learn More",
+    "ctaPrimary": "Learn More",
+    "ctaSecondary": "Contact Us",
     "stats": {
-      "participants": "Participants",
-      "teams": "Teams",
-      "countries": "Countries",
-      "prize": "Prize Pool"
+      "participants": "Members",
+      "teams": "Events",
+      "countries": "Partners",
+      "prize": "Years of Service"
     }
   },
   "common": {
@@ -42,40 +43,40 @@
     "welcome": "Welcome to APSTPM",
     "aboutSection": {
       "title": "About Us",
-      "description": "The Asia-Pacific Smart Grid and Power Management Conference is dedicated to promoting innovation and collaboration in the energy sector."
+      "description": "APSTPM is a non-profit organization dedicated to researching and promoting awareness of science and technology practice in Macau, enhancing the use of technology in education and outreach."
     },
     "eventsSection": {
-      "title": "Featured Events",
-      "description": "Participate in our professional events and showcase your technical expertise."
+      "title": "Recent Events",
+      "description": "Participate in our science and technology practice events and enhance your professional skills."
     },
     "newsSection": {
       "title": "Latest News",
-      "description": "Stay updated with the latest developments and trends in the energy industry."
+      "description": "Stay updated with the latest developments in science and technology practice."
     },
     "cta": {
-      "title": "Ready to Get Started?",
-      "description": "Join us in driving energy innovation",
-      "button": "Register Now"
+      "title": "Join Us",
+      "description": "Professionals in science and technology related research, management, technical, and education fields are welcome to join APSTPM.",
+      "button": "Contact Us"
     }
   },
   "about": {
     "title": "About APSTPM",
-    "subtitle": "Advancing Energy Innovation Together",
-    "missionTitle": "Our Mission",
-    "missionDescription": "APSTPM is dedicated to promoting innovation and collaboration in the Asia-Pacific energy sector. We bring together researchers, industry professionals, and policymakers to share knowledge and drive sustainable energy solutions.",
-    "historyTitle": "Our History",
-    "historyDescription": "Founded in 2015, APSTPM has grown from a regional conference to a premier platform for energy innovation in the Asia-Pacific region. Over the years, we have facilitated numerous partnerships and launched groundbreaking initiatives in smart grid technology and power management.",
+    "subtitle": "Promoting Science and Technology Practice, Serving Macau",
+    "missionTitle": "Mission",
+    "missionDescription": "APSTPM is a non-profit organization. Our mission is to research and assist in promoting awareness of science and technology practice in Macau, enhance the use of technology in education and outreach, support the development of our members, and serve the community.",
+    "historyTitle": "Membership",
+    "historyDescription": "Professionals engaged in science and technology related research, management, technical, and education fields who are willing to abide by the association's bylaws may apply for membership by submitting an application form and paying the membership fee, subject to approval by the Board of Directors.",
     "valuesTitle": "Our Values",
     "values": {
-      "innovation": "Innovation",
-      "innovationDesc": "We foster creative solutions to energy challenges.",
-      "collaboration": "Collaboration",
-      "collaborationDesc": "We believe in the power of partnerships and knowledge sharing.",
-      "sustainability": "Sustainability",
-      "sustainabilityDesc": "We are committed to promoting environmentally responsible energy solutions."
+      "innovation": "Technology Practice",
+      "innovationDesc": "Promoting awareness and practical application of science and technology in Macau.",
+      "collaboration": "Education & Outreach",
+      "collaborationDesc": "Enhancing the use of technology in education and community outreach.",
+      "sustainability": "Community Service",
+      "sustainabilityDesc": "Supporting member development and serving the community."
     },
-    "teamTitle": "Our Team",
-    "teamDescription": "Our dedicated team consists of experts from various fields including electrical engineering, renewable energy, and policy development."
+    "teamTitle": "Contact Us",
+    "teamDescription": "Address: Unit A, 4/F, Tower 7, U Wa Building, No. 222, Avenida 1.º de Maio, Areia Preta, Macau"
   },
   "competitions": {
     "title": "Competitions",
@@ -173,7 +174,7 @@
     }
   },
   "footer": {
-    "description": "APSTPM is dedicated to promoting technological innovation and talent development through international competitions and academic exchanges in the Asia-Pacific region.",
+    "description": "Association of Promotion of Science and Technology Practice in Macau (APSTPM) is a non-profit organization dedicated to promoting awareness and practical application of science and technology in Macau.",
     "copyright": "Copyright",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
