@@ -11,7 +11,11 @@ import type { User as SupabaseUser } from '@supabase/supabase-js';
 export default function UserMenu() {
   const t = useTranslations('Auth');
   const [user, setUser] = useState<SupabaseUser | null>(null);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [profile, setProfile] = useState<{
+    role?: string;
+    real_name?: string | null;
+    school?: { code: string; name: string } | null;
+  } | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const supabase = createBrowserClient();
 
@@ -21,11 +25,11 @@ export default function UserMenu() {
       if (user) {
         supabase
           .from('profiles')
-          .select('role')
+          .select('role, real_name, school:schools!school_id(code, name)')
           .eq('id', user.id)
           .single()
           .then(({ data }) => {
-            setIsAdmin(data?.role === 'admin');
+            setProfile(data ?? null);
           });
       }
     });
@@ -34,6 +38,16 @@ export default function UserMenu() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
+      if (!session?.user) {
+        setProfile(null);
+      } else {
+        supabase
+          .from('profiles')
+          .select('role, real_name, school:schools!school_id(code, name)')
+          .eq('id', session.user.id)
+          .single()
+          .then(({ data }) => setProfile(data ?? null));
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -58,9 +72,11 @@ export default function UserMenu() {
 
   const avatarUrl = user.user_metadata?.avatar_url || user.user_metadata?.picture;
   const displayName =
+    profile?.real_name?.trim() ||
     user.user_metadata?.full_name ||
     user.user_metadata?.name ||
     user.email?.split('@')[0];
+  const isAdmin = profile?.role === 'admin';
 
   return (
     <div className="relative">
@@ -93,7 +109,9 @@ export default function UserMenu() {
               <p className="text-sm font-medium text-gray-900 truncate">
                 {displayName}
               </p>
-              <p className="text-xs text-gray-500 truncate">{user.email}</p>
+              <p className="text-xs text-gray-500 truncate">
+                {profile?.school ? `${profile.school.code} - ${profile.school.name}` : user.email}
+              </p>
             </div>
             {isAdmin && (
               <Link

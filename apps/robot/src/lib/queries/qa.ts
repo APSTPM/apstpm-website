@@ -15,7 +15,7 @@ export async function getPosts(filters: QaFilters = {}) {
 
   let query = supabase
     .from('qa_posts')
-    .select('*, author:profiles!author_id(id, display_name, avatar_url, role)', { count: 'exact' })
+    .select('*, author:profiles!author_id(id, display_name, avatar_url, role, real_name, user_type, school:schools!school_id(code, name))', { count: 'exact' })
     .order('pinned', { ascending: false })
     .order('created_at', { ascending: false })
     .range((page - 1) * pageSize, page * pageSize - 1);
@@ -50,12 +50,12 @@ export async function getPostById(id: string) {
   const [postResult, repliesResult] = await Promise.all([
     supabase
       .from('qa_posts')
-      .select('*, author:profiles!author_id(id, display_name, avatar_url, role)')
+      .select('*, author:profiles!author_id(id, display_name, avatar_url, role, real_name, user_type, school:schools!school_id(code, name))')
       .eq('id', id)
       .single(),
     supabase
       .from('qa_replies')
-      .select('*, author:profiles!author_id(id, display_name, avatar_url, role)')
+      .select('*, author:profiles!author_id(id, display_name, avatar_url, role, real_name, user_type, school:schools!school_id(code, name))')
       .eq('post_id', id)
       .order('created_at', { ascending: true }),
   ]);

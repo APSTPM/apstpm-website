@@ -129,6 +129,7 @@
     "loginToAsk": "登入後即可提問",
     "loginToReply": "登入後即可回覆",
     "backToList": "返回問題列表",
+    "noSchool": "無學校",
     "replyCount": "回覆"
   },
   "Auth": {
@@ -145,7 +146,21 @@
     "magicLinkSent": "登入連結已發送至您的電郵",
     "checkEmail": "請檢查您的電郵信箱",
     "profile": "個人資料",
-    "admin": "管理面板"
+    "admin": "管理面板",
+    "completeProfile": "完善個人資料",
+    "realName": "真實姓名",
+    "realNamePlaceholder": "請輸入您的真實姓名",
+    "selectSchool": "選擇學校",
+    "selectSchoolPlaceholder": "請選擇您的學校",
+    "userType": "身份",
+    "teacher": "老師",
+    "student": "同學",
+    "saveProfile": "保存資料",
+    "saving": "保存中...",
+    "profileRequired": "請先完善個人資料後再使用系統",
+    "userType": "身份",
+    "teacher": "老師",
+    "student": "同學"
   },
   "Admin": {
     "title": "管理面板",
@@ -162,6 +177,17 @@
     "deleteReply": "刪除回覆",
     "confirmDelete": "確定要刪除嗎？",
     "unauthorized": "您沒有權限訪問此頁面",
-    "backToSite": "返回網站"
+    "backToSite": "返回網站",
+    "schoolManagement": "學校管理",
+    "addSchool": "新增學校",
+    "schoolCode": "學校編號",
+    "schoolName": "學校名稱",
+    "schoolCodePlaceholder": "如: 113",
+    "schoolNamePlaceholder": "如: 澳門坊眾學校",
+    "editSchool": "編輯學校",
+    "deleteSchool": "刪除學校",
+    "noSchools": "暫無學校",
+    "save": "保存",
+    "cancel": "取消"
   }
 }

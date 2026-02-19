@@ -112,7 +112,6 @@
     "replyPlaceholder": "Type your reply...",
     "submitReply": "Submit Reply",
     "replies": "Replies",
-    "replyCount": "replies",
     "noReplies": "No replies yet",
     "statusOpen": "Open",
     "statusAnswered": "Answered",
@@ -129,6 +128,7 @@
     "loginToAsk": "Log in to ask a question",
     "loginToReply": "Log in to reply",
     "backToList": "Back to questions",
+    "noSchool": "No School",
     "replyCount": "Replies"
   },
   "Auth": {
@@ -145,7 +145,18 @@
     "magicLinkSent": "Magic link sent to your email",
     "checkEmail": "Please check your email inbox",
     "profile": "Profile",
-    "admin": "Admin Panel"
+    "admin": "Admin Panel",
+    "completeProfile": "Complete Profile",
+    "realName": "Real Name",
+    "realNamePlaceholder": "Enter your real name",
+    "selectSchool": "Select School",
+    "selectSchoolPlaceholder": "Please select your school",
+    "userType": "I am a",
+    "teacher": "Teacher",
+    "student": "Student",
+    "saveProfile": "Save Profile",
+    "saving": "Saving...",
+    "profileRequired": "Please complete your profile before using the system"
   },
   "Admin": {
     "title": "Admin Panel",
@@ -162,6 +173,17 @@
     "deleteReply": "Delete Reply",
     "confirmDelete": "Are you sure you want to delete?",
     "unauthorized": "You do not have permission to access this page",
-    "backToSite": "Back to Site"
+    "backToSite": "Back to Site",
+    "schoolManagement": "School Management",
+    "addSchool": "Add School",
+    "schoolCode": "School Code",
+    "schoolName": "School Name",
+    "schoolCodePlaceholder": "e.g. 113",
+    "schoolNamePlaceholder": "e.g. School Name",
+    "editSchool": "Edit School",
+    "deleteSchool": "Delete School",
+    "noSchools": "No schools",
+    "save": "Save",
+    "cancel": "Cancel"
   }
 }

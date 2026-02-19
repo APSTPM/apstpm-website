@@ -6,6 +6,8 @@ import { Link } from '@/i18n/routing';
 import { Badge, Button } from '@apstpm-website/ui';
 import { CheckCircle, Pin, XCircle, Trash2, ExternalLink } from 'lucide-react';
 import { markAsAnswered, togglePin, closePost, deletePost } from '@/lib/actions/qa';
+import { formatAuthor } from '@/lib/utils/author';
+import { formatDateBeijing } from '@/lib/utils/date';
 import QaStatusBadge from '@/components/qa/QaStatusBadge';
 
 interface AdminQaListProps {
@@ -51,7 +53,7 @@ export default function AdminQaList({ posts }: AdminQaListProps) {
               </div>
               <h3 className="font-semibold text-gray-900 truncate">{post.title}</h3>
               <p className="text-sm text-gray-500 mt-1">
-                {post.author?.display_name || '匿名'} · {post.reply_count} {tQa('replyCount')} · {new Date(post.created_at).toLocaleDateString('zh-TW')}
+                {formatAuthor(post.author)} · {post.reply_count} {tQa('replyCount')} · {formatDateBeijing(post.created_at)}
               </p>
             </div>
 

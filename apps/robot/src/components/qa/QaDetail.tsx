@@ -3,6 +3,8 @@
 import { useTranslations } from 'next-intl';
 import { Badge } from '@apstpm-website/ui';
 import { Shield, Clock } from 'lucide-react';
+import { formatAuthor } from '@/lib/utils/author';
+import { formatDateBeijing } from '@/lib/utils/date';
 import QaStatusBadge from './QaStatusBadge';
 
 interface Reply {
@@ -13,7 +15,10 @@ interface Reply {
   author: {
     display_name: string | null;
     avatar_url: string | null;
+    real_name: string | null;
     role: string;
+    user_type: 'teacher' | 'student' | null;
+    school: { code: string; name: string } | null;
   } | null;
 }
 
@@ -29,6 +34,10 @@ interface QaDetailProps {
     author: {
       display_name: string | null;
       avatar_url: string | null;
+      real_name: string | null;
+      role: string;
+      user_type: 'teacher' | 'student' | null;
+      school: { code: string; name: string } | null;
     } | null;
   };
   replies: Reply[];
@@ -36,16 +45,6 @@ interface QaDetailProps {
 
 export default function QaDetail({ post, replies }: QaDetailProps) {
   const t = useTranslations('QA');
-
-  const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString('zh-TW', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  };
 
   return (
     <div className="space-y-6">
@@ -73,11 +72,11 @@ export default function QaDetail({ post, replies }: QaDetailProps) {
                   {(post.author?.display_name || '?')[0].toUpperCase()}
                 </div>
               )}
-              <span>{post.author?.display_name || '匿名'}</span>
+              <span>{formatAuthor(post.author as any)}</span>
             </div>
             <span className="flex items-center gap-1">
               <Clock className="w-3.5 h-3.5" />
-              {formatDate(post.created_at)}
+              {formatDateBeijing(post.created_at)}
             </span>
           </div>
           {post.tags.length > 0 && (
@@ -128,14 +127,11 @@ export default function QaDetail({ post, replies }: QaDetailProps) {
                         {(reply.author?.display_name || '?')[0].toUpperCase()}
                       </div>
                     )}
-                    <span>{reply.author?.display_name || '匿名'}</span>
-                    {reply.author?.role === 'admin' && (
-                      <Badge variant="default" className="text-xs py-0">Admin</Badge>
-                    )}
+                    <span>{formatAuthor(reply.author as any)}</span>
                   </div>
                   <span className="flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5" />
-                    {formatDate(reply.created_at)}
+                    {formatDateBeijing(reply.created_at)}
                   </span>
                 </div>
               </div>

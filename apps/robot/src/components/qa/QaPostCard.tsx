@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { MessageSquare, Pin, Clock } from 'lucide-react';
+import { formatAuthor } from '@/lib/utils/author';
 import QaStatusBadge from './QaStatusBadge';
 
 interface QaPostCardProps {
@@ -16,6 +17,10 @@ interface QaPostCardProps {
     author: {
       display_name: string | null;
       avatar_url: string | null;
+      real_name: string | null;
+      role: string;
+      user_type: 'teacher' | 'student' | null;
+      school: { code: string; name: string } | null;
     } | null;
   };
 }
@@ -63,7 +68,7 @@ export default function QaPostCard({ post }: QaPostCardProps) {
               {post.title}
             </h3>
             <div className="flex items-center gap-4 mt-2 text-sm text-gray-500">
-              <span>{post.author?.display_name || '匿名'}</span>
+              <span>{formatAuthor(post.author as any)}</span>
               <span className="flex items-center gap-1">
                 <Clock className="w-3.5 h-3.5" />
                 {timeAgo(post.created_at)}

@@ -16,6 +16,10 @@ export interface Database {
           avatar_url: string | null;
           email: string | null;
           role: 'user' | 'admin';
+          real_name: string | null;
+          school_id: string | null;
+          user_type: 'teacher' | 'student' | null;
+          profile_completed: boolean;
           created_at: string;
         };
         Insert: {
@@ -24,6 +28,10 @@ export interface Database {
           avatar_url?: string | null;
           email?: string | null;
           role?: 'user' | 'admin';
+          real_name?: string | null;
+          school_id?: string | null;
+          user_type?: 'teacher' | 'student' | null;
+          profile_completed?: boolean;
           created_at?: string;
         };
         Update: {
@@ -32,6 +40,39 @@ export interface Database {
           avatar_url?: string | null;
           email?: string | null;
           role?: 'user' | 'admin';
+          real_name?: string | null;
+          school_id?: string | null;
+          user_type?: 'teacher' | 'student' | null;
+          profile_completed?: boolean;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'profiles_school_id_fkey';
+            columns: ['school_id'];
+            isOneToOne: false;
+            referencedRelation: 'schools';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      schools: {
+        Row: {
+          id: string;
+          code: string;
+          name: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          code: string;
+          name: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          code?: string;
+          name?: string;
           created_at?: string;
         };
         Relationships: [];
