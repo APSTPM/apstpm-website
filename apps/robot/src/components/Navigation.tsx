@@ -5,6 +5,7 @@ import { Link, usePathname } from '@/i18n/routing';
 import { useTransition, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bot } from 'lucide-react';
+import UserMenu from '@/components/auth/UserMenu';
 
 export default function Navigation({ locale }: { locale: string }) {
   const t = useTranslations('Navigation');
@@ -29,6 +30,7 @@ export default function Navigation({ locale }: { locale: string }) {
     { href: '/' as const, label: t('home') },
     { href: '/competition' as const, label: t('competition') },
     { href: '/rules' as const, label: t('rules') },
+    { href: '/qa' as const, label: t('qa') },
     { href: '/announcements' as const, label: t('announcements') },
     { href: '/history' as const, label: t('history') },
     { href: '/contact' as const, label: t('contact') },
@@ -75,8 +77,9 @@ export default function Navigation({ locale }: { locale: string }) {
             })}
           </div>
 
-          {/* Right side: locale + mobile menu */}
+          {/* Right side: UserMenu + locale + mobile menu */}
           <div className="flex items-center gap-3">
+            <UserMenu />
             {/* Locale Switcher */}
             <div className="flex gap-1">
               {(['en', 'zh-TW'] as const).map((loc) => (
@@ -131,6 +134,9 @@ export default function Navigation({ locale }: { locale: string }) {
                   {link.label}
                 </Link>
               ))}
+              <div className="pt-2 border-t border-gray-200">
+                <UserMenu />
+              </div>
             </div>
           </motion.div>
         )}

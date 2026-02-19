@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { contentProvider } from '@/lib/content';
-import GiscusComments from '@/components/GiscusComments';
 import { Link } from '@/i18n/routing';
 import { FileText, Calendar, ArrowLeft } from 'lucide-react';
 
@@ -92,8 +91,6 @@ export default async function AnnouncementPage({ params }: PageProps) {
           </div>
         )}
       </article>
-
-      <GiscusComments locale={locale} />
     </div>
   );
 }

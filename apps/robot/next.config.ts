@@ -4,7 +4,7 @@ import type { NextConfig } from "next";
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
-  transpilePackages: ['@apstpm-website/ui', '@apstpm-website/utils', '@apstpm-website/i18n'],
+  transpilePackages: ['@apstpm-website/ui', '@apstpm-website/utils', '@apstpm-website/i18n', '@apstpm/database'],
 };
 
 export default withNextIntl(nextConfig);
