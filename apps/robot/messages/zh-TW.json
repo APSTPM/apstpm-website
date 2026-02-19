@@ -152,6 +152,8 @@
     "realNamePlaceholder": "請輸入您的真實姓名",
     "selectSchool": "選擇學校",
     "selectSchoolPlaceholder": "請選擇您的學校",
+    "searchSchoolPlaceholder": "輸入學校名稱或編號搜尋...",
+    "noSchoolResults": "找不到匹配的學校",
     "userType": "身份",
     "teacher": "老師",
     "student": "同學",

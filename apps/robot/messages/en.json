@@ -151,6 +151,8 @@
     "realNamePlaceholder": "Enter your real name",
     "selectSchool": "Select School",
     "selectSchoolPlaceholder": "Please select your school",
+    "searchSchoolPlaceholder": "Search by name or code...",
+    "noSchoolResults": "No matching schools",
     "userType": "I am a",
     "teacher": "Teacher",
     "student": "Student",

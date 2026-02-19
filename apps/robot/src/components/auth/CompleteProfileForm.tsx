@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/routing';
-import { Button } from '@apstpm-website/ui';
+import { Button, SearchableSelect } from '@apstpm-website/ui';
 import { completeProfile } from '@/lib/actions/profile';
 
 interface School {
@@ -21,6 +21,11 @@ export default function CompleteProfileForm({ schools }: CompleteProfileFormProp
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [realName, setRealName] = useState('');
+  const [selectedSchool, setSelectedSchool] = useState('');
+  const [userType, setUserType] = useState('');
+
+  const isFormComplete = realName.trim() !== '' && selectedSchool !== '' && userType !== '';
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,40 +47,42 @@ export default function CompleteProfileForm({ schools }: CompleteProfileFormProp
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
         <label htmlFor="real_name" className="block text-sm font-medium text-gray-700 mb-1">
-          {t('realName')}
+          {t('realName')} <span className="text-red-500">*</span>
         </label>
         <input
           id="real_name"
           name="real_name"
           type="text"
           required
+          value={realName}
+          onChange={(e) => setRealName(e.target.value)}
           placeholder={t('realNamePlaceholder')}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-robot-500 focus:border-transparent outline-none"
         />
       </div>
 
       <div>
-        <label htmlFor="school_id" className="block text-sm font-medium text-gray-700 mb-1">
-          {t('selectSchool')}
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          {t('selectSchool')} <span className="text-red-500">*</span>
         </label>
-        <select
-          id="school_id"
+        <SearchableSelect
           name="school_id"
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-robot-500 focus:border-transparent outline-none bg-white"
-        >
-          <option value="">{t('selectSchoolPlaceholder')}</option>
-          {schools.map((school) => (
-            <option key={school.id} value={school.id}>
-              {school.code} - {school.name}
-            </option>
-          ))}
-        </select>
+          value={selectedSchool}
+          onChange={setSelectedSchool}
+          options={schools.map((s) => ({
+            value: s.id,
+            label: `${s.code} - ${s.name}`,
+          }))}
+          placeholder={t('selectSchoolPlaceholder')}
+          searchPlaceholder={t('searchSchoolPlaceholder')}
+          noResultsText={t('noSchoolResults')}
+        />
       </div>
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          {t('userType')}
+          {t('userType')} <span className="text-red-500">*</span>
         </label>
         <div className="flex gap-6">
           <label className="flex items-center gap-2 cursor-pointer">
@@ -84,6 +91,8 @@ export default function CompleteProfileForm({ schools }: CompleteProfileFormProp
               name="user_type"
               value="teacher"
               required
+              checked={userType === 'teacher'}
+              onChange={() => setUserType('teacher')}
               className="w-4 h-4 text-robot-600 focus:ring-robot-500"
             />
             <span className="text-sm text-gray-700">{t('teacher')}</span>
@@ -94,6 +103,8 @@ export default function CompleteProfileForm({ schools }: CompleteProfileFormProp
               name="user_type"
               value="student"
               required
+              checked={userType === 'student'}
+              onChange={() => setUserType('student')}
               className="w-4 h-4 text-robot-600 focus:ring-robot-500"
             />
             <span className="text-sm text-gray-700">{t('student')}</span>
@@ -103,7 +114,7 @@ export default function CompleteProfileForm({ schools }: CompleteProfileFormProp
 
       {error && <p className="text-sm text-red-600">{error}</p>}
 
-      <Button type="submit" className="w-full" disabled={loading}>
+      <Button type="submit" className="w-full" disabled={!isFormComplete || loading}>
         {loading ? t('saving') : t('saveProfile')}
       </Button>
     </form>
