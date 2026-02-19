@@ -8,6 +8,8 @@
 - **Frontend**: Next.js 15 (App Router) + React 19
 - **Styling**: Tailwind CSS 4 + Framer Motion
 - **i18n**: next-intl (繁體中文 / English)
+- **Database**: Supabase (PostgreSQL + Auth + RLS)
+- **Email**: Resend (optional, for QA notifications)
 - **Fonts**: Space Grotesk (display) + Inter (body) + Noto Sans TC (中文)
 
 ## Project Structure
@@ -154,6 +156,11 @@ This is a monorepo with multiple Next.js applications:
 | `/contact` | 聯繫我們 |
 | `/history` | 歷史沿革 |
 | `/rules` | 比賽規則 |
+| `/qa` | Q&A 問答列表 |
+| `/qa/[id]` | 問答詳情 |
+| `/auth/login` | 登入頁面 |
+| `/admin` | 管理後台 |
+| `/admin/qa` | 管理 Q&A |
 
 所有頁面支援 `[locale]` 動態路由，支持 `en` 和 `zh-TW` 兩種語言。
 
@@ -164,6 +171,7 @@ This is a monorepo with multiple Next.js applications:
 | Main App | `apps/main` | Next.js 15 主站應用 |
 | Robot App | `apps/robot` | Next.js 15 機器人競賽分站 |
 | UI | `@apstpm-website/ui` | 共享 UI 組件庫 |
+| Database | `@apstpm/database` | Supabase 客戶端封裝 (browser/server/middleware) |
 | i18n | `@apstpm-website/i18n` | 國際化配置與翻譯 |
 | utils | `@apstpm-website/utils` | 通用工具函數 |
 | tsconfig | `@apstpm-website/tsconfig` | 共享 TypeScript 配置 |
@@ -206,11 +214,110 @@ The main website runs at `http://localhost:3000` by default.
 
 ### Environment Variables
 
-Create a `.env.local` file in `apps/main` for local development:
+**`apps/main/.env.local`**（主站，目前無需額外配置）：
 
 ```bash
-# Optional: Analytics or API keys
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
+
+**`apps/robot/.env.local`**（機器人競賽分站）：
+
+```bash
+# Supabase — 從 Supabase Dashboard > Project Settings > API 獲取
+NEXT_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_your-key
+
+# Resend（可選，用於 Q&A 郵件通知）— 從 resend.com 獲取
+RESEND_API_KEY=re_your-api-key
+
+# Site URL
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
+
+| 變量 | 必填 | 說明 |
+|------|------|------|
+| `NEXT_PUBLIC_SUPABASE_URL` | ✅ | Supabase 項目 URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | ✅ | Supabase Publishable Key（安全，可公開） |
+| `RESEND_API_KEY` | ❌ | 不設置則跳過郵件發送，不影響其他功能 |
+| `NEXT_PUBLIC_SITE_URL` | ✅ | 用於郵件中的連結，開發環境為 `http://localhost:3000` |
+
+## Database Setup (Supabase)
+
+Robot 分站使用 Supabase 作為數據庫和認證後端。首次設置需執行以下步驟。
+
+### 1. 創建 Supabase 項目
+
+前往 [supabase.com](https://supabase.com) 創建項目，記下 Project URL 和 API Keys。
+
+### 2. 配置 OAuth 登入（Dashboard > Authentication > Providers）
+
+項目支持三種 OAuth 登入方式，回調 URL 統一為：
+
+```
+https://<your-project-ref>.supabase.co/auth/v1/callback
+```
+
+**GitHub OAuth**：
+1. 前往 [github.com/settings/developers](https://github.com/settings/developers) → New OAuth App
+2. Authorization callback URL 填入上方回調 URL
+3. 將 Client ID / Client Secret 填入 Supabase Dashboard > Authentication > Providers > GitHub
+
+**Google OAuth**：
+1. 前往 [Google Cloud Console](https://console.cloud.google.com) → APIs & Services → Credentials → Create OAuth client ID
+2. Authorized redirect URIs 填入上方回調 URL
+3. 將 Client ID / Client Secret 填入 Supabase Dashboard > Authentication > Providers > Google
+
+**Microsoft (Azure) OAuth**：
+1. 前往 [Azure Portal](https://portal.azure.com) → Microsoft Entra ID → App registrations → New registration
+2. Redirect URI (Web) 填入上方回調 URL
+3. 將 Application (client) ID 和 Client Secret **Value** 填入 Supabase Dashboard > Authentication > Providers > Azure
+
+### 3. 配置 Redirect URLs
+
+在 Supabase Dashboard > Authentication > URL Configuration 中添加：
+
+```
+http://localhost:3000/auth/callback
+http://localhost:3000/auth/confirm
+```
+
+生產環境部署後，再添加對應的生產域名 URL。
+
+### 4. 執行數據庫遷移
+
+遷移文件位於 `apps/robot/supabase/migrations/`，包含：
+
+| 文件 | 說明 |
+|------|------|
+| `001_profiles.sql` | 用戶檔案表 + 自動建立 profile 的 trigger |
+| `002_qa_tables.sql` | Q&A 問答表 + 回覆表 + RLS 策略 |
+| `003_rule_versions.sql` | 規則版本表 |
+
+**方式 A：使用 Supabase CLI**
+
+```bash
+cd apps/robot
+npx supabase login
+npx supabase link --project-ref <your-project-ref>
+npx supabase db push
+```
+
+**方式 B：在 Supabase Dashboard 手動執行**
+
+如果 CLI 連線失敗（已知 TLS 問題），可在 Dashboard > SQL Editor 中按順序粘貼執行三個 SQL 文件的內容，效果相同。
+
+> ⚠️ 必須按 001 → 002 → 003 順序執行，後續表依賴前置表。
+
+### 5. 設置管理員
+
+需要先用任意 OAuth 或 Magic Link 登入一次，讓 trigger 自動在 `profiles` 表中建立記錄，然後在 Dashboard > SQL Editor 中執行：
+
+```sql
+-- 查看已有用戶
+SELECT id, email, role FROM profiles;
+
+-- 將指定用戶設為管理員
+UPDATE profiles SET role = 'admin' WHERE email = 'your@email.com';
 ```
 
 ## Dependencies
@@ -222,6 +329,8 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 - **Tailwind CSS**: ^4.0.0
 - **Framer Motion**: ^11.15.0
 - **next-intl**: ^3.26.0
+- **@supabase/ssr**: Supabase Auth (SSR)
+- **resend**: Email notifications
 - **lucide-react**: ^0.469.0 (Icons)
 - **react-hook-form**: ^7.54.2
 - **zod**: ^3.24.1
