@@ -1,0 +1,215 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "competitions": "Competitions",
+    "news": "News",
+    "gallery": "Gallery",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "2026 Season Now Open for Registration",
+    "title": "Asia-Pacific Smart Grid and Power Management Conference",
+    "subtitle": "Exploring future energy solutions, driving sustainable development",
+    "cta": "Register Now",
+    "ctaPrimary": "Register Now",
+    "ctaSecondary": "View Events",
+    "stats": {
+      "participants": "Participants",
+      "teams": "Teams",
+      "countries": "Countries",
+      "prize": "Prize Pool"
+    }
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "registerNow": "Register Now",
+    "contactUs": "Contact Us",
+    "readMore": "Read More",
+    "viewAll": "View All",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "search": "Search",
+    "back": "Back",
+    "details": "Details",
+    "date": "Date",
+    "location": "Location",
+    "status": "Status",
+    "organizer": "Organizer",
+    "description": "Description"
+  },
+  "home": {
+    "welcome": "Welcome to APSTPM",
+    "aboutSection": {
+      "title": "About Us",
+      "description": "The Asia-Pacific Smart Grid and Power Management Conference is dedicated to promoting innovation and collaboration in the energy sector."
+    },
+    "eventsSection": {
+      "title": "Featured Events",
+      "description": "Participate in our professional events and showcase your technical expertise."
+    },
+    "newsSection": {
+      "title": "Latest News",
+      "description": "Stay updated with the latest developments and trends in the energy industry."
+    },
+    "cta": {
+      "title": "Ready to Get Started?",
+      "description": "Join us in driving energy innovation",
+      "button": "Register Now"
+    }
+  },
+  "about": {
+    "title": "About APSTPM",
+    "subtitle": "Advancing Energy Innovation Together",
+    "missionTitle": "Our Mission",
+    "missionDescription": "APSTPM is dedicated to promoting innovation and collaboration in the Asia-Pacific energy sector. We bring together researchers, industry professionals, and policymakers to share knowledge and drive sustainable energy solutions.",
+    "historyTitle": "Our History",
+    "historyDescription": "Founded in 2015, APSTPM has grown from a regional conference to a premier platform for energy innovation in the Asia-Pacific region. Over the years, we have facilitated numerous partnerships and launched groundbreaking initiatives in smart grid technology and power management.",
+    "valuesTitle": "Our Values",
+    "values": {
+      "innovation": "Innovation",
+      "innovationDesc": "We foster creative solutions to energy challenges.",
+      "collaboration": "Collaboration",
+      "collaborationDesc": "We believe in the power of partnerships and knowledge sharing.",
+      "sustainability": "Sustainability",
+      "sustainabilityDesc": "We are committed to promoting environmentally responsible energy solutions."
+    },
+    "teamTitle": "Our Team",
+    "teamDescription": "Our dedicated team consists of experts from various fields including electrical engineering, renewable energy, and policy development."
+  },
+  "competitions": {
+    "title": "Competitions",
+    "subtitle": "Showcase Your Skills in Energy Innovation",
+    "upcoming": "Upcoming Competitions",
+    "past": "Past Competitions",
+    "register": "Register Now",
+    "learnMore": "Learn More",
+    "participants": "Participants",
+    "viewDetails": "View Details",
+    "status": {
+      "open": "Registration Open",
+      "upcoming": "Coming Soon",
+      "closed": "Registration Closed",
+      "ongoing": "Ongoing",
+      "ended": "Ended"
+    },
+    "detail": {
+      "overview": "Overview",
+      "schedule": "Schedule",
+      "prizes": "Prizes",
+      "requirements": "Requirements",
+      "registration": "Registration",
+      "contactOrganizer": "Contact Organizer"
+    }
+  },
+  "news": {
+    "title": "News",
+    "subtitle": "Latest Updates from APSTPM",
+    "readMore": "Read More",
+    "publishedOn": "Published on",
+    "categories": {
+      "all": "All",
+      "announcements": "Announcements",
+      "events": "Events",
+      "research": "Research",
+      "industry": "Industry"
+    }
+  },
+  "gallery": {
+    "title": "Media Gallery",
+    "subtitle": "Explore Our Photo and Video Collection",
+    "photos": "Photos",
+    "videos": "Videos",
+    "viewAll": "View All",
+    "allCategories": "All"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in Touch with APSTPM",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send Message",
+      "success": "Message sent successfully!",
+      "error": "Failed to send message. Please try again.",
+      "sending": "Sending...",
+      "category": "Category",
+      "categories": {
+        "general": "General Inquiry",
+        "support": "Technical Support",
+        "sponsorship": "Sponsorship",
+        "press": "Press Inquiry",
+        "other": "Other"
+      },
+      "errors": {
+        "name": "Please enter your name",
+        "emailRequired": "Please enter your email",
+        "emailInvalid": "Please enter a valid email",
+        "subject": "Please enter a subject",
+        "message": "Please enter a message",
+        "messageShort": "Message must be at least 10 characters"
+      },
+      "placeholders": {
+        "name": "Your name",
+        "email": "your@email.com",
+        "subject": "Message subject",
+        "message": "Please describe your needs in detail..."
+      }
+    },
+    "info": {
+      "title": "Contact Information",
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email"
+    },
+    "offices": {
+      "title": "Regional Offices",
+      "hk": "Hong Kong",
+      "tw": "Taiwan",
+      "sg": "Singapore",
+      "jp": "Japan"
+    }
+  },
+  "footer": {
+    "description": "APSTPM is dedicated to promoting technological innovation and talent development through international competitions and academic exchanges in the Asia-Pacific region.",
+    "copyright": "Copyright",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "developedBy": "Developed by APSTPM",
+    "sections": {
+      "competition": "Competitions",
+      "resources": "Resources",
+      "contact": "Contact"
+    },
+    "links": {
+      "about": "About Us",
+      "events": "Events",
+      "schedule": "Schedule",
+      "rules": "Rules",
+      "gallery": "Gallery",
+      "news": "News",
+      "faq": "FAQ",
+      "support": "Support",
+      "contact": "Contact Us",
+      "sponsors": "Sponsors",
+      "press": "Press",
+      "careers": "Careers"
+    },
+    "newsletter": {
+      "title": "Stay Updated",
+      "description": "Subscribe to our newsletter for the latest competition and event updates.",
+      "placeholder": "Enter your email",
+      "button": "Subscribe"
+    },
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "cookies": "Cookie Policy"
+    }
+  },
+  "timeline": {
+    "now": "NOW"
+  }
+}

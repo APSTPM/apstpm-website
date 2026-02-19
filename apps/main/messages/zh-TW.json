@@ -1,0 +1,215 @@
+{
+  "nav": {
+    "home": "首頁",
+    "about": "關於",
+    "competitions": "競賽",
+    "news": "新聞",
+    "gallery": "媒體庫",
+    "contact": "聯絡"
+  },
+  "hero": {
+    "badge": "2026 賽季現已開放報名",
+    "title": "亞太智慧電網與能源管理研討會",
+    "subtitle": "探索未來能源解決方案，推動可持續發展",
+    "cta": "立即報名",
+    "ctaPrimary": "立即報名",
+    "ctaSecondary": "瀏覽賽事",
+    "stats": {
+      "participants": "參賽者",
+      "teams": "參賽隊伍",
+      "countries": "國家與地區",
+      "prize": "總獎金"
+    }
+  },
+  "common": {
+    "learnMore": "了解更多",
+    "registerNow": "立即報名",
+    "contactUs": "聯繫我們",
+    "readMore": "閱讀更多",
+    "viewAll": "查看全部",
+    "submit": "提交",
+    "cancel": "取消",
+    "search": "搜尋",
+    "back": "返回",
+    "details": "詳情",
+    "date": "日期",
+    "location": "地點",
+    "status": "狀態",
+    "organizer": "主辦單位",
+    "description": "描述"
+  },
+  "home": {
+    "welcome": "歡迎來到 APSTPM",
+    "aboutSection": {
+      "title": "關於我們",
+      "description": "亞太智慧電網與能源管理研討會致力於促進能源領域的創新與合作。"
+    },
+    "eventsSection": {
+      "title": "精彩賽事",
+      "description": "參與我們舉辦的各類專業賽事，展現您的技術實力。"
+    },
+    "newsSection": {
+      "title": "最新消息",
+      "description": "掌握能源產業的最新動態與發展趨勢。"
+    },
+    "cta": {
+      "title": "準備好開始了嗎？",
+      "description": "加入我們，共同推動能源創新",
+      "button": "立即報名"
+    }
+  },
+  "about": {
+    "title": "關於 APSTPM",
+    "subtitle": "攜手推動能源創新",
+    "missionTitle": "我們的使命",
+    "missionDescription": "APSTPM 致力於促進亞太地區能源領域的創新與合作。我們匯聚研究人員、產業專業人士和政策制定者，共同分享知識並推動可持續能源解決方案。",
+    "historyTitle": "發展歷程",
+    "historyDescription": "APSTPM 成立於 2015 年，從區域性會議發展成為亞太地區能源創新的重要平台。多年來，我們促成了眾多合作夥伴關係，並在智慧電網技術和能源管理方面推出了開創性的倡議。",
+    "valuesTitle": "核心價值",
+    "values": {
+      "innovation": "創新",
+      "innovationDesc": "我們激勵創意解決能源挑戰。",
+      "collaboration": "協作",
+      "collaborationDesc": "我們相信合作夥伴關係和知識分享的力量。",
+      "sustainability": "可持續發展",
+      "sustainabilityDesc": "我們致力於推動環境友善的能源解決方案。"
+    },
+    "teamTitle": "團隊介紹",
+    "teamDescription": "我們的專業團隊由來自不同領域的專家組成，包括電機工程、可再生能源和政策開發。"
+  },
+  "competitions": {
+    "title": "競賽",
+    "subtitle": "展現您的能源創新實力",
+    "upcoming": "即將舉辦",
+    "past": "過往競賽",
+    "register": "立即報名",
+    "learnMore": "了解更多",
+    "participants": "參賽者",
+    "viewDetails": "查看詳情",
+    "status": {
+      "open": "報名中",
+      "upcoming": "即將開始",
+      "closed": "報名結束",
+      "ongoing": "進行中",
+      "ended": "已結束"
+    },
+    "detail": {
+      "overview": "概覽",
+      "schedule": "日程",
+      "prizes": "獎項",
+      "requirements": "參賽要求",
+      "registration": "報名資訊",
+      "contactOrganizer": "聯繫主辦單位"
+    }
+  },
+  "news": {
+    "title": "新聞",
+    "subtitle": "APSTPM 最新資訊",
+    "readMore": "閱讀更多",
+    "publishedOn": "發布日期",
+    "categories": {
+      "all": "全部",
+      "announcements": "公告",
+      "events": "活動",
+      "research": "研究",
+      "industry": "產業"
+    }
+  },
+  "gallery": {
+    "title": "媒體庫",
+    "subtitle": "探索我們的照片和影片收藏",
+    "photos": "照片",
+    "videos": "影片",
+    "viewAll": "查看全部",
+    "allCategories": "全部"
+  },
+  "contact": {
+    "title": "聯絡我們",
+    "subtitle": "與 APSTPM 取得聯繫",
+    "form": {
+      "name": "姓名",
+      "email": "電子郵件",
+      "subject": "主旨",
+      "message": "訊息",
+      "submit": "發送訊息",
+      "success": "訊息發送成功！",
+      "error": "訊息發送失敗，請重試。",
+      "sending": "發送中...",
+      "category": "類別",
+      "categories": {
+        "general": "一般諮詢",
+        "support": "技術支援",
+        "sponsorship": "贊助合作",
+        "press": "媒體合作",
+        "other": "其他"
+      },
+      "errors": {
+        "name": "請輸入姓名",
+        "emailRequired": "請輸入電子郵件",
+        "emailInvalid": "請輸入有效的電子郵件",
+        "subject": "請輸入主旨",
+        "message": "請輸入訊息",
+        "messageShort": "訊息至少需要10個字"
+      },
+      "placeholders": {
+        "name": "您的姓名",
+        "email": "your@email.com",
+        "subject": "訊息主旨",
+        "message": "請詳細描述您的需求..."
+      }
+    },
+    "info": {
+      "title": "聯絡資訊",
+      "address": "地址",
+      "phone": "電話",
+      "email": "電子郵件"
+    },
+    "offices": {
+      "title": "地區辦事處",
+      "hk": "香港",
+      "tw": "台灣",
+      "sg": "新加坡",
+      "jp": "日本"
+    }
+  },
+  "footer": {
+    "description": "亞太科技與專案管理協會致力於促進科技創新與人才培養，透過舉辦國際賽事和學術交流，推動亞太地區科技教育發展。",
+    "copyright": "版權所有",
+    "privacy": "隱私政策",
+    "terms": "服務條款",
+    "developedBy": "由 APSTPM 開發",
+    "sections": {
+      "competition": "賽事資訊",
+      "resources": "資源",
+      "contact": "聯繫我們"
+    },
+    "links": {
+      "about": "關於協會",
+      "events": "賽事活動",
+      "schedule": "賽程安排",
+      "rules": "賽事規則",
+      "gallery": "媒體庫",
+      "news": "最新消息",
+      "faq": "常見問題",
+      "support": "技術支援",
+      "contact": "聯絡我們",
+      "sponsors": "贊助合作",
+      "press": "媒體報導",
+      "careers": "加入我們"
+    },
+    "newsletter": {
+      "title": "訂閱最新資訊",
+      "description": "訂閱我們的電子報，獲取最新賽事和活動消息。",
+      "placeholder": "輸入電子郵件",
+      "button": "訂閱"
+    },
+    "legal": {
+      "privacy": "隱私政策",
+      "terms": "服務條款",
+      "cookies": "Cookie 政策"
+    }
+  },
+  "timeline": {
+    "now": "進行中"
+  }
+}
