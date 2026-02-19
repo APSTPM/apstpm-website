@@ -1,0 +1,102 @@
+{
+  "Home": {
+    "title": "澳門青少年機械人大賽",
+    "subtitle": "澳門最具影響力的青少年機器人競賽平台",
+    "year": "2025",
+    "registerNow": "立即報名",
+    "viewRules": "查看賽規",
+    "viewAnnouncements": "通知公告",
+    "viewHistory": "歷屆回顧",
+    "latestNews": "最新公告",
+    "latestNewsSubtitle": "掌握最新動態",
+    "competitionInfo": "比賽資訊",
+    "organizer": "主辦單位",
+    "coOrganizer": "承辦單位",
+    "cooperator": "協辦單位",
+    "venue": "比賽場地",
+    "registrationPeriod": "報名期",
+    "competitionPeriod": "比賽日期",
+    "location": "比賽地點",
+    "quickLinks": "快速入口",
+    "learnMore": "了解更多",
+    "readMore": "閱讀更多",
+    "noAnnouncements": "暫無公告"
+  },
+  "Navigation": {
+    "home": "首頁",
+    "competition": "賽事介紹",
+    "rules": "賽規下載",
+    "announcements": "通知公告",
+    "history": "歷屆回顧",
+    "contact": "聯繫我們"
+  },
+  "Competition": {
+    "title": "賽事介紹",
+    "purpose": "比賽目的",
+    "purposeDesc": "鼓勵青少年在機器人、信息、自動控制等領域進行學習與探索，培養創新思維和實踐能力。",
+    "target": "參賽對象",
+    "categories": "參賽項目",
+    "judging": "評審標準",
+    "awards": "獎勵機制",
+    "loading": "載入中...",
+    "ageGroup": "年齡組別"
+  },
+  "Rules": {
+    "title": "賽規下載",
+    "regulations": "比賽章程",
+    "rules": "比賽規則",
+    "download": "下載",
+    "updated": "更新日期",
+    "noRules": "暫無賽規文件"
+  },
+  "Announcements": {
+    "title": "通知公告",
+    "subtitle": "查看澳門青少年機械人大賽的最新消息和通知",
+    "readMore": "閱讀更多",
+    "attachments": "附件下載",
+    "noAnnouncements": "暫無公告"
+  },
+  "History": {
+    "title": "歷屆比賽回顧",
+    "theme": "主題",
+    "highlights": "亮點",
+    "noHistory": "暫無歷屆資料"
+  },
+  "Contact": {
+    "title": "聯繫我們",
+    "email": "電子郵件",
+    "phone": "電話",
+    "address": "地址",
+    "sendMessage": "發送訊息",
+    "name": "姓名",
+    "message": "訊息",
+    "submit": "提交",
+    "organization": "組織單位",
+    "contactInfo": "聯繫資訊",
+    "getInTouch": "與我們聯繫",
+    "getInTouchDesc": "我們很期待收到您的訊息。發送訊息給我們，我們會盡快回覆。",
+    "loading": "載入中..."
+  },
+  "Footer": {
+    "copyright": " 版權所有",
+    "privacy": "隱私政策",
+    "terms": "使用條款",
+    "quickLinks": "快速連結",
+    "competition": "賽事介紹",
+    "rules": "賽規下載",
+    "announcements": "通知公告",
+    "history": "歷屆回顧",
+    "contact": "聯繫我們",
+    "venue": "澳門科學館"
+  },
+  "Common": {
+    "learnMore": "了解更多",
+    "back": "返回",
+    "loading": "載入中...",
+    "error": "載入錯誤"
+  },
+  "Giscus": {
+    "comments": "評論",
+    "loadError": "評論系統載入失敗，請稍後再試。"
+  }
+}

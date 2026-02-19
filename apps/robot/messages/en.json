@@ -1,0 +1,102 @@
+{
+  "Home": {
+    "title": "Macau Youth Robot Competition",
+    "subtitle": "Macau's Most Influential Youth Robotics Competition Platform",
+    "year": "2025",
+    "registerNow": "Register Now",
+    "viewRules": "View Rules",
+    "viewAnnouncements": "Announcements",
+    "viewHistory": "Past Competitions",
+    "latestNews": "Latest News",
+    "latestNewsSubtitle": "Stay Updated",
+    "competitionInfo": "Competition Info",
+    "organizer": "Organizer",
+    "coOrganizer": "Co-organizer",
+    "cooperator": "Cooperator",
+    "venue": "Venue",
+    "registrationPeriod": "Registration Period",
+    "competitionPeriod": "Competition Dates",
+    "location": "Location",
+    "quickLinks": "Quick Links",
+    "learnMore": "Learn More",
+    "readMore": "Read More",
+    "noAnnouncements": "No announcements"
+  },
+  "Navigation": {
+    "home": "Home",
+    "competition": "Competition",
+    "rules": "Rules",
+    "announcements": "Announcements",
+    "history": "History",
+    "contact": "Contact"
+  },
+  "Competition": {
+    "title": "Competition Introduction",
+    "purpose": "Purpose",
+    "purposeDesc": "Encourage youth to explore robotics, information technology, and automatic control, fostering innovative thinking and practical abilities.",
+    "target": "Eligibility",
+    "categories": "Categories",
+    "judging": "Judging Criteria",
+    "awards": "Awards",
+    "loading": "Loading...",
+    "ageGroup": "Age Group"
+  },
+  "Rules": {
+    "title": "Rule Downloads",
+    "regulations": "Regulations",
+    "rules": "Competition Rules",
+    "download": "Download",
+    "updated": "Updated",
+    "noRules": "No rule files available"
+  },
+  "Announcements": {
+    "title": "Announcements",
+    "subtitle": "Latest news and updates from Macau Youth Robot Competition",
+    "readMore": "Read More",
+    "attachments": "Attachments",
+    "noAnnouncements": "No announcements"
+  },
+  "History": {
+    "title": "Past Competitions",
+    "theme": "Theme",
+    "highlights": "Highlights",
+    "noHistory": "No historical data available"
+  },
+  "Contact": {
+    "title": "Contact Us",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "sendMessage": "Send Message",
+    "name": "Name",
+    "message": "Message",
+    "submit": "Submit",
+    "organization": "Organization",
+    "contactInfo": "Contact Information",
+    "getInTouch": "Get in Touch",
+    "getInTouchDesc": "We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+    "loading": "Loading..."
+  },
+  "Footer": {
+    "copyright": " All Rights Reserved",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "quickLinks": "Quick Links",
+    "competition": "Competition",
+    "rules": "Rules",
+    "announcements": "Announcements",
+    "history": "History",
+    "contact": "Contact Us",
+    "venue": "Macau Science Center"
+  },
+  "Common": {
+    "learnMore": "Learn More",
+    "back": "Back",
+    "loading": "Loading...",
+    "error": "Error loading"
+  },
+  "Giscus": {
+    "comments": "Comments",
+    "loadError": "Failed to load comments. Please try again later."
+  }
+}
