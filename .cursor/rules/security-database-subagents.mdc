@@ -1,0 +1,33 @@
+---
+description: 安全和數據庫相關 Subagents 指南
+globs: **/*supabase*,**/migrations/*.sql,**/database/**
+alwaysApply: false
+---
+
+# 安全和數據庫 Subagents 指南
+
+## 適用 Subagents
+
+### security-sentinel
+**何時使用**：
+- 處理用戶認證
+- 實現數據庫操作
+- 處理表單提交
+- 設置 RLS (Row Level Security) 策略
+
+**適用文件**：
+- Supabase 相關配置
+- 數據庫遷移文件
+- 認證相關代碼
+- Server Actions（如 `updateProfile.ts`）
+
+**檢查重點**：
+- 輸入驗證
+- SQL 注入防護
+- 權限檢查
+- 敏感數據處理
+
+## 相關文件
+- `packages/database/src/types/database.ts`
+- `apps/robot/supabase/migrations/`
+- `apps/robot/src/lib/actions/`

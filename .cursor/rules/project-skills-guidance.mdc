@@ -1,0 +1,38 @@
+---
+description: 項目開發適用的 Skills 和 Subagents 指南
+alwaysApply: true
+---
+
+# 項目 Skills 和 Subagents 使用指南
+
+本項目使用以下技術棧：Next.js 15, React 19, Tailwind CSS 4, Supabase, Turborepo
+
+## 推薦 Skills
+
+### frontend-design
+**何時使用**：創建新的 React 組件、頁面設計、動畫效果
+**適用場景**：
+- 構建新的 UI 組件
+- 頁面布局和樣式設計
+- Framer Motion 動畫實現
+- Tailwind CSS 樣式優化
+
+### documentation-lookup
+**何時使用**：查詢 API 文件、庫的最佳實踐、程式碼範例
+**適用場景**：
+- Next.js 15 App Router 用法
+- React 19 新特性
+- Supabase Auth/RLS
+- next-intl 國際化
+- Tailwind CSS 4 配置
+
+### gitmoji-traditional-commit
+**何時使用**：創建 Git 提交時
+**適用場景**：所有 Git 提交操作，使用繁體中文和 Gitmoji
+
+### brainstorming
+**何時使用**：新功能開發前的策劃
+**適用場景**：
+- 功能需求分析
+- 技術選型討論
+- 架構設計

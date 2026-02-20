@@ -1,0 +1,32 @@
+---
+description: React 和 TypeScript 相關的 Subagents 使用指南
+globs: **/*.tsx,**/*.ts
+alwaysApply: false
+---
+
+# React 和 TypeScript Subagents 指南
+
+## 適用 Subagents
+
+### kieran-typescript-reviewer
+**何時使用**：
+- 編寫或修改 TypeScript 程式碼後
+- 代碼審查
+- 確保類型安全
+- 優化 TypeScript 類型定義
+
+**適用文件**：
+- `packages/database/src/types/database.ts`
+- `apps/robot/src/lib/actions/updateProfile.ts`
+- 所有 `.ts` 和 `.tsx` 文件
+
+### code-simplicity-reviewer
+**何時使用**：
+- 代碼重構
+- 優化複雜邏輯
+- 消除代碼異味
+- 提高可維護性
+
+**適用場景**：
+- 重構大型組件（如 `QaNewPostForm.tsx`）
+- 簡化複雜的業務邏輯
