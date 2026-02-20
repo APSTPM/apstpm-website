@@ -33,9 +33,8 @@ export async function createPost(formData: FormData) {
 
   const title = (formData.get('title') as string)?.trim();
   const content = (formData.get('content') as string)?.trim();
-  const rawTags = (formData.get('tags') as string) ?? '';
+  const rawTags = formData.getAll('tags') as string[];
   const tags = rawTags
-    .split(',')
     .map(t => t.trim().slice(0, MAX_TAG_LENGTH))
     .filter(Boolean)
     .slice(0, MAX_TAGS);

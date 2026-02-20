@@ -4,6 +4,7 @@ import {routing} from '@/i18n/routing';
 import {notFound} from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import { Toaster } from '@apstpm-website/ui';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({locale}));
@@ -32,6 +33,7 @@ export default async function LocaleLayout({
       <Navigation locale={resolvedLocale} />
       <main className="min-h-screen">{children}</main>
       <Footer />
+      <Toaster />
     </NextIntlClientProvider>
   );
 }

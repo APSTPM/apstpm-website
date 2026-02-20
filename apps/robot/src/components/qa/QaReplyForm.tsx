@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { useTranslations } from 'next-intl';
-import { Button } from '@apstpm-website/ui';
+import { Button, toast } from '@apstpm-website/ui';
 import { Send, Loader2 } from 'lucide-react';
 import { createReply } from '@/lib/actions/qa';
 
@@ -21,8 +21,10 @@ export default function QaReplyForm({ postId }: QaReplyFormProps) {
       formData.append('postId', postId);
       await createReply(formData);
       formRef.current?.reset();
+      toast.success(t('replyCreated'));
     } catch (error) {
       console.error('Failed to create reply:', error);
+      toast.error(t('replyFailed'));
     } finally {
       setLoading(false);
     }

@@ -112,6 +112,10 @@
     "reply": "Reply",
     "replyPlaceholder": "Type your reply...",
     "submitReply": "Submit Reply",
+    "postCreated": "Question posted successfully",
+    "postFailed": "Failed to submit question. Please try again.",
+    "replyCreated": "Reply posted successfully",
+    "replyFailed": "Failed to submit reply. Please try again.",
     "replies": "Replies",
     "noReplies": "No replies yet",
     "statusOpen": "Open",
@@ -189,6 +193,21 @@
     "deleteSchool": "Delete School",
     "noSchools": "No schools",
     "save": "Save",
-    "cancel": "Cancel"
+    "competitionCategoryManagement": "Competition Category Management",
+    "addCompetitionCategory": "Add Competition Category",
+    "categoryName": "Category Name (Chinese)",
+    "categoryNameEn": "Category Name (English)",
+    "categoryNamePlaceholder": "e.g. RIC Innovation Challenge",
+    "categoryNameEnPlaceholder": "e.g. RIC Innovation Challenge",
+    "noCompetitionCategories": "No competition categories",
+    "cancel": "Cancel",
+    "categoryCreated": "Competition category created successfully",
+    "categoryUpdated": "Competition category updated successfully",
+    "categoryDeleted": "Competition category deleted successfully",
+    "categoryError": "Competition category operation failed. Please try again.",
+    "schoolCreated": "School created successfully",
+    "schoolUpdated": "School updated successfully",
+    "schoolDeleted": "School deleted successfully",
+    "schoolError": "School operation failed. Please try again."
   }
 }

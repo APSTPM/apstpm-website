@@ -4,11 +4,14 @@ import { ArrowLeft } from 'lucide-react';
 import { createServerClient } from '@apstpm/database/server';
 import AuthGuard from '@/components/auth/AuthGuard';
 import QaNewPostForm from '@/components/qa/QaNewPostForm';
+import { getCompetitionCategories } from '@/lib/queries/competition-categories';
 
 export default async function QaNewPage() {
   const t = await getTranslations('QA');
   const supabase = await createServerClient();
   await supabase.auth.getUser();
+
+  const competitionCategories = await getCompetitionCategories();
 
   return (
     <AuthGuard>
@@ -29,7 +32,7 @@ export default async function QaNewPage() {
             <p className="text-sm text-gray-500 mb-6">
               {t('newPostDescription')}
             </p>
-            <QaNewPostForm />
+            <QaNewPostForm competitionCategories={competitionCategories} />
           </div>
         </div>
       </div>

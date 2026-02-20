@@ -112,6 +112,10 @@
     "reply": "回覆",
     "replyPlaceholder": "輸入您的回覆...",
     "submitReply": "提交回覆",
+    "postCreated": "問題提交成功",
+    "postFailed": "問題提交失敗，請稍後再試",
+    "replyCreated": "回覆提交成功",
+    "replyFailed": "回覆提交失敗，請稍後再試",
     "replies": "回覆",
     "replyCount": "則回覆",
     "noReplies": "暫無回覆",
@@ -193,6 +197,21 @@
     "deleteSchool": "刪除學校",
     "noSchools": "暫無學校",
     "save": "保存",
-    "cancel": "取消"
+    "competitionCategoryManagement": "比賽項目管理",
+    "addCompetitionCategory": "新增比賽項目",
+    "categoryName": "類別名稱（中文）",
+    "categoryNameEn": "類別名稱（英文）",
+    "categoryNamePlaceholder": "如: RIC創新挑戰賽",
+    "categoryNameEnPlaceholder": "如: RIC Innovation Challenge",
+    "noCompetitionCategories": "暫無比賽項目",
+    "cancel": "取消",
+    "categoryCreated": "比賽項目新增成功",
+    "categoryUpdated": "比賽項目更新成功",
+    "categoryDeleted": "比賽項目刪除成功",
+    "categoryError": "比賽項目操作失敗，請稍後再試",
+    "schoolCreated": "學校新增成功",
+    "schoolUpdated": "學校更新成功",
+    "schoolDeleted": "學校刪除成功",
+    "schoolError": "學校操作失敗，請稍後再試"
   }
 }

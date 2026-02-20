@@ -3,7 +3,7 @@ import { Link } from '@/i18n/routing';
 import AuthGuard from '@/components/auth/AuthGuard';
 import AdminDashboard from '@/components/admin/AdminDashboard';
 import { Button } from '@apstpm-website/ui';
-import { MessageSquare, GraduationCap } from 'lucide-react';
+import { MessageSquare, GraduationCap, Tag } from 'lucide-react';
 
 export default async function AdminPage() {
   const t = await getTranslations('Admin');
@@ -28,6 +28,12 @@ export default async function AdminPage() {
                 <Button variant="outline">
                   <GraduationCap className="w-4 h-4 mr-2" />
                   {t('schoolManagement')}
+                </Button>
+              </Link>
+              <Link href={'/admin/competition-categories' as any}>
+                <Button variant="outline">
+                  <Tag className="w-4 h-4 mr-2" />
+                  {t('competitionCategoryManagement')}
                 </Button>
               </Link>
             </div>

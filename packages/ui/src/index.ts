@@ -12,4 +12,7 @@ export type { BadgeProps } from "./Badge";
 export { SearchableSelect } from "./SearchableSelect";
 export type { SearchableSelectOption, SearchableSelectProps } from "./SearchableSelect";
 
+export { Toaster, toast } from "./Toaster";
+export type { ToasterProps } from "sonner";
+
 export { cn } from "./lib/utils";
