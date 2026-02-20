@@ -210,7 +210,7 @@ export interface Database {
       audit_logs: {
         Row: {
           id: string;
-          user_id: string;
+          user_id: string | null;
           action: string;
           entity_type: string | null;
           entity_id: string | null;
@@ -219,7 +219,7 @@ export interface Database {
         };
         Insert: {
           id?: string;
-          user_id: string;
+          user_id?: string | null;
           action: string;
           entity_type?: string | null;
           entity_id?: string | null;

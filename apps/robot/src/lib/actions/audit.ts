@@ -2,16 +2,10 @@
 
 import type { Json } from '@apstpm/database';
 import { createServerClient } from '@apstpm/database/server';
+import { requireAuth } from './requireAuth';
 
 const MAX_ACTION_LENGTH = 100;
 const MAX_ENTITY_TYPE_LENGTH = 50;
-
-async function requireAuth() {
-  const supabase = await createServerClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error('Unauthorized');
-  return { supabase, user };
-}
 
 export type LogAuditParams = {
   action: string;
@@ -20,9 +14,22 @@ export type LogAuditParams = {
   metadata?: Record<string, unknown>;
 };
 
-export async function logAudit(params: LogAuditParams) {
+export async function logAudit(
+  params: LogAuditParams,
+  ctx?: { supabase: Awaited<ReturnType<typeof createServerClient>>; userId: string }
+) {
+  if (ctx) {
+    return logAuditWithContext(params, ctx.supabase, ctx.userId);
+  }
   const { supabase, user } = await requireAuth();
+  return logAuditWithContext(params, supabase, user.id);
+}
 
+async function logAuditWithContext(
+  params: LogAuditParams,
+  supabase: Awaited<ReturnType<typeof createServerClient>>,
+  userId: string
+) {
   const action = (params.action ?? '').trim().slice(0, MAX_ACTION_LENGTH);
   if (!action) throw new Error('Action is required');
 
@@ -39,12 +46,15 @@ export async function logAudit(params: LogAuditParams) {
     : {};
 
   const { error } = await supabase.from('audit_logs').insert({
-    user_id: user.id,
+    user_id: userId,
     action,
     entity_type: entityType,
     entity_id: entityId,
     metadata,
   });
 
-  if (error) throw error;
+  if (error) {
+    console.error('Audit log failed:', error);
+    throw new Error('Audit log failed');
+  }
 }

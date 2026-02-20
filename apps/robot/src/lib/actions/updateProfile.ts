@@ -1,16 +1,9 @@
 'use server';
 
-import { createServerClient } from '@apstpm/database/server';
 import { revalidatePath } from 'next/cache';
 import { routing } from '@/i18n/routing';
 import { logAudit } from './audit';
-
-async function requireAuth() {
-  const supabase = await createServerClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error('Unauthorized');
-  return { supabase, user };
-}
+import { requireAuth } from './requireAuth';
 
 export async function updateProfile(formData: FormData) {
   const { supabase, user } = await requireAuth();
@@ -27,7 +20,10 @@ export async function updateProfile(formData: FormData) {
     .eq('id', user.id)
     .single();
 
-  if (currentProfileError) throw currentProfileError;
+  if (currentProfileError) {
+    console.error('Failed to fetch current profile:', currentProfileError);
+    throw new Error('Update failed');
+  }
 
   const { error } = await supabase
     .from('profiles')
@@ -37,7 +33,10 @@ export async function updateProfile(formData: FormData) {
     })
     .eq('id', user.id);
 
-  if (error) throw error;
+  if (error) {
+    console.error('Failed to update profile:', error);
+    throw new Error('Update failed');
+  }
 
   await logAudit({
     action: 'profile_update',
@@ -50,7 +49,7 @@ export async function updateProfile(formData: FormData) {
         school_id: schoolId,
       },
     },
-  }).catch((err) => console.error('Audit log failed:', err));
+  }, { supabase, userId: user.id }).catch((err) => console.error('Audit log failed:', err));
 
   revalidatePath('/');
   revalidatePath('/settings');
