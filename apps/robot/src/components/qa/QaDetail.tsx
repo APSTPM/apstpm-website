@@ -27,7 +27,7 @@ interface QaDetailProps {
     id: string;
     title: string;
     content: string;
-    status: 'open' | 'answered' | 'closed';
+    status: 'open' | 'answered';
     pinned: boolean;
     tags: string[];
     created_at: string;

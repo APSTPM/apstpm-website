@@ -3,7 +3,7 @@ import { createServerClient } from '@apstpm/database/server';
 // TODO(Phase 3): Replace with CMS API
 
 export interface QaFilters {
-  status?: 'open' | 'answered' | 'closed';
+  status?: 'open' | 'answered';
   search?: string;
   page?: number;
   pageSize?: number;

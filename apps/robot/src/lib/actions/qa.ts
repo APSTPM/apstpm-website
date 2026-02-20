@@ -28,6 +28,22 @@ async function requireAdmin() {
   return { supabase, user };
 }
 
+async function updatePostStatusBasedOnLastReply(supabase: Awaited<ReturnType<typeof createServerClient>>, postId: string) {
+  const { data: replies } = await supabase
+    .from('qa_replies')
+    .select('is_official')
+    .eq('post_id', postId)
+    .order('created_at', { ascending: true });
+
+  const lastReply = replies?.[replies.length - 1];
+  const newStatus = lastReply?.is_official ? 'answered' : 'open';
+
+  await supabase
+    .from('qa_posts')
+    .update({ status: newStatus })
+    .eq('id', postId);
+}
+
 export async function createPost(formData: FormData) {
   const { supabase, user } = await requireAuth();
 
@@ -88,22 +104,14 @@ export async function createReply(formData: FormData) {
   if (error) throw error;
 
   if (data) notifyPostAuthor(postId, data.id).catch(console.error);
-  revalidatePath(`/qa/${postId}`);
-
-  return data;
-}
-
-export async function markAsAnswered(postId: string) {
-  const { supabase } = await requireAdmin();
-
-  const { error } = await supabase
-    .from('qa_posts')
-    .update({ status: 'answered' })
-    .eq('id', postId);
-
-  if (error) throw error;
+  
+  // 根據最後回覆自動更新帖子狀態
+  await updatePostStatusBasedOnLastReply(supabase, postId);
+  
   revalidatePath(`/qa/${postId}`);
   revalidatePath('/qa');
+
+  return data;
 }
 
 export async function togglePin(postId: string) {
@@ -118,19 +126,6 @@ export async function togglePin(postId: string) {
   const { error } = await supabase
     .from('qa_posts')
     .update({ pinned: !(post?.pinned ?? false) })
-    .eq('id', postId);
-
-  if (error) throw error;
-  revalidatePath(`/qa/${postId}`);
-  revalidatePath('/qa');
-}
-
-export async function closePost(postId: string) {
-  const { supabase } = await requireAdmin();
-
-  const { error } = await supabase
-    .from('qa_posts')
-    .update({ status: 'closed' })
     .eq('id', postId);
 
   if (error) throw error;
@@ -159,5 +154,10 @@ export async function deleteReply(replyId: string, postId: string) {
     .eq('id', replyId);
 
   if (error) throw error;
+  
+  // 根據最後回覆自動更新帖子狀態
+  await updatePostStatusBasedOnLastReply(supabase, postId);
+  
   revalidatePath(`/qa/${postId}`);
+  revalidatePath('/qa');
 }

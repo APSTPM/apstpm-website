@@ -10,7 +10,7 @@ interface QaPostCardProps {
   post: {
     id: string;
     title: string;
-    status: 'open' | 'answered' | 'closed';
+    status: 'open' | 'answered';
     pinned: boolean;
     reply_count: number;
     created_at: string;

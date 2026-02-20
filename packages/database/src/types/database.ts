@@ -83,7 +83,7 @@ export interface Database {
           author_id: string;
           title: string;
           content: string;
-          status: 'open' | 'answered' | 'closed';
+          status: 'open' | 'answered';
           pinned: boolean;
           tags: string[];
           reply_count: number;
@@ -95,7 +95,7 @@ export interface Database {
           author_id: string;
           title: string;
           content: string;
-          status?: 'open' | 'answered' | 'closed';
+          status?: 'open' | 'answered';
           pinned?: boolean;
           tags?: string[];
           reply_count?: number;
@@ -107,7 +107,7 @@ export interface Database {
           author_id?: string;
           title?: string;
           content?: string;
-          status?: 'open' | 'answered' | 'closed';
+          status?: 'open' | 'answered';
           pinned?: boolean;
           tags?: string[];
           reply_count?: number;
@@ -168,6 +168,27 @@ export interface Database {
             referencedColumns: ['id'];
           },
         ];
+      };
+      competition_categories: {
+        Row: {
+          id: string;
+          name: string;
+          name_en: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          name: string;
+          name_en?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          name?: string;
+          name_en?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
       };
       rule_versions: {
         Row: {

@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { createServerClient } from '@apstpm/database/server';
-import { redirect } from '@/i18n/routing';
+import { redirect } from 'next/navigation';
 import ProfileSettingsForm from '@/components/settings/ProfileSettingsForm';
 import { getSchools } from '@/lib/queries/schools';
 import { Link } from '@/i18n/routing';

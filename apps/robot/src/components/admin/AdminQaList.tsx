@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { Badge, Button } from '@apstpm-website/ui';
-import { CheckCircle, Pin, XCircle, Trash2, ExternalLink } from 'lucide-react';
-import { markAsAnswered, togglePin, closePost, deletePost } from '@/lib/actions/qa';
+import { Pin, Trash2, ExternalLink } from 'lucide-react';
+import { togglePin, deletePost } from '@/lib/actions/qa';
 import { formatAuthor } from '@/lib/utils/author';
 import { formatDateBeijing } from '@/lib/utils/date';
 import QaStatusBadge from '@/components/qa/QaStatusBadge';
@@ -64,17 +64,6 @@ export default function AdminQaList({ posts }: AdminQaListProps) {
 
           {/* Action buttons */}
           <div className="flex flex-wrap gap-2 mt-3 pt-3 border-t border-gray-100">
-            {post.status === 'open' && (
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() => handleAction(() => markAsAnswered(post.id), post.id)}
-                disabled={loadingId === post.id}
-              >
-                <CheckCircle className="w-3.5 h-3.5 mr-1" />
-                {t('markAnswered')}
-              </Button>
-            )}
             <Button
               size="sm"
               variant="outline"
@@ -84,17 +73,6 @@ export default function AdminQaList({ posts }: AdminQaListProps) {
               <Pin className="w-3.5 h-3.5 mr-1" />
               {t('togglePin')}
             </Button>
-            {post.status !== 'closed' && (
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() => handleAction(() => closePost(post.id), post.id)}
-                disabled={loadingId === post.id}
-              >
-                <XCircle className="w-3.5 h-3.5 mr-1" />
-                {t('closePost')}
-              </Button>
-            )}
             <Button
               size="sm"
               variant="destructive"
