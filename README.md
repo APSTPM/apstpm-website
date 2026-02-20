@@ -342,6 +342,11 @@ UPDATE profiles SET role = 'admin' WHERE email = 'your@email.com';
 - Input
 - Badge (variants: default, secondary, success, warning, destructive, outline)
 
-## License
 
-MIT
+# 生產環境須知
+1. Supabase Dashboard → Authentication → URL Configuration：
+- Site URL：設置為你的實際域名（如 https://xxx.org）
+- Redirect URLs：包含你的實際域名
+
+2. 修改Oauth中的url
+3. 修改環境變數 apps/robot/.env.local：   NEXT_PUBLIC_SITE_URL=https://xxx.org
