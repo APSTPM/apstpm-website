@@ -1,0 +1,46 @@
+---
+description: 數據庫變更時同步更新文檔
+globs: apps/robot/supabase/migrations/*.sql, packages/database/src/types/database.ts, docs/robot/*.md
+alwaysApply: false
+---
+
+# 數據庫變更同步規則
+
+當修改數據庫結構時，必須同步更新 `/docs/robot/` 目錄下的相關文檔，確保文檔與實際數據庫結構保持一致。
+
+## 同步時機
+
+修改以下內容時需要更新文檔：
+
+1. **新增 / 修改 / 刪除資料表**
+   - 更新 `docs/robot/database.md` 中的表結構說明
+   - 確保欄位、類型、約束條件與 SQL 遷移一致
+
+2. **新增 / 修改 / 刪除欄位**
+   - 在對應表的文檔區塊中更新欄位資訊
+   - 檢查 CHECK 約束是否需要更新
+
+3. **新增 / 修改 / 刪除索引**
+   - 更新表的索引說明
+
+4. **新增 / 修改 / 刪除觸發器或函數**
+   - 更新「數據庫觸發器與函數」章節
+
+5. **修改 RLS 策略**
+   - 更新「Row Level Security (RLS) 原則」章節
+
+## 同步檢查清單
+
+- [ ] 遷移文件中的表結構與 `docs/robot/database.md` 一致
+- [ ] 新增欄位時在文檔中新增對應說明
+- [ ] 刪除欄位時從文檔中移除對應說明
+- [ ] 欄位類型變更時更新文檔中的類型標註
+- [ ] 新增約束（如 CHECK）在文檔中反映
+- [ ] 如有業務邏輯變更，考慮更新 `docs/robot/business-logic.md`
+
+## 文檔位置
+
+- 數據庫結構：`docs/robot/database.md`
+- 業務邏輯：`docs/robot/business-logic.md`
+- 遷移文件：`apps/robot/supabase/migrations/*.sql`
+- 類型定義：`packages/database/src/types/database.ts`
