@@ -117,7 +117,6 @@
     "replyCreated": "回覆提交成功",
     "replyFailed": "回覆提交失敗，請稍後再試",
     "replies": "回覆",
-    "replyCount": "則回覆",
     "noReplies": "暫無回覆",
     "statusOpen": "待回覆",
     "statusAnswered": "已解答",
@@ -167,9 +166,21 @@
     "saveProfile": "保存資料",
     "saving": "保存中...",
     "profileRequired": "請先完善個人資料後再使用系統",
-    "userType": "身份",
-    "teacher": "老師",
-    "student": "同學"
+    "settings": "設定"
+  },
+  "Settings": {
+    "title": "個人資料設定",
+    "subtitle": "更新您的個人資料",
+    "realName": "真實姓名",
+    "realNamePlaceholder": "請輸入您的真實姓名",
+    "school": "學校",
+    "schoolPlaceholder": "請選擇您的學校",
+    "schoolSearchPlaceholder": "輸入學校名稱或編號搜尋...",
+    "schoolNoResults": "找不到匹配的學校",
+    "save": "保存",
+    "saving": "保存中...",
+    "updateSuccess": "資料已成功更新",
+    "updateError": "更新失敗，請稍後再試"
   },
   "Admin": {
     "title": "管理面板",

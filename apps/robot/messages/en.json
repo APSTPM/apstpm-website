@@ -165,7 +165,22 @@
     "student": "Student",
     "saveProfile": "Save Profile",
     "saving": "Saving...",
-    "profileRequired": "Please complete your profile before using the system"
+    "profileRequired": "Please complete your profile before using the system",
+    "settings": "Settings"
+  },
+  "Settings": {
+    "title": "Profile Settings",
+    "subtitle": "Update your profile information",
+    "realName": "Real Name",
+    "realNamePlaceholder": "Enter your real name",
+    "school": "School",
+    "schoolPlaceholder": "Please select your school",
+    "schoolSearchPlaceholder": "Search by name or code...",
+    "schoolNoResults": "No matching schools",
+    "save": "Save",
+    "saving": "Saving...",
+    "updateSuccess": "Profile updated successfully",
+    "updateError": "Failed to update profile. Please try again."
   },
   "Admin": {
     "title": "Admin Panel",

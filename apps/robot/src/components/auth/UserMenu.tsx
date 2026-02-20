@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { createBrowserClient } from '@apstpm/database/browser';
 import { Button } from '@apstpm-website/ui';
-import { LogOut, User, Shield } from 'lucide-react';
+import { LogOut, User, Shield, Settings } from 'lucide-react';
 import type { User as SupabaseUser } from '@supabase/supabase-js';
 
 export default function UserMenu() {
@@ -123,6 +123,14 @@ export default function UserMenu() {
                 {t('admin')}
               </Link>
             )}
+            <Link
+              href="/settings"
+              className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+              onClick={() => setMenuOpen(false)}
+            >
+              <Settings className="w-4 h-4" />
+              {t('settings')}
+            </Link>
             <button
               onClick={handleLogout}
               className="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 w-full text-left"
