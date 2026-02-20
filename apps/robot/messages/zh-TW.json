@@ -143,6 +143,8 @@
     "orContinueWith": "或使用電郵",
     "emailPlaceholder": "your@email.com",
     "sendMagicLink": "發送登入連結",
+    "magicLinkError": "發送失敗，請稍後再試",
+    "rateLimitError": "發送次數過多，請等待一小時後再試",
     "magicLinkSent": "登入連結已發送至您的電郵",
     "checkEmail": "請檢查您的電郵信箱",
     "profile": "個人資料",

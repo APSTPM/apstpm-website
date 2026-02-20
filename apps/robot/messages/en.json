@@ -142,6 +142,8 @@
     "orContinueWith": "or continue with email",
     "emailPlaceholder": "your@email.com",
     "sendMagicLink": "Send Magic Link",
+    "magicLinkError": "Failed to send, please try again later",
+    "rateLimitError": "Too many attempts, please wait an hour and try again",
     "magicLinkSent": "Magic link sent to your email",
     "checkEmail": "Please check your email inbox",
     "profile": "Profile",

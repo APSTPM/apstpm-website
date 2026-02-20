@@ -12,14 +12,19 @@ import {
   Input,
   Button,
 } from '@apstpm-website/ui';
-import { Mail, Loader2, CheckCircle } from 'lucide-react';
+import { Mail, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function LoginForm() {
   const t = useTranslations('Auth');
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [magicLinkSent, setMagicLinkSent] = useState(false);
+  const [error, setError] = useState('');
   const supabase = createBrowserClient();
+
+  const isValidEmail = EMAIL_RE.test(email);
 
   const handleOAuth = async (provider: 'google' | 'github' | 'azure') => {
     await supabase.auth.signInWithOAuth({
@@ -32,16 +37,25 @@ export default function LoginForm() {
 
   const handleMagicLink = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!isValidEmail) return;
+    setError('');
     setLoading(true);
-    const { error } = await supabase.auth.signInWithOtp({
+    const { error: otpError } = await supabase.auth.signInWithOtp({
       email,
       options: {
         emailRedirectTo: `${window.location.origin}/auth/confirm`,
       },
     });
     setLoading(false);
-    if (!error) setMagicLinkSent(true);
+    if (otpError) {
+      if (otpError.status === 429) {
+        setError(t('rateLimitError'));
+      } else {
+        setError(t('magicLinkError'));
+      }
+    } else {
+      setMagicLinkSent(true);
+    }
   };
 
   if (magicLinkSent) {
@@ -128,10 +142,19 @@ export default function LoginForm() {
             type="email"
             placeholder={t('emailPlaceholder')}
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setError('');
+            }}
             required
           />
-          <Button type="submit" className="w-full" disabled={loading}>
+          {error && (
+            <p className="flex items-center gap-1.5 text-sm text-red-600">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              {error}
+            </p>
+          )}
+          <Button type="submit" className="w-full" disabled={loading || !isValidEmail}>
             {loading ? (
               <Loader2 className="w-4 h-4 animate-spin mr-2" />
             ) : (
