@@ -214,32 +214,32 @@ The main website runs at `http://localhost:3000` by default.
 
 ### Environment Variables
 
-**`apps/main/.env.local`**（主站，目前無需額外配置）：
+每個應用都提供 `.env.example` 模板文件。首次配置時，複製模板並填入你的配置：
 
 ```bash
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
+# 複製模板文件
+cp apps/main/.env.example apps/main/.env.local
+cp apps/robot/.env.example apps/robot/.env.local
 ```
 
-**`apps/robot/.env.local`**（機器人競賽分站）：
+#### `apps/main/.env.local`（主站）：
 
-```bash
-# Supabase — 從 Supabase Dashboard > Project Settings > API 獲取
-NEXT_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_your-key
-
-# Resend（可選，用於 Q&A 郵件通知）— 從 resend.com 獲取
-RESEND_API_KEY=re_your-api-key
-
-# Site URL
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-```
+參考 `apps/main/.env.example`，目前僅需配置：
 
 | 變量 | 必填 | 說明 |
 |------|------|------|
-| `NEXT_PUBLIC_SUPABASE_URL` | ✅ | Supabase 項目 URL |
+| `NEXT_PUBLIC_SITE_URL` | ✅ | 站點 URL，開發環境為 `http://localhost:3000` |
+
+#### `apps/robot/.env.local`（機器人競賽分站）：
+
+參考 `apps/robot/.env.example`，需要配置：
+
+| 變量 | 必填 | 說明 |
+|------|------|------|
+| `NEXT_PUBLIC_SUPABASE_URL` | ✅ | Supabase 項目 URL（從 Dashboard > Project Settings > API 獲取） |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | ✅ | Supabase Publishable Key（安全，可公開） |
-| `RESEND_API_KEY` | ❌ | 不設置則跳過郵件發送，不影響其他功能 |
-| `NEXT_PUBLIC_SITE_URL` | ✅ | 用於郵件中的連結，開發環境為 `http://localhost:3000` |
+| `RESEND_API_KEY` | ❌ | Resend 郵件服務 API Key（不設置則跳過郵件通知） |
+| `NEXT_PUBLIC_SITE_URL` | ✅ | 用於郵件中的連結 |
 
 ## Database Setup (Supabase)
 
