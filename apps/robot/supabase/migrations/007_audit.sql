@@ -1,4 +1,4 @@
--- Audit logs table for tracking user actions
+-- Audit Logs table for tracking user actions
 CREATE TABLE public.audit_logs (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
@@ -9,6 +9,7 @@ CREATE TABLE public.audit_logs (
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
+-- Indexes
 CREATE INDEX idx_audit_logs_user_id ON public.audit_logs(user_id);
 CREATE INDEX idx_audit_logs_action ON public.audit_logs(action);
 CREATE INDEX idx_audit_logs_created_at ON public.audit_logs(created_at DESC);

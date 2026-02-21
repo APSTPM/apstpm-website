@@ -6,7 +6,7 @@ CREATE TABLE public.competition_categories (
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
--- Default competition categories
+-- Default data
 INSERT INTO public.competition_categories (name, name_en) VALUES
   ('VEXIQ', 'VEXIQ'),
   ('RIC創新挑戰賽', 'RIC Innovation Challenge'),

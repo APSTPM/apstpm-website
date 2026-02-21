@@ -1,10 +1,10 @@
--- QA Posts
+-- QA Posts table
 CREATE TABLE public.qa_posts (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   author_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
   title TEXT NOT NULL,
   content TEXT NOT NULL,
-  status TEXT NOT NULL DEFAULT 'open' CHECK (status IN ('open', 'answered', 'closed')),
+  status TEXT NOT NULL DEFAULT 'open' CHECK (status IN ('open', 'answered')),
   pinned BOOLEAN NOT NULL DEFAULT false,
   tags TEXT[] DEFAULT '{}',
   reply_count INTEGER NOT NULL DEFAULT 0,
@@ -12,7 +12,7 @@ CREATE TABLE public.qa_posts (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
--- QA Replies
+-- QA Replies table
 CREATE TABLE public.qa_replies (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   post_id UUID NOT NULL REFERENCES public.qa_posts(id) ON DELETE CASCADE,
@@ -23,13 +23,7 @@ CREATE TABLE public.qa_replies (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
--- Indexes
-CREATE INDEX idx_qa_posts_status ON public.qa_posts(status);
-CREATE INDEX idx_qa_posts_author ON public.qa_posts(author_id);
-CREATE INDEX idx_qa_posts_pinned ON public.qa_posts(pinned DESC, created_at DESC);
-CREATE INDEX idx_qa_replies_post ON public.qa_replies(post_id);
-
--- Auto-update reply_count trigger
+-- Function to update reply count
 CREATE OR REPLACE FUNCTION public.update_reply_count()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -42,19 +36,12 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
+-- Trigger to update reply count on insert/delete
 CREATE TRIGGER on_reply_change
   AFTER INSERT OR DELETE ON public.qa_replies
   FOR EACH ROW EXECUTE FUNCTION public.update_reply_count();
 
 -- Auto-update updated_at trigger
-CREATE OR REPLACE FUNCTION public.update_updated_at()
-RETURNS TRIGGER AS $$
-BEGIN
-  NEW.updated_at = now();
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
 CREATE TRIGGER set_updated_at_posts
   BEFORE UPDATE ON public.qa_posts
   FOR EACH ROW EXECUTE FUNCTION public.update_updated_at();
@@ -63,20 +50,17 @@ CREATE TRIGGER set_updated_at_replies
   BEFORE UPDATE ON public.qa_replies
   FOR EACH ROW EXECUTE FUNCTION public.update_updated_at();
 
--- Helper function to check admin role
-CREATE OR REPLACE FUNCTION public.is_admin()
-RETURNS BOOLEAN AS $$
-BEGIN
-  RETURN EXISTS (
-    SELECT 1 FROM public.profiles
-    WHERE id = auth.uid() AND role = 'admin'
-  );
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER STABLE;
+-- Indexes for QA tables
+CREATE INDEX idx_qa_posts_status ON public.qa_posts(status);
+CREATE INDEX idx_qa_posts_author ON public.qa_posts(author_id);
+CREATE INDEX idx_qa_posts_pinned ON public.qa_posts(pinned DESC, created_at DESC);
+CREATE INDEX idx_qa_replies_post ON public.qa_replies(post_id);
 
--- RLS for qa_posts
+-- RLS for QA tables
 ALTER TABLE public.qa_posts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.qa_replies ENABLE ROW LEVEL SECURITY;
 
+-- QA Posts policies
 CREATE POLICY "Posts are publicly readable"
   ON public.qa_posts FOR SELECT
   USING (true);
@@ -98,9 +82,7 @@ CREATE POLICY "Admins can delete posts"
   ON public.qa_posts FOR DELETE
   USING (public.is_admin());
 
--- RLS for qa_replies
-ALTER TABLE public.qa_replies ENABLE ROW LEVEL SECURITY;
-
+-- QA Replies policies
 CREATE POLICY "Replies are publicly readable"
   ON public.qa_replies FOR SELECT
   USING (true);

@@ -1,5 +1,4 @@
--- TODO(Phase 3): This table will be managed by CMS
--- Rule Versions tracking
+-- Rule Versions table
 CREATE TABLE public.rule_versions (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   title TEXT NOT NULL,
@@ -10,6 +9,7 @@ CREATE TABLE public.rule_versions (
   published_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
+-- Indexes
 CREATE INDEX idx_rule_versions_published ON public.rule_versions(published_at DESC);
 
 -- RLS

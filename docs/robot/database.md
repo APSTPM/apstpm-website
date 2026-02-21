@@ -252,14 +252,13 @@ auth.users
 
 | 遷移編號 | 檔案名稱 | 說明 |
 |---------|---------|------|
-| 001 | `001_profiles.sql` | 建立 profiles 表 |
-| 002 | `002_qa_tables.sql` | 建立問答相關表 |
-| 003 | `003_rule_versions.sql` | 建立規則版本表 |
-| 004 | `004_schools_and_profile_update.sql` | 建立學校表和更新 profile |
-| 005 | `005_add_user_type.sql` | 新增 user_type 欄位 |
-| 006 | `006_competition_categories.sql` | 建立競賽類別表 |
-| 007 | `007_audit_logs.sql` | 建立審計日誌表 |
-| 008 | `008_remove_closed_status.sql` | 移除 closed 狀態 |
+| 001 | `001_base.sql` | 建立 profiles 表、handle_new_user()、is_admin()、update_updated_at() |
+| 002 | `002_schools.sql` | 建立 schools 表 |
+| 003 | `003_profiles_extended.sql` | 擴充 profiles 欄位（real_name, school_id, user_type, profile_completed） |
+| 004 | `004_qa.sql` | 建立問答系統（qa_posts, qa_replies）、update_reply_count() 觸發器 |
+| 005 | `005_competition.sql` | 建立競賽類別表（competition_categories）、預設資料 |
+| 006 | `006_rules.sql` | 建立規則版本表（rule_versions） |
+| 007 | `007_audit.sql` | 建立審計日誌表（audit_logs） |
 
 ---
 

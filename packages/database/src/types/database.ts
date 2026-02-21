@@ -197,16 +197,16 @@ export interface Database {
           version: string;
           changelog: string;
           file_url: string;
-          uploaded_by: string;
+          uploaded_by: string | null;
           published_at: string;
         };
         Insert: {
           id?: string;
           title: string;
           version: string;
-          changelog: string;
+          changelog?: string;
           file_url: string;
-          uploaded_by: string;
+          uploaded_by?: string | null;
           published_at?: string;
         };
         Update: {
@@ -215,7 +215,7 @@ export interface Database {
           version?: string;
           changelog?: string;
           file_url?: string;
-          uploaded_by?: string;
+          uploaded_by?: string | null;
           published_at?: string;
         };
         Relationships: [
@@ -249,7 +249,7 @@ export interface Database {
         };
         Update: {
           id?: string;
-          user_id?: string;
+          user_id?: string | null;
           action?: string;
           entity_type?: string | null;
           entity_id?: string | null;
