@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { redirect } from 'next/navigation';
 import { Link } from '@/i18n/routing';
 import { ArrowLeft } from 'lucide-react';
 import { createServerClient } from '@apstpm/database/server';
@@ -6,10 +7,29 @@ import AuthGuard from '@/components/auth/AuthGuard';
 import QaNewPostForm from '@/components/qa/QaNewPostForm';
 import { getCompetitionCategories } from '@/lib/queries/competition-categories';
 
+async function checkProfileComplete(supabase: Awaited<ReturnType<typeof createServerClient>>, userId: string) {
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('real_name, school_id')
+    .eq('id', userId)
+    .single();
+
+  return profile?.real_name?.trim() && profile?.school_id;
+}
+
 export default async function QaNewPage() {
   const t = await getTranslations('QA');
   const supabase = await createServerClient();
-  await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect('/auth/login');
+  }
+
+  const isProfileComplete = await checkProfileComplete(supabase, user.id);
+  if (!isProfileComplete) {
+    redirect('/auth/complete-profile');
+  }
 
   const competitionCategories = await getCompetitionCategories();
 

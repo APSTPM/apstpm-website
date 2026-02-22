@@ -15,21 +15,33 @@ export default async function CompleteProfilePage() {
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('profile_completed')
+    .select('real_name, school_id, user_type, profile_completed')
     .eq('id', user.id)
     .single();
 
-  if (profile?.profile_completed) redirect('/qa');
-
   const schools = await getSchools();
+
+  const isEditMode = !!profile?.real_name && !!profile?.school_id;
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">{t('completeProfile')}</h1>
-          <p className="text-gray-500 mb-6">{t('profileRequired')}</p>
-          <CompleteProfileForm schools={schools} />
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">
+            {isEditMode ? t('editProfile') : t('completeProfile')}
+          </h1>
+          <p className="text-gray-500 mb-6">
+            {isEditMode ? t('editProfileDescription') : t('profileRequired')}
+          </p>
+          <CompleteProfileForm
+            schools={schools}
+            initialData={{
+              real_name: profile?.real_name ?? '',
+              school_id: profile?.school_id ?? '',
+              user_type: profile?.user_type ?? '',
+            }}
+            mode={isEditMode ? 'edit' : 'create'}
+          />
         </div>
       </div>
     </div>

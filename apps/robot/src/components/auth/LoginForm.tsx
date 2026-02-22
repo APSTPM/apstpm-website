@@ -49,7 +49,7 @@ export default function LoginForm() {
     setLoading(false);
     if (otpError) {
       if (otpError.status === 429) {
-        setError(t('rateLimitError'));
+        setError(t('magicLinkRateLimitError'));
       } else {
         setError(t('magicLinkError'));
       }
