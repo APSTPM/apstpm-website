@@ -1,4 +1,4 @@
-interface AuthorInfo {
+export interface AuthorInfo {
   real_name: string | null;
   display_name: string | null;
   role: string;

@@ -1,0 +1,70 @@
+---
+description: 禁止記憶體限流與提交按鈕狀態管理規範
+globs: "**/actions/**/*.ts,**/route*.ts,**/*Form*.tsx,**/rate-limit*.ts"
+alwaysApply: false
+---
+
+# 禁止記憶體限流 + 提交按鈕狀態管理
+
+本規則規範跨請求限流、冪等性與表單提交的實作方式，確保多實例部署與重複提交情境下的正確行為。
+
+## MUST 條款
+
+### 1. 禁止記憶體限流
+
+**禁止**在 server action 或 route handler 中使用 in-memory 的 `Map`、`Set` 或普通 object 作為跨請求的 rate limit 或 idempotency 來源。
+
+- 記憶體儲存無法跨請求、跨實例共享，多實例部署時失效
+- 服務重啟後狀態遺失，無法保證限流效果
+
+### 2. 跨請求限流必須使用持久化後端
+
+跨請求限流**必須**使用持久化後端。本專案指定使用 Supabase RPC `check_rate_limit` 進行限流檢查。
+
+- 在呼叫寫入邏輯前，透過 `supabase.rpc('check_rate_limit', { ... })` 檢查
+- 限流 key 應包含業務維度（如 `user_id`、`action_type`）與時間窗口
+
+### 3. 寫入觸發按鈕的狀態管理
+
+所有會觸發後端寫入的前端按鈕**必須**具備：
+
+- **loading**：提交中顯示載入狀態（如 spinner、disabled）
+- **disabled**：提交中禁用按鈕，避免重複點擊
+- **狀態文案**：提交中顯示明確提示（如「提交中…」「Sending…」）
+
+### 4. 寫入型表單需附 submissionId
+
+寫入型表單**必須**附帶 `submissionId`（UUID），並傳遞至 server action。
+
+- 前端在表單提交時生成 `crypto.randomUUID()` 或等效 UUID
+- 以 hidden input 或 action 參數傳入 server action
+
+### 5. DB 寫入去重使用 UNIQUE constraint
+
+DB 寫入去重**必須**使用目標表的 UNIQUE constraint（如 `(author_id, submission_id)`）或等價方案，**不得**依賴前端狀態或記憶體判斷。
+
+- 在 migration 中為目標表新增 `UNIQUE (author_id, submission_id)` 或等價約束
+- 重複提交時由 DB 回傳 constraint violation，server action 轉譯為冪等成功或明確錯誤
+
+## SHOULD 條款
+
+### 6. 錯誤映射介面一致性
+
+錯誤映射應維持 `RateLimitError` / `AppError` 介面一致性：
+
+- `RateLimitError`：`message`、`resetTime`、`remaining`
+- `AppError`：`code`、`message`、`statusCode`
+- 使用 `mapErrorToResponse` 或等效函式統一轉換
+
+### 7. Migration 與文檔同步
+
+修改 migration 時**應**同步更新 `docs/robot/database.md`：
+
+- 新增/變更表結構、約束、函數時更新對應章節
+- 與 `database-sync-rule.mdc` 保持一致
+
+## 相關檔案
+
+- 限流 RPC：Supabase `check_rate_limit`
+- 錯誤介面：`RateLimitError`、`AppError`、`mapErrorToResponse`
+- 文檔：`docs/robot/database.md`

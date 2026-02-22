@@ -285,25 +285,36 @@ export default function QaNewPostForm({ competitionCategories }: QaNewPostFormPr
   const [content, setContent] = useState('');
   const [tags, setTags] = useState<string[]>([]);
   const formRef = useRef<HTMLFormElement>(null);
+  const [submissionId, setSubmissionId] = useState<string>(() => crypto.randomUUID());
 
   const isFormComplete = title.trim() !== '' && content.trim() !== '' && tags.length >= 1;
 
-  const handleSubmit = async (formData: FormData) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (loading) return;
+
+    const formData = new FormData(e.currentTarget);
     setLoading(true);
+    let keepLoadingUntilRouteChange = false;
     try {
+      formData.set('submissionId', submissionId);
       const post = await createPost(formData);
       if (!post) {
         toast.error(t('postFailed'));
         return;
       }
 
+      setSubmissionId(crypto.randomUUID());
       toast.success(t('postCreated'));
+      keepLoadingUntilRouteChange = true;
       router.push(`/qa/${post.id}` as any);
     } catch (error) {
       console.error('Failed to create post:', error);
       toast.error(t('postFailed'));
     } finally {
-      setLoading(false);
+      if (!keepLoadingUntilRouteChange) {
+        setLoading(false);
+      }
     }
   };
 
@@ -315,7 +326,8 @@ export default function QaNewPostForm({ competitionCategories }: QaNewPostFormPr
   );
 
   return (
-    <form ref={formRef} action={handleSubmit} className="space-y-5">
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+      <input type="hidden" name="submissionId" value={submissionId} readOnly />
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1.5">
           {t('questionTitle')} <span className="text-red-500">*</span>

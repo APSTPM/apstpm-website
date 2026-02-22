@@ -14,12 +14,15 @@ export default function QaReplyForm({ postId }: QaReplyFormProps) {
   const t = useTranslations('QA');
   const [loading, setLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+  const submissionIdRef = useRef<string>(crypto.randomUUID());
 
   const handleSubmit = async (formData: FormData) => {
     setLoading(true);
     try {
       formData.append('postId', postId);
+      formData.append('submissionId', submissionIdRef.current);
       await createReply(formData);
+      submissionIdRef.current = crypto.randomUUID();
       formRef.current?.reset();
       toast.success(t('replyCreated'));
     } catch (error) {
@@ -46,7 +49,7 @@ export default function QaReplyForm({ postId }: QaReplyFormProps) {
           ) : (
             <Send className="w-4 h-4 mr-2" />
           )}
-          {t('submitReply')}
+          {loading ? t('submitting') : t('submitReply')}
         </Button>
       </div>
     </form>

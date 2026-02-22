@@ -66,6 +66,7 @@
 | `pinned` | BOOLEAN | 是否置頂 | DEFAULT false |
 | `tags` | TEXT[] | 標籤陣列 | |
 | `reply_count` | INTEGER | 回覆數量 | DEFAULT 0 |
+| `submission_id` | UUID | 提交冪等 ID（防重複提交） | 可為 NULL |
 | `created_at` | TIMESTAMPTZ | 建立時間 | DEFAULT NOW() |
 | `updated_at` | TIMESTAMPTZ | 更新時間 | DEFAULT NOW() |
 
@@ -75,6 +76,7 @@
 - 狀態索引：`status`
 - 置頂索引：`pinned`
 - 建立時間索引：`created_at DESC`
+- 部分唯一索引：`(author_id, submission_id) WHERE submission_id IS NOT NULL`
 
 ---
 
@@ -89,6 +91,7 @@
 | `author_id` | UUID | 作者 ID | REFERENCES profiles(id) |
 | `content` | TEXT | 內容 | |
 | `is_official` | BOOLEAN | 是否為官方回覆 | DEFAULT false |
+| `submission_id` | UUID | 提交冪等 ID（防重複提交） | 可為 NULL |
 | `created_at` | TIMESTAMPTZ | 建立時間 | DEFAULT NOW() |
 | `updated_at` | TIMESTAMPTZ | 更新時間 | DEFAULT NOW() |
 
@@ -97,6 +100,7 @@
 - 外鍵索引：`post_id`, `author_id`
 - 官方回覆索引：`is_official`
 - 建立時間索引：`created_at ASC`
+- 部分唯一索引：`(author_id, submission_id) WHERE submission_id IS NOT NULL`
 
 ---
 
@@ -118,7 +122,23 @@
 
 ---
 
-### 6. `rule_versions` 表（規則版本表）
+### 6. `rate_limits` 表（限流計數表）
+
+存儲 `check_rate_limit` RPC 的計數視窗資料（採 lazy cleanup）。
+
+| 欄位 | 類型 | 說明 | 約束 |
+|------|------|------|------|
+| `key` | TEXT | 限流鍵（`{action}:{uid}`） | PRIMARY KEY |
+| `count` | INTEGER | 視窗內次數 | NOT NULL, DEFAULT 1 |
+| `window_start` | TIMESTAMPTZ | 視窗起始時間 | NOT NULL, DEFAULT NOW() |
+
+**RLS：**
+- 啟用 RLS，且不建立 policy（deny all）
+- 僅透過 `SECURITY DEFINER` 的 `check_rate_limit` 函式操作
+
+---
+
+### 7. `rule_versions` 表（規則版本表）
 
 存儲競賽規則的版本資訊。
 
@@ -134,7 +154,7 @@
 
 ---
 
-### 7. `audit_logs` 表（審計日誌表）
+### 8. `audit_logs` 表（審計日誌表）
 
 記錄用戶操作的審計日誌。
 
@@ -196,6 +216,12 @@ auth.users
 
 **返回類型：** BOOLEAN
 
+### 5. `check_rate_limit(p_action)`
+
+**說明：** 原子化限流 RPC，使用 `{action}:{uid}` 作為 key，並在函式內做 action allowlist 與固定限流配置映射（每個 action 的 `max_requests/window_seconds` 由 SQL 端決定，不接受客戶端覆寫）。
+
+**返回類型：** JSONB（`allowed`, `remaining`, `reset_at`）
+
 ---
 
 ## Row Level Security (RLS) 原則
@@ -235,6 +261,10 @@ auth.users
 - **SELECT:** 公開
 - **INSERT/UPDATE/DELETE:** 管理員
 
+#### `rate_limits` 表
+- **直接 SELECT/INSERT/UPDATE/DELETE:** 全部拒絕（RLS deny all）
+- **RPC 呼叫:** 僅 `authenticated` 可執行 `check_rate_limit`
+
 #### `rule_versions` 表
 - **SELECT:** 公開
 - **INSERT/UPDATE/DELETE:** 管理員
@@ -259,6 +289,7 @@ auth.users
 | 005 | `005_competition.sql` | 建立競賽類別表（competition_categories）、預設資料 |
 | 006 | `006_rules.sql` | 建立規則版本表（rule_versions） |
 | 007 | `007_audit.sql` | 建立審計日誌表（audit_logs） |
+| 008 | `008_rate_limit.sql` | 建立 `rate_limits`、`check_rate_limit`，並為 `qa_posts`/`qa_replies` 新增 `submission_id` 與部分唯一索引 |
 
 ---
 

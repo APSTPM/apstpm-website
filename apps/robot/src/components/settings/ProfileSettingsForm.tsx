@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button, SearchableSelect, toast } from '@apstpm-website/ui';
 import { updateProfile } from '@/lib/actions/updateProfile';
@@ -26,6 +26,7 @@ export default function ProfileSettingsForm({ schools, initialData }: ProfileSet
   const [success, setSuccess] = useState(false);
   const [realName, setRealName] = useState(initialData.real_name);
   const [selectedSchool, setSelectedSchool] = useState(initialData.school_id);
+  const submissionIdRef = useRef<string>(crypto.randomUUID());
 
   const isFormComplete = realName.trim() !== '' && selectedSchool !== '';
 
@@ -37,11 +38,17 @@ export default function ProfileSettingsForm({ schools, initialData }: ProfileSet
 
     try {
       const formData = new FormData(e.currentTarget);
+      formData.append('submissionId', submissionIdRef.current);
       await updateProfile(formData);
+      submissionIdRef.current = crypto.randomUUID();
       setSuccess(true);
       toast.success(t('updateSuccess'));
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : t('updateError');
+      const rawMessage = err instanceof Error ? err.message : '';
+      const isRateLimited = rawMessage.includes('Too many requests');
+      const message = isRateLimited
+        ? (t('rateLimitError') || t('updateError'))
+        : t('updateError');
       setError(message);
       toast.error(message);
     } finally {

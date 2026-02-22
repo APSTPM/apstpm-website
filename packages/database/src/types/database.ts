@@ -77,6 +77,24 @@ export interface Database {
         };
         Relationships: [];
       };
+      rate_limits: {
+        Row: {
+          key: string;
+          count: number;
+          window_start: string;
+        };
+        Insert: {
+          key: string;
+          count?: number;
+          window_start?: string;
+        };
+        Update: {
+          key?: string;
+          count?: number;
+          window_start?: string;
+        };
+        Relationships: [];
+      };
       qa_posts: {
         Row: {
           id: string;
@@ -87,6 +105,7 @@ export interface Database {
           pinned: boolean;
           tags: string[];
           reply_count: number;
+          submission_id: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -99,6 +118,7 @@ export interface Database {
           pinned?: boolean;
           tags?: string[];
           reply_count?: number;
+          submission_id?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -111,6 +131,7 @@ export interface Database {
           pinned?: boolean;
           tags?: string[];
           reply_count?: number;
+          submission_id?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -131,6 +152,7 @@ export interface Database {
           author_id: string;
           content: string;
           is_official: boolean;
+          submission_id: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -140,6 +162,7 @@ export interface Database {
           author_id: string;
           content: string;
           is_official?: boolean;
+          submission_id?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -149,6 +172,7 @@ export interface Database {
           author_id?: string;
           content?: string;
           is_official?: boolean;
+          submission_id?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -269,6 +293,12 @@ export interface Database {
     };
     Views: Record<string, never>;
     Functions: {
+      check_rate_limit: {
+        Args: {
+          p_action: string;
+        };
+        Returns: Json;
+      };
       is_admin: {
         Args: Record<PropertyKey, never>;
         Returns: boolean;

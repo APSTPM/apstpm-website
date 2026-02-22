@@ -186,7 +186,8 @@
     "save": "保存",
     "saving": "保存中...",
     "updateSuccess": "資料已成功更新",
-    "updateError": "更新失敗，請稍後再試"
+    "updateError": "更新失敗，請稍後再試",
+    "rateLimitError": "請求次數過多，請稍等片刻後再試"
   },
   "Admin": {
     "title": "管理面板",
@@ -227,6 +228,11 @@
     "schoolCreated": "學校新增成功",
     "schoolUpdated": "學校更新成功",
     "schoolDeleted": "學校刪除成功",
-    "schoolError": "學校操作失敗，請稍後再試"
+    "schoolError": "學校操作失敗，請稍後再試",
+    "saving": "儲存中...",
+    "deleting": "刪除中...",
+    "processing": "處理中...",
+    "postDeleted": "問題已刪除",
+    "pinToggled": "置頂狀態已更新"
   }
 }

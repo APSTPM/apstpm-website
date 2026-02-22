@@ -186,7 +186,8 @@
     "save": "Save",
     "saving": "Saving...",
     "updateSuccess": "Profile updated successfully",
-    "updateError": "Failed to update profile. Please try again."
+    "updateError": "Failed to update profile. Please try again.",
+    "rateLimitError": "Too many requests. Please wait a moment and try again."
   },
   "Admin": {
     "title": "Admin Panel",
@@ -227,6 +228,11 @@
     "schoolCreated": "School created successfully",
     "schoolUpdated": "School updated successfully",
     "schoolDeleted": "School deleted successfully",
-    "schoolError": "School operation failed. Please try again."
+    "schoolError": "School operation failed. Please try again.",
+    "saving": "Saving...",
+    "deleting": "Deleting...",
+    "processing": "Processing...",
+    "postDeleted": "Question deleted",
+    "pinToggled": "Pin status updated"
   }
 }

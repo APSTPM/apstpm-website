@@ -3,30 +3,56 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
-import { Badge, Button } from '@apstpm-website/ui';
-import { Pin, Trash2, ExternalLink } from 'lucide-react';
+import { Badge, Button, toast } from '@apstpm-website/ui';
+import { Pin, Trash2, ExternalLink, Loader2 } from 'lucide-react';
 import { togglePin, deletePost } from '@/lib/actions/qa';
-import { formatAuthor } from '@/lib/utils/author';
+import { formatAuthor, type AuthorInfo } from '@/lib/utils/author';
 import { formatDateBeijing } from '@/lib/utils/date';
 import QaStatusBadge from '@/components/qa/QaStatusBadge';
 
+interface QaPostItem {
+  id: string;
+  title: string;
+  status: 'open' | 'answered';
+  pinned: boolean;
+  reply_count: number;
+  created_at: string;
+  author: AuthorInfo | null;
+}
+
 interface AdminQaListProps {
-  posts: any[];
+  posts: QaPostItem[];
 }
 
 export default function AdminQaList({ posts }: AdminQaListProps) {
   const t = useTranslations('Admin');
   const tQa = useTranslations('QA');
-  const [loadingId, setLoadingId] = useState<string | null>(null);
+  const [loadingState, setLoadingState] = useState<{ postId: string; action: 'pin' | 'delete' } | null>(null);
 
-  const handleAction = async (action: () => Promise<void>, postId: string) => {
-    setLoadingId(postId);
+  const handleTogglePin = async (postId: string) => {
+    setLoadingState({ postId, action: 'pin' });
     try {
-      await action();
+      await togglePin(postId);
+      toast.success(t('pinToggled'));
     } catch (error) {
-      console.error('Action failed:', error);
+      console.error('Toggle pin failed:', error);
+      toast.error(t('categoryError'));
     } finally {
-      setLoadingId(null);
+      setLoadingState(null);
+    }
+  };
+
+  const handleDelete = async (postId: string) => {
+    if (!confirm(t('confirmDelete'))) return;
+    setLoadingState({ postId, action: 'delete' });
+    try {
+      await deletePost(postId);
+      toast.success(t('postDeleted'));
+    } catch (error) {
+      console.error('Delete post failed:', error);
+      toast.error(t('categoryError'));
+    } finally {
+      setLoadingState(null);
     }
   };
 
@@ -67,24 +93,38 @@ export default function AdminQaList({ posts }: AdminQaListProps) {
             <Button
               size="sm"
               variant="outline"
-              onClick={() => handleAction(() => togglePin(post.id), post.id)}
-              disabled={loadingId === post.id}
+              onClick={() => handleTogglePin(post.id)}
+              disabled={loadingState?.postId === post.id}
             >
-              <Pin className="w-3.5 h-3.5 mr-1" />
-              {t('togglePin')}
+              {loadingState?.postId === post.id && loadingState?.action === 'pin' ? (
+                <>
+                  <Loader2 className="w-3.5 h-3.5 mr-1 animate-spin" />
+                  {t('processing')}
+                </>
+              ) : (
+                <>
+                  <Pin className="w-3.5 h-3.5 mr-1" />
+                  {t('togglePin')}
+                </>
+              )}
             </Button>
             <Button
               size="sm"
               variant="destructive"
-              onClick={() => {
-                if (confirm(t('confirmDelete'))) {
-                  handleAction(() => deletePost(post.id), post.id);
-                }
-              }}
-              disabled={loadingId === post.id}
+              onClick={() => handleDelete(post.id)}
+              disabled={loadingState?.postId === post.id}
             >
-              <Trash2 className="w-3.5 h-3.5 mr-1" />
-              {t('deletePost')}
+              {loadingState?.postId === post.id && loadingState?.action === 'delete' ? (
+                <>
+                  <Loader2 className="w-3.5 h-3.5 mr-1 animate-spin" />
+                  {t('deleting')}
+                </>
+              ) : (
+                <>
+                  <Trash2 className="w-3.5 h-3.5 mr-1" />
+                  {t('deletePost')}
+                </>
+              )}
             </Button>
           </div>
         </div>

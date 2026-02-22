@@ -4,15 +4,20 @@ import { revalidatePath } from 'next/cache';
 import { routing } from '@/i18n/routing';
 import { logAudit } from './audit';
 import { requireAuth } from './requireAuth';
+import { checkRateLimit } from '@/lib/utils/rate-limit';
+
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 export async function updateProfile(formData: FormData) {
   const { supabase, user } = await requireAuth();
+  await checkRateLimit(supabase, 'profile:update');
 
   const realName = (formData.get('real_name') as string | null)?.trim();
   const schoolId = formData.get('school_id') as string | null;
 
   if (!realName) throw new Error('Real name is required');
   if (!schoolId) throw new Error('School is required');
+  if (!UUID_REGEX.test(schoolId)) throw new Error('School must be a valid UUID');
 
   const { data: currentProfile, error: currentProfileError } = await supabase
     .from('profiles')

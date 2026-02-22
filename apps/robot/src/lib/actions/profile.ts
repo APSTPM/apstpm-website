@@ -5,13 +5,9 @@ import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { routing } from '@/i18n/routing';
 import { logAudit } from './audit';
-import {
-  checkRateLimit,
-  RateLimitError,
-} from '@/lib/utils/rate-limit';
+import { checkRateLimit } from '@/lib/utils/rate-limit';
 
-const PROFILE_RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
-const PROFILE_RATE_LIMIT_MAX = 5; // 5 requests per minute
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 export async function saveProfile(formData: FormData, mode: 'create' | 'edit') {
   const supabase = await createServerClient();
@@ -20,20 +16,7 @@ export async function saveProfile(formData: FormData, mode: 'create' | 'edit') {
   } = await supabase.auth.getUser();
   if (!user) throw new Error('Unauthorized');
 
-  // Rate limiting: check before processing
-  const rateLimitKey = `saveProfile:${user.id}`;
-  const { allowed, remaining, resetTime } = checkRateLimit(rateLimitKey, {
-    windowMs: PROFILE_RATE_LIMIT_WINDOW,
-    maxRequests: PROFILE_RATE_LIMIT_MAX,
-  });
-
-  if (!allowed) {
-    throw new RateLimitError(
-      'Too many requests. Please try again later.',
-      resetTime,
-      remaining
-    );
-  }
+  await checkRateLimit(supabase, 'profile:save');
 
   const realName = (formData.get('real_name') as string)?.trim();
   const schoolId = formData.get('school_id') as string;
@@ -41,6 +24,7 @@ export async function saveProfile(formData: FormData, mode: 'create' | 'edit') {
 
   if (!realName) throw new Error('Real name is required');
   if (!schoolId) throw new Error('School is required');
+  if (!UUID_REGEX.test(schoolId)) throw new Error('School must be a valid UUID');
   if (!userType || !['teacher', 'student'].includes(userType)) throw new Error('User type is required');
 
   if (mode === 'create') {

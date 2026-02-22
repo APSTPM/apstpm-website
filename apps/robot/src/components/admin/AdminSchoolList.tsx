@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button, toast } from '@apstpm-website/ui';
-import { Plus, Pencil, Trash2, X, Check } from 'lucide-react';
+import { Plus, Pencil, Trash2, X, Check, Loader2 } from 'lucide-react';
 import { createSchool, updateSchool, deleteSchool } from '@/lib/actions/schools';
 
 interface School {
@@ -20,43 +20,66 @@ export default function AdminSchoolList({ schools }: AdminSchoolListProps) {
   const t = useTranslations('Admin');
   const [editingId, setEditingId] = useState<string | null>(null);
   const [showAdd, setShowAdd] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [formLoading, setFormLoading] = useState(false);
+  const [deleteLoadingId, setDeleteLoadingId] = useState<string | null>(null);
+  const submissionIdRef = useRef<string | null>(null);
+
+  const getOrCreateSubmissionId = () => {
+    if (!submissionIdRef.current) {
+      submissionIdRef.current = crypto.randomUUID();
+    }
+    return submissionIdRef.current;
+  };
+
+  const resetSubmissionId = () => {
+    submissionIdRef.current = null;
+  };
+
+  const toggleAddForm = () => {
+    resetSubmissionId();
+    setEditingId(null);
+    setShowAdd((prev) => !prev);
+  };
 
   const handleCreate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
+    setFormLoading(true);
     try {
       const formData = new FormData(e.currentTarget);
+      formData.set('submissionId', getOrCreateSubmissionId());
       await createSchool(formData);
+      resetSubmissionId();
       setShowAdd(false);
       toast.success(t('schoolCreated'));
     } catch (error) {
       console.error('Failed to create school:', error);
       toast.error(t('schoolError'));
     } finally {
-      setLoading(false);
+      setFormLoading(false);
     }
   };
 
   const handleUpdate = async (id: string, e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
+    setFormLoading(true);
     try {
       const formData = new FormData(e.currentTarget);
+      formData.set('submissionId', getOrCreateSubmissionId());
       await updateSchool(id, formData);
+      resetSubmissionId();
       setEditingId(null);
       toast.success(t('schoolUpdated'));
     } catch (error) {
       console.error('Failed to update school:', error);
       toast.error(t('schoolError'));
     } finally {
-      setLoading(false);
+      setFormLoading(false);
     }
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm(t('confirmDelete'))) return;
-    setLoading(true);
+    setDeleteLoadingId(id);
     try {
       await deleteSchool(id);
       toast.success(t('schoolDeleted'));
@@ -64,7 +87,7 @@ export default function AdminSchoolList({ schools }: AdminSchoolListProps) {
       console.error('Failed to delete school:', error);
       toast.error(t('schoolError'));
     } finally {
-      setLoading(false);
+      setDeleteLoadingId(null);
     }
   };
 
@@ -72,7 +95,7 @@ export default function AdminSchoolList({ schools }: AdminSchoolListProps) {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-gray-900">{t('schoolManagement')}</h2>
-        <Button size="sm" onClick={() => setShowAdd(!showAdd)}>
+        <Button size="sm" onClick={toggleAddForm}>
           <Plus className="w-4 h-4 mr-1" />
           {t('addSchool')}
         </Button>
@@ -98,10 +121,19 @@ export default function AdminSchoolList({ schools }: AdminSchoolListProps) {
               className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-robot-500 focus:border-transparent outline-none"
             />
           </div>
-          <Button type="submit" size="sm" disabled={loading}>
-            {t('save')}
+          <Button type="submit" size="sm" disabled={formLoading}>
+            {formLoading ? t('saving') : t('save')}
           </Button>
-          <Button type="button" size="sm" variant="outline" onClick={() => setShowAdd(false)}>
+          <Button
+            type="button"
+            size="sm"
+            variant="outline"
+            onClick={() => {
+              resetSubmissionId();
+              setShowAdd(false);
+            }}
+            disabled={formLoading}
+          >
             <X className="w-4 h-4" />
           </Button>
         </form>
@@ -137,10 +169,19 @@ export default function AdminSchoolList({ schools }: AdminSchoolListProps) {
                           required
                           className="flex-1 px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-robot-500 focus:border-transparent outline-none"
                         />
-                        <Button type="submit" size="sm" disabled={loading}>
-                          <Check className="w-4 h-4" />
+                        <Button type="submit" size="sm" disabled={formLoading}>
+                          {formLoading ? t('saving') : <Check className="w-4 h-4" />}
                         </Button>
-                        <Button type="button" size="sm" variant="outline" onClick={() => setEditingId(null)}>
+                        <Button
+                          type="button"
+                          size="sm"
+                          variant="outline"
+                          onClick={() => {
+                            resetSubmissionId();
+                            setEditingId(null);
+                          }}
+                          disabled={formLoading}
+                        >
                           <X className="w-4 h-4" />
                         </Button>
                       </form>
@@ -152,17 +193,26 @@ export default function AdminSchoolList({ schools }: AdminSchoolListProps) {
                       <td className="px-4 py-3 text-right">
                         <div className="flex items-center justify-end gap-1">
                           <button
-                            onClick={() => setEditingId(school.id)}
+                            onClick={() => {
+                              resetSubmissionId();
+                              setShowAdd(false);
+                              setEditingId(school.id);
+                            }}
                             className="p-1.5 text-gray-400 hover:text-robot-600 rounded"
                           >
                             <Pencil className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => handleDelete(school.id)}
-                            className="p-1.5 text-gray-400 hover:text-red-600 rounded"
-                            disabled={loading}
+                            className="p-1.5 text-gray-400 hover:text-red-600 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                            disabled={deleteLoadingId === school.id}
+                            title={deleteLoadingId === school.id ? t('deleting') : t('deleteSchool')}
                           >
-                            <Trash2 className="w-4 h-4" />
+                            {deleteLoadingId === school.id ? (
+                              <Loader2 className="w-4 h-4 animate-spin text-red-600" />
+                            ) : (
+                              <Trash2 className="w-4 h-4" />
+                            )}
                           </button>
                         </div>
                       </td>

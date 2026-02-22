@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/routing';
 import { Button, SearchableSelect, toast } from '@apstpm-website/ui';
 import { saveProfile } from '@/lib/actions/profile';
-import { RateLimitError } from '@/lib/utils/rate-limit';
 
 interface School {
   id: string;
@@ -34,6 +33,7 @@ export default function CompleteProfileForm({ schools, initialData, mode }: Comp
   const [selectedSchool, setSelectedSchool] = useState(initialData.school_id);
   const [userType, setUserType] = useState(initialData.user_type);
   const submitAttemptRef = useRef(0);
+  const submissionIdRef = useRef<string>(crypto.randomUUID());
 
   const isFormComplete = realName.trim() !== '' && selectedSchool !== '' && userType !== '';
   const isSubmitting = loading;
@@ -52,7 +52,9 @@ export default function CompleteProfileForm({ schools, initialData, mode }: Comp
 
     try {
       const formData = new FormData(e.currentTarget);
+      formData.append('submissionId', submissionIdRef.current);
       await saveProfile(formData, mode);
+      submissionIdRef.current = crypto.randomUUID();
 
       if (mode === 'create') {
         router.push('/qa');
@@ -63,24 +65,14 @@ export default function CompleteProfileForm({ schools, initialData, mode }: Comp
       // Only handle the most recent attempt
       if (attempt !== submitAttemptRef.current) return;
 
-      if (err instanceof RateLimitError) {
-        const message = t('rateLimitError') || 'Too many requests. Please try again later.';
-        setError(message);
-        toast.error(message);
-      } else if (err instanceof Error) {
-        const message = err.message || 'An error occurred';
-        // Check for common error patterns and use i18n keys
-        if (message.includes('required') || message.includes('invalid')) {
-          setError(t('validationError') || message);
-          toast.error(t('validationError') || message);
-        } else {
-          setError(t('saveError') || 'Failed to save. Please try again.');
-          toast.error(t('saveError') || 'Failed to save. Please try again.');
-        }
-      } else {
-        setError(t('saveError') || 'Failed to save. Please try again.');
-        toast.error(t('saveError') || 'Failed to save. Please try again.');
-      }
+      const rawMessage = err instanceof Error ? err.message : '';
+      const isRateLimited = rawMessage.includes('Too many requests');
+      const message = isRateLimited
+        ? (t('rateLimitError') || 'Too many requests. Please try again later.')
+        : (t('saveError') || 'Failed to save. Please try again.');
+
+      setError(message);
+      toast.error(message);
     } finally {
       // Only reset loading if this is still the most recent attempt
       if (attempt === submitAttemptRef.current) {
