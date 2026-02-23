@@ -107,15 +107,15 @@ export default function Footer() {
               </h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2 text-gray-400 text-sm">
-                  <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
                   <span>{t('venue')}</span>
                 </li>
                 <li className="flex items-center gap-2 text-gray-400 text-sm">
-                  <Mail className="w-4 h-4 flex-shrink-0" />
+                  <Mail className="w-4 h-4 shrink-0" />
                   <span>info@macau-robot.org</span>
                 </li>
                 <li className="flex items-center gap-2 text-gray-400 text-sm">
-                  <Phone className="w-4 h-4 flex-shrink-0" />
+                  <Phone className="w-4 h-4 shrink-0" />
                   <span>+853 1234 5678</span>
                 </li>
               </ul>
