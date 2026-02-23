@@ -1,13 +1,13 @@
 # APSTPM Website
 
-亞太科技教育推廣協會 (Asia Pacific Science, Technology Promotion in Macau) 官方網站。
+澳門科技實踐促進會 (Association of Promotion of Science and Technology Practice in Macau) 官方網站及其子網站。
 
 ## Tech Stack
 
 - **Monorepo**: Turborepo + pnpm workspace
 - **Frontend**: Next.js 15 (App Router) + React 19
 - **Styling**: Tailwind CSS 4 + Framer Motion
-- **i18n**: next-intl (僅支援 zh-TW 繁體中文)
+- **i18n**: next-intl
 - **Database**: Supabase (PostgreSQL + Auth + RLS)
 - **Email**: Resend (optional, for QA notifications)
 - **Fonts**: Space Grotesk (display) + Inter (body) + Noto Sans TC (中文)
@@ -139,63 +139,63 @@ apstpm-website/
 
 This is a monorepo with multiple Next.js applications:
 
-| App | Domain | Description |
-|-----|--------|-------------|
-| `apps/main` | macaustpa.org | 主站 - 協會官網，包含關於、比賽、新聞、畫廊等 |
-| `apps/robot` | robot.macaustpa.org | 機器人競賽分站 - 公告、競賽資訊、規則、歷史 |
+| App          | Domain              | Description                                   |
+| ------------ | ------------------- | --------------------------------------------- |
+| `apps/main`  | macaustpa.org       | 主站 - 協會官網，包含關於、比賽、新聞、畫廊等 |
+| `apps/robot` | robot.macaustpa.org | 機器人競賽分站 - 公告、競賽資訊、規則、歷史   |
 
 ### Main Site Routes (`apps/main`)
 
-| 路徑 | 頁面 |
-|------|------|
-| `/` | 首頁 |
-| `/about` | 關於頁面 |
-| `/competitions` | 比賽列表 |
+| 路徑                   | 頁面     |
+| ---------------------- | -------- |
+| `/`                    | 首頁     |
+| `/about`               | 關於頁面 |
+| `/competitions`        | 比賽列表 |
 | `/competitions/[slug]` | 比賽詳情 |
-| `/contact` | 聯繫我們 |
-| `/gallery` | 畫廊 |
-| `/news` | 新聞 |
+| `/contact`             | 聯繫我們 |
+| `/gallery`             | 畫廊     |
+| `/news`                | 新聞     |
 
 ### Robot Site Routes (`apps/robot`)
 
-| 路徑 | 頁面 |
-|------|------|
-| `/` | 首頁 |
-| `/announcements` | 公告列表 |
-| `/announcements/[slug]` | 公告詳情 |
-| `/competition` | 競賽資訊 |
-| `/contact` | 聯繫我們 |
-| `/history` | 歷史沿革 |
-| `/rules` | 比賽規則 |
-| `/qa` | Q&A 問答列表 |
-| `/qa/[id]` | 問答詳情 |
-| `/auth/login` | 登入頁面 |
-| `/admin` | 管理後台 |
-| `/admin/qa` | 管理 Q&A |
+| 路徑                    | 頁面         |
+| ----------------------- | ------------ |
+| `/`                     | 首頁         |
+| `/announcements`        | 公告列表     |
+| `/announcements/[slug]` | 公告詳情     |
+| `/competition`          | 競賽資訊     |
+| `/contact`              | 聯繫我們     |
+| `/history`              | 歷史沿革     |
+| `/rules`                | 比賽規則     |
+| `/qa`                   | Q&A 問答列表 |
+| `/qa/[id]`              | 問答詳情     |
+| `/auth/login`           | 登入頁面     |
+| `/admin`                | 管理後台     |
+| `/admin/qa`             | 管理 Q&A     |
 
 Robot 站採用扁平路由，僅支援 zh-TW 繁體中文。
 
 ## Packages
 
-| Package | Name | Description |
-|---------|------|-------------|
-| Main App | `apps/main` | Next.js 15 主站應用 |
-| Robot App | `apps/robot` | Next.js 15 機器人競賽分站 |
-| UI | `@apstpm-website/ui` | 共享 UI 組件庫 |
-| Database | `@apstpm/database` | Supabase 客戶端封裝 (browser/server/middleware) |
-| i18n | `@apstpm-website/i18n` | 翻譯配置（zh-TW） |
-| utils | `@apstpm-website/utils` | 通用工具函數 |
-| tsconfig | `@apstpm-website/tsconfig` | 共享 TypeScript 配置 |
+| Package   | Name                       | Description                                     |
+| --------- | -------------------------- | ----------------------------------------------- |
+| Main App  | `apps/main`                | Next.js 15 主站應用                             |
+| Robot App | `apps/robot`               | Next.js 15 機器人競賽分站                       |
+| UI        | `@apstpm-website/ui`       | 共享 UI 組件庫                                  |
+| Database  | `@apstpm/database`         | Supabase 客戶端封裝 (browser/server/middleware) |
+| i18n      | `@apstpm-website/i18n`     | 翻譯配置（zh-TW）                               |
+| utils     | `@apstpm-website/utils`    | 通用工具函數                                    |
+| tsconfig  | `@apstpm-website/tsconfig` | 共享 TypeScript 配置                            |
 
 ### Apps Comparison
 
-| Feature | Main Site | Robot Site |
-|---------|-----------|------------|
-| **Theme** | 綠色 (brand-*) | 藍色 (robot-*) + 綠色 |
-| **Pages** | 首頁、關於、比賽、新聞、畫廊、聯繫 | 首頁、公告、競賽、歷史、規則、聯繫 |
-| **Comments** | 無 | Giscus 評論系統 |
-| **Form Validation** | react-hook-form + zod | 無 |
-| **Data Source** | 翻譯檔案 + 組件 | 翻譯檔案 + src/data/ 靜態數據 |
+| Feature             | Main Site                          | Robot Site                         |
+| ------------------- | ---------------------------------- | ---------------------------------- |
+| **Theme**           | 綠色 (brand-*)                     | 藍色 (robot-*) + 綠色              |
+| **Pages**           | 首頁、關於、比賽、新聞、畫廊、聯繫 | 首頁、公告、競賽、歷史、規則、聯繫 |
+| **Comments**        | 無                                 | Giscus 評論系統                    |
+| **Form Validation** | react-hook-form + zod              | 無                                 |
+| **Data Source**     | 翻譯檔案 + 組件                    | 翻譯檔案 + src/data/ 靜態數據      |
 
 ## Getting Started
 
@@ -216,11 +216,11 @@ The main website runs at `http://localhost:3000` by default.
 
 ### Available Scripts
 
-| Command | Description |
-| ------- | ----------- |
-| `pnpm dev` | Start dev server |
-| `pnpm build` | Build all packages |
-| `pnpm lint` | Lint all packages |
+| Command      | Description         |
+| ------------ | ------------------- |
+| `pnpm dev`   | Start dev server    |
+| `pnpm build` | Build all packages  |
+| `pnpm lint`  | Lint all packages   |
 | `pnpm clean` | Clean build outputs |
 
 ### Environment Variables
@@ -237,20 +237,20 @@ cp apps/robot/.env.example apps/robot/.env.local
 
 參考 `apps/main/.env.example`，目前僅需配置：
 
-| 變量 | 必填 | 說明 |
-|------|------|------|
-| `NEXT_PUBLIC_SITE_URL` | ✅ | 站點 URL，開發環境為 `http://localhost:3000` |
+| 變量                   | 必填 | 說明                                         |
+| ---------------------- | ---- | -------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL` | ✅    | 站點 URL，開發環境為 `http://localhost:3000` |
 
 #### `apps/robot/.env.local`（機器人競賽分站）：
 
 參考 `apps/robot/.env.example`，需要配置：
 
-| 變量 | 必填 | 說明 |
-|------|------|------|
-| `NEXT_PUBLIC_SUPABASE_URL` | ✅ | Supabase 項目 URL（從 Dashboard > Project Settings > API 獲取） |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | ✅ | Supabase Publishable Key（安全，可公開） |
-| `RESEND_API_KEY` | ❌ | Resend 郵件服務 API Key（不設置則跳過郵件通知） |
-| `NEXT_PUBLIC_SITE_URL` | ✅ | 用於郵件中的連結 |
+| 變量                            | 必填 | 說明                                                            |
+| ------------------------------- | ---- | --------------------------------------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL`      | ✅    | Supabase 項目 URL（從 Dashboard > Project Settings > API 獲取） |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | ✅    | Supabase Publishable Key（安全，可公開）                        |
+| `RESEND_API_KEY`                | ❌    | Resend 郵件服務 API Key（不設置則跳過郵件通知）                 |
+| `NEXT_PUBLIC_SITE_URL`          | ✅    | 用於郵件中的連結                                                |
 
 ## Database Setup (Supabase)
 
@@ -298,11 +298,11 @@ http://localhost:3000/auth/confirm
 
 遷移文件位於 `apps/robot/supabase/migrations/`，包含：
 
-| 文件 | 說明 |
-|------|------|
-| `001_profiles.sql` | 用戶檔案表 + 自動建立 profile 的 trigger |
-| `002_qa_tables.sql` | Q&A 問答表 + 回覆表 + RLS 策略 |
-| `003_rule_versions.sql` | 規則版本表 |
+| 文件                    | 說明                                     |
+| ----------------------- | ---------------------------------------- |
+| `001_profiles.sql`      | 用戶檔案表 + 自動建立 profile 的 trigger |
+| `002_qa_tables.sql`     | Q&A 問答表 + 回覆表 + RLS 策略           |
+| `003_rule_versions.sql` | 規則版本表                               |
 
 **方式 A：使用 Supabase CLI**
 
@@ -331,27 +331,6 @@ SELECT id, email, role FROM profiles;
 UPDATE profiles SET role = 'admin' WHERE email = 'your@email.com';
 ```
 
-## Dependencies
-
-### Main Dependencies
-
-- **Next.js**: ^15.1.0 (App Router, Server Components)
-- **React**: ^19.0.0
-- **Tailwind CSS**: ^4.0.0
-- **Framer Motion**: ^11.15.0
-- **next-intl**: ^3.26.0
-- **@supabase/ssr**: Supabase Auth (SSR)
-- **resend**: Email notifications
-- **lucide-react**: ^0.469.0 (Icons)
-- **react-hook-form**: ^7.54.2
-- **zod**: ^3.24.1
-
-### UI Components (via @apstpm-website/ui)
-
-- Button (variants: primary, secondary, outline, ghost, destructive)
-- Card (with Header, Title, Description, Content, Footer)
-- Input
-- Badge (variants: default, secondary, success, warning, destructive, outline)
 
 
 # 生產環境須知
