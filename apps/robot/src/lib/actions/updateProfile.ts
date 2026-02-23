@@ -1,7 +1,6 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { routing } from '@/i18n/routing';
 import { logAudit } from './audit';
 import { requireAuth } from './requireAuth';
 import { checkRateLimit } from '@/lib/utils/rate-limit';
@@ -58,10 +57,4 @@ export async function updateProfile(formData: FormData) {
 
   revalidatePath('/');
   revalidatePath('/settings');
-
-  for (const locale of routing.locales) {
-    if (locale === routing.defaultLocale) continue;
-    revalidatePath(`/${locale}`);
-    revalidatePath(`/${locale}/settings`);
-  }
 }

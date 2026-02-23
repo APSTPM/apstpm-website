@@ -1,34 +1,12 @@
 'use server';
 
-import { createServerClient } from '@apstpm/database/server';
 import { revalidatePath } from 'next/cache';
+import { requireAdmin } from './requireAuth';
+import { assertUuid } from '@/lib/utils/assert';
 import { checkRateLimit } from '@/lib/utils/rate-limit';
 
-const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const MAX_CODE_LENGTH = 50;
 const MAX_NAME_LENGTH = 200;
-
-function assertUuid(value: string | null | undefined, fieldName: string): string {
-  if (!value || !UUID_REGEX.test(value)) {
-    throw new Error(`${fieldName} is required and must be a valid UUID`);
-  }
-  return value;
-}
-
-async function requireAdmin() {
-  const supabase = await createServerClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error('Unauthorized');
-
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('role')
-    .eq('id', user.id)
-    .single();
-
-  if (profile?.role !== 'admin') throw new Error('Forbidden');
-  return { supabase, user };
-}
 
 export async function createSchool(formData: FormData) {
   const { supabase } = await requireAdmin();

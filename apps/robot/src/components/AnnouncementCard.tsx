@@ -1,20 +1,19 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Link } from '@/i18n/routing';
+import Link from 'next/link';
 import { Paperclip, Calendar } from 'lucide-react';
 import { type Announcement } from '@/lib/content';
 import { Badge } from '@apstpm-website/ui';
 
 interface AnnouncementCardProps {
   announcement: Announcement;
-  locale?: string;
 }
 
-export default function AnnouncementCard({ announcement, locale = 'zh-TW' }: AnnouncementCardProps) {
+export default function AnnouncementCard({ announcement }: AnnouncementCardProps) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString(locale, {
+    return date.toLocaleDateString('zh-TW', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'

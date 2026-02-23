@@ -1,6 +1,7 @@
 export interface AuthorInfo {
   real_name: string | null;
   display_name: string | null;
+  avatar_url?: string | null;
   role: string;
   user_type: 'teacher' | 'student' | null;
   school: { code: string; name: string } | null;

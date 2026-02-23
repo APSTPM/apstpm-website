@@ -4,16 +4,16 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Search, MessageCircleQuestion } from 'lucide-react';
 import { Input } from '@apstpm-website/ui';
-import QaPostCard from './QaPostCard';
+import QaPostCard, { type QaPost } from './QaPostCard';
 
 type StatusFilter = 'all' | 'open' | 'answered';
 
 interface QaListProps {
-  posts: any[];
+  posts: QaPost[];
   total: number;
 }
 
-export default function QaList({ posts }: QaListProps) {
+export default function QaList({ posts, total: _total }: QaListProps) {
   const t = useTranslations('QA');
   const [activeFilter, setActiveFilter] = useState<StatusFilter>('all');
   const [search, setSearch] = useState('');

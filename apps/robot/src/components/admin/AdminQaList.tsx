@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/routing';
+import Link from 'next/link';
 import { Badge, Button, toast } from '@apstpm-website/ui';
 import { Pin, Trash2, ExternalLink, Loader2 } from 'lucide-react';
 import { togglePin, deletePost } from '@/lib/actions/qa';
@@ -83,7 +83,7 @@ export default function AdminQaList({ posts }: AdminQaListProps) {
               </p>
             </div>
 
-            <Link href={`/qa/${post.id}` as any} className="shrink-0 text-gray-400 hover:text-robot-600">
+            <Link href={`/qa/${post.id}`} className="shrink-0 text-gray-400 hover:text-robot-600">
               <ExternalLink className="w-4 h-4" />
             </Link>
           </div>

@@ -1,10 +1,10 @@
 'use client';
 
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Clock, ChevronRight } from 'lucide-react';
 import { Card, CardContent, Button } from '@apstpm-website/ui';
-import { Link } from '@/i18n/routing';
+import Link from 'next/link';
 import type { CompetitionInfo } from '@/lib/content';
 
 interface CompetitionTimelineProps {
@@ -13,7 +13,7 @@ interface CompetitionTimelineProps {
 
 export default function CompetitionTimeline({ competitionInfo }: CompetitionTimelineProps) {
   const t = useTranslations('Home');
-  const locale = useLocale();
+  const locale = 'zh-TW';
 
   const timelineItems = [
     {

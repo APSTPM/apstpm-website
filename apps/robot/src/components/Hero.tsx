@@ -1,10 +1,10 @@
 'use client';
 
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Award, Users } from 'lucide-react';
 import { Button } from '@apstpm-website/ui';
-import { Link } from '@/i18n/routing';
+import Link from 'next/link';
 import type { ContactInfo, CompetitionInfo } from '@/lib/content';
 
 interface HeroProps {
@@ -14,7 +14,7 @@ interface HeroProps {
 
 export default function Hero({ contactInfo, competitionInfo }: HeroProps) {
   const t = useTranslations('Home');
-  const locale = useLocale();
+  const locale = 'zh-TW';
 
   const containerVariants = {
     hidden: { opacity: 0 },

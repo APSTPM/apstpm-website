@@ -36,21 +36,25 @@
 - **語言：** TypeScript
 - **樣式：** Tailwind CSS 4
 - **數據庫：** Supabase (PostgreSQL)
-- **國際化：** next-intl
+- **i18n：** next-intl（僅支援 zh-TW 繁體中文）
 - **其他：** React 19, Turborepo
 
 ## 專案結構
 
 ```
 apps/robot/
+├── app/               # Next.js App Router（扁平路由）
 ├── supabase/          # Supabase 配置和遷移
-├── messages/          # 國際化翻譯檔案
+├── messages/          # 翻譯檔案（zh-TW）
+│   └── zh-TW.json
 └── src/
-    ├── app/           # Next.js App Router 頁面
     ├── components/    # React 元件
+    ├── i18n/          # zh-TW 單語配置
+    │   └── request.ts
     └── lib/
         ├── actions/   # Server Actions
-        └── queries/   # 數據查詢
+        ├── queries/   # 數據查詢
+        └── utils/     # 工具函數
 
 packages/database/
 └── src/

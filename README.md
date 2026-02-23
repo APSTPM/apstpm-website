@@ -7,7 +7,7 @@
 - **Monorepo**: Turborepo + pnpm workspace
 - **Frontend**: Next.js 15 (App Router) + React 19
 - **Styling**: Tailwind CSS 4 + Framer Motion
-- **i18n**: next-intl (繁體中文 / English)
+- **i18n**: next-intl (僅支援 zh-TW 繁體中文)
 - **Database**: Supabase (PostgreSQL + Auth + RLS)
 - **Email**: Resend (optional, for QA notifications)
 - **Fonts**: Space Grotesk (display) + Inter (body) + Noto Sans TC (中文)
@@ -55,24 +55,37 @@ apstpm-website/
 │   │   ├── tailwind.config.ts
 │   │   └── package.json
 │   └── robot/                    # 機器人競賽分站 (robot.macaustpa.org)
-│       ├── app/                  # Next.js App Router
-│       │   ├── [locale]/         # 國際化動態路由
-│       │   │   ├── page.tsx            # 首頁
-│       │   │   ├── HomePageContent.tsx # 首頁內容
-│       │   │   ├── announcements/      # 公告頁面
-│       │   │   │   ├── page.tsx
-│       │   │   │   └── [slug]/page.tsx # 公告詳情
-│       │   │   ├── competition/         # 競賽頁面
-│       │   │   │   ├── page.tsx
-│       │   │   │   └── CompetitionPageContent.tsx
-│       │   │   ├── contact/page.tsx    # 聯繫頁面
-│       │   │   ├── history/page.tsx    # 歷史頁面
-│       │   │   │   └── HistoryPageContent.tsx
-│       │   │   ├── rules/page.tsx      # 規則頁面
-│       │   │   │   └── RulesPageContent.tsx
-│       │   │   └── layout.tsx          # 國際化佈局
-│       │   ├── globals.css
-│       │   └── layout.tsx
+│       ├── app/                  # Next.js App Router（扁平路由）
+│       │   ├── page.tsx                # 首頁
+│       │   ├── HomePageContent.tsx     # 首頁內容
+│       │   ├── announcements/          # 公告頁面
+│       │   │   ├── page.tsx
+│       │   │   └── [slug]/page.tsx     # 公告詳情
+│       │   ├── competition/            # 競賽頁面
+│       │   │   ├── page.tsx
+│       │   │   └── CompetitionPageContent.tsx
+│       │   ├── contact/page.tsx        # 聯繫頁面
+│       │   ├── history/page.tsx        # 歷史頁面
+│       │   │   └── HistoryPageContent.tsx
+│       │   ├── rules/page.tsx          # 規則頁面
+│       │   │   └── RulesPageContent.tsx
+│       │   ├── qa/                     # Q&A 問答
+│       │   │   ├── page.tsx
+│       │   │   ├── new/page.tsx
+│       │   │   └── [id]/page.tsx
+│       │   ├── auth/                   # 認證
+│       │   │   ├── login/page.tsx
+│       │   │   ├── complete-profile/page.tsx
+│       │   │   ├── callback/route.ts
+│       │   │   └── confirm/route.ts
+│       │   ├── admin/                  # 管理後台
+│       │   │   ├── page.tsx
+│       │   │   ├── qa/page.tsx
+│       │   │   ├── schools/page.tsx
+│       │   │   └── competition-categories/page.tsx
+│       │   ├── settings/page.tsx
+│       │   ├── layout.tsx
+│       │   └── globals.css
 │       ├── src/
 │       │   ├── components/       # React 組件
 │       │   │   ├── Navigation.tsx
@@ -89,11 +102,9 @@ apstpm-website/
 │       │   │   ├── history.ts
 │       │   │   └── rules.ts
 │       │   ├── i18n/
-│       │   │   ├── routing.ts
-│       │   │   └── request.ts
+│       │   │   └── request.ts          # zh-TW 單語配置
 │       │   └── lib/content/      # 內容管理
-│       ├── messages/             # 翻譯檔案
-│       │   ├── en.json
+│       ├── messages/             # 翻譯檔案（zh-TW）
 │       │   └── zh-TW.json
 │       ├── middleware.ts
 │       ├── next.config.ts
@@ -162,7 +173,7 @@ This is a monorepo with multiple Next.js applications:
 | `/admin` | 管理後台 |
 | `/admin/qa` | 管理 Q&A |
 
-所有頁面支援 `[locale]` 動態路由，支持 `en` 和 `zh-TW` 兩種語言。
+Robot 站採用扁平路由，僅支援 zh-TW 繁體中文。
 
 ## Packages
 
@@ -172,7 +183,7 @@ This is a monorepo with multiple Next.js applications:
 | Robot App | `apps/robot` | Next.js 15 機器人競賽分站 |
 | UI | `@apstpm-website/ui` | 共享 UI 組件庫 |
 | Database | `@apstpm/database` | Supabase 客戶端封裝 (browser/server/middleware) |
-| i18n | `@apstpm-website/i18n` | 國際化配置與翻譯 |
+| i18n | `@apstpm-website/i18n` | 翻譯配置（zh-TW） |
 | utils | `@apstpm-website/utils` | 通用工具函數 |
 | tsconfig | `@apstpm-website/tsconfig` | 共享 TypeScript 配置 |
 

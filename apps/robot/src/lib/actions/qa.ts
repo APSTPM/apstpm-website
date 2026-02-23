@@ -3,9 +3,9 @@
 import { createServerClient } from '@apstpm/database/server';
 import { revalidatePath } from 'next/cache';
 import { notifyPostAuthor, notifyAdmins } from './notify';
+import { requireAuth, requireAdmin } from './requireAuth';
+import { assertUuid } from '@/lib/utils/assert';
 import { checkRateLimit } from '@/lib/utils/rate-limit';
-
-const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 const MAX_TITLE_LENGTH = 200;
 const MAX_CONTENT_LENGTH = 10000;
@@ -13,32 +13,6 @@ const MAX_TAGS = 5;
 const MAX_TAG_LENGTH = 30;
 const QA_POST_RETURN_FIELDS = 'id, author_id, title, content, tags, status, pinned, created_at, updated_at, submission_id';
 const QA_REPLY_RETURN_FIELDS = 'id, post_id, author_id, content, is_official, created_at, updated_at, submission_id';
-
-async function requireAuth() {
-  const supabase = await createServerClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error('Unauthorized');
-  return { supabase, user };
-}
-
-async function requireAdmin() {
-  const { supabase, user } = await requireAuth();
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('role')
-    .eq('id', user.id)
-    .single();
-
-  if (profile?.role !== 'admin') throw new Error('Forbidden');
-  return { supabase, user };
-}
-
-function assertUuid(value: string | null | undefined, fieldName: string): string {
-  if (!value || !UUID_REGEX.test(value)) {
-    throw new Error(`${fieldName} is required and must be a valid UUID`);
-  }
-  return value;
-}
 
 async function updatePostStatusBasedOnLastReply(supabase: Awaited<ReturnType<typeof createServerClient>>, postId: string) {
   const { data: replies } = await supabase

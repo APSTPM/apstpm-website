@@ -4,6 +4,17 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 const FROM_EMAIL = 'APSTPM <noreply@apstpm.org>';
 
+function isInvalidApiKeyError(error: unknown): boolean {
+  if (!error || typeof error !== 'object') return false;
+  const maybeError = error as { statusCode?: number; name?: string; message?: string };
+  return (
+    maybeError.statusCode === 401 &&
+    maybeError.name === 'validation_error' &&
+    typeof maybeError.message === 'string' &&
+    maybeError.message.toLowerCase().includes('api key is invalid')
+  );
+}
+
 export async function sendEmail({
   to,
   subject,
@@ -26,7 +37,10 @@ export async function sendEmail({
   });
 
   if (error) {
-    console.error('Failed to send email:', error);
+    if (isInvalidApiKeyError(error)) {
+      console.warn('RESEND_API_KEY is invalid, skipping email');
+      return;
+    }
     throw error;
   }
 }

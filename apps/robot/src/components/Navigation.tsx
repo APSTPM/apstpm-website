@@ -1,16 +1,16 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Link, usePathname } from '@/i18n/routing';
-import { useTransition, useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bot } from 'lucide-react';
 import UserMenu from '@/components/auth/UserMenu';
 
-export default function Navigation({ locale }: { locale: string }) {
+export default function Navigation() {
   const t = useTranslations('Navigation');
   const pathname = usePathname();
-  const [, startTransition] = useTransition();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -20,20 +20,14 @@ export default function Navigation({ locale }: { locale: string }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const switchLocale = (newLocale: string) => {
-    startTransition(() => {
-      window.location.href = `/${newLocale}${pathname}`;
-    });
-  };
-
   const navLinks = [
-    { href: '/' as const, label: t('home') },
-    { href: '/competition' as const, label: t('competition') },
-    { href: '/rules' as const, label: t('rules') },
-    { href: '/qa' as const, label: t('qa') },
-    { href: '/announcements' as const, label: t('announcements') },
-    { href: '/history' as const, label: t('history') },
-    { href: '/contact' as const, label: t('contact') },
+    { href: '/', label: t('home') },
+    { href: '/competition', label: t('competition') },
+    { href: '/rules', label: t('rules') },
+    { href: '/qa', label: t('qa') },
+    { href: '/announcements', label: t('announcements') },
+    { href: '/history', label: t('history') },
+    { href: '/contact', label: t('contact') },
   ];
 
   return (
@@ -77,25 +71,9 @@ export default function Navigation({ locale }: { locale: string }) {
             })}
           </div>
 
-          {/* Right side: UserMenu + locale + mobile menu */}
+          {/* Right side: UserMenu + mobile menu */}
           <div className="flex items-center gap-3">
             <UserMenu />
-            {/* Locale Switcher */}
-            <div className="flex gap-1">
-              {(['en', 'zh-TW'] as const).map((loc) => (
-                <button
-                  key={loc}
-                  onClick={() => switchLocale(loc)}
-                  className={`border rounded-md px-3 py-1.5 text-xs font-semibold transition-all duration-300 ${
-                    locale === loc
-                      ? 'bg-robot-600 text-white border-robot-600'
-                      : 'border-gray-300 text-gray-600'
-                  }`}
-                >
-                  {loc === 'en' ? 'EN' : '中文'}
-                </button>
-              ))}
-            </div>
 
             {/* Mobile menu button */}
             <button

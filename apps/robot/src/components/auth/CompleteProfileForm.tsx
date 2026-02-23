@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from '@/i18n/routing';
+import { useRouter } from 'next/navigation';
 import { Button, SearchableSelect, toast } from '@apstpm-website/ui';
 import { saveProfile } from '@/lib/actions/profile';
 

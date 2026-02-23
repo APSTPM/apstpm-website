@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/routing';
+import Link from 'next/link';
 import { createBrowserClient } from '@apstpm/database/browser';
 import { Button } from '@apstpm-website/ui';
 import { LogOut, User, Shield, Settings } from 'lucide-react';

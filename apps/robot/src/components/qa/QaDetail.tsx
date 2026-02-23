@@ -72,7 +72,7 @@ export default function QaDetail({ post, replies }: QaDetailProps) {
                   {(post.author?.display_name || '?')[0].toUpperCase()}
                 </div>
               )}
-              <span>{formatAuthor(post.author as any)}</span>
+              <span>{formatAuthor(post.author)}</span>
             </div>
             <span className="flex items-center gap-1">
               <Clock className="w-3.5 h-3.5" />
@@ -127,7 +127,7 @@ export default function QaDetail({ post, replies }: QaDetailProps) {
                         {(reply.author?.display_name || '?')[0].toUpperCase()}
                       </div>
                     )}
-                    <span>{formatAuthor(reply.author as any)}</span>
+                    <span>{formatAuthor(reply.author)}</span>
                   </div>
                   <span className="flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5" />

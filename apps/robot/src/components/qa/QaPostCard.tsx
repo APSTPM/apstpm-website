@@ -1,28 +1,32 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/routing';
+import Link from 'next/link';
 import { MessageSquare, Pin, Clock } from 'lucide-react';
 import { formatAuthor } from '@/lib/utils/author';
 import QaStatusBadge from './QaStatusBadge';
 
+/** 共用 QA 貼文型別，供 QaPostCard 與 QaList 使用 */
+export interface QaPost {
+  id: string;
+  title: string;
+  status: 'open' | 'answered';
+  pinned: boolean;
+  reply_count: number;
+  created_at: string;
+  content?: string;
+  author: {
+    display_name: string | null;
+    avatar_url: string | null;
+    real_name: string | null;
+    role: string;
+    user_type: 'teacher' | 'student' | null;
+    school: { code: string; name: string } | null;
+  } | null;
+}
+
 interface QaPostCardProps {
-  post: {
-    id: string;
-    title: string;
-    status: 'open' | 'answered';
-    pinned: boolean;
-    reply_count: number;
-    created_at: string;
-    author: {
-      display_name: string | null;
-      avatar_url: string | null;
-      real_name: string | null;
-      role: string;
-      user_type: 'teacher' | 'student' | null;
-      school: { code: string; name: string } | null;
-    } | null;
-  };
+  post: QaPost;
 }
 
 export default function QaPostCard({ post }: QaPostCardProps) {
@@ -39,7 +43,7 @@ export default function QaPostCard({ post }: QaPostCardProps) {
   };
 
   return (
-    <Link href={`/qa/${post.id}` as any} className="block">
+    <Link href={`/qa/${post.id}`} className="block">
       <div className="p-4 sm:p-5 bg-white rounded-xl border border-gray-200 hover:border-robot-300 hover:shadow-md transition-all group">
         <div className="flex items-start gap-3">
           {/* Author avatar */}
@@ -68,7 +72,7 @@ export default function QaPostCard({ post }: QaPostCardProps) {
               {post.title}
             </h3>
             <div className="flex items-center gap-4 mt-2 text-sm text-gray-500">
-              <span>{formatAuthor(post.author as any)}</span>
+              <span>{formatAuthor(post.author)}</span>
               <span className="flex items-center gap-1">
                 <Clock className="w-3.5 h-3.5" />
                 {timeAgo(post.created_at)}

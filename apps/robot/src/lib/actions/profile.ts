@@ -3,7 +3,6 @@
 import { createServerClient } from '@apstpm/database/server';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
-import { routing } from '@/i18n/routing';
 import { logAudit } from './audit';
 import { checkRateLimit } from '@/lib/utils/rate-limit';
 
@@ -93,11 +92,5 @@ export async function saveProfile(formData: FormData, mode: 'create' | 'edit') {
 
     revalidatePath('/');
     revalidatePath('/settings');
-
-    for (const locale of routing.locales) {
-      if (locale === routing.defaultLocale) continue;
-      revalidatePath(`/${locale}`);
-      revalidatePath(`/${locale}/settings`);
-    }
   }
 }

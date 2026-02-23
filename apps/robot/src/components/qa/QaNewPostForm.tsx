@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from '@/i18n/routing';
+import { useRouter } from 'next/navigation';
 import { Input, Button, Badge, cn, toast } from '@apstpm-website/ui';
 import { Loader2, Send, X } from 'lucide-react';
 import { createPost } from '@/lib/actions/qa';
@@ -307,7 +307,7 @@ export default function QaNewPostForm({ competitionCategories }: QaNewPostFormPr
       setSubmissionId(crypto.randomUUID());
       toast.success(t('postCreated'));
       keepLoadingUntilRouteChange = true;
-      router.push(`/qa/${post.id}` as any);
+      router.push(`/qa/${post.id}`);
     } catch (error) {
       console.error('Failed to create post:', error);
       toast.error(t('postFailed'));
