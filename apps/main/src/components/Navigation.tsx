@@ -91,19 +91,25 @@ export default function Navigation({locale}: {locale: string}) {
           {/* Language switcher — far right */}
           <div className="flex items-center justify-end gap-1.5 sm:gap-3 justify-self-end z-10">
             <div className="flex gap-1">
-              {(['en', 'zh-TW'] as const).map((loc) => (
-                <button
-                  key={loc}
-                  onClick={() => switchLocale(loc)}
-                  className={`border rounded-md px-2 sm:px-3 py-1.5 text-xs font-semibold transition-all duration-300 ${
-                    locale === loc
-                      ? 'bg-brand-700 text-white border-brand-700'
-                      : 'border-gray-300 text-gray-600'
-                  }`}
-                >
-                  {loc === 'en' ? 'EN' : '中文'}
-                </button>
-              ))}
+              {(['en', 'zh-TW'] as const).map((loc) => {
+                const isActive = locale === loc;
+                return (
+                  <button
+                    key={loc}
+                    type="button"
+                    disabled={isActive}
+                    aria-current={isActive ? 'true' : undefined}
+                    onClick={() => switchLocale(loc)}
+                    className={`border rounded-md px-2 sm:px-3 py-1.5 text-xs font-semibold transition-all duration-300 disabled:opacity-100 ${
+                      isActive
+                        ? 'bg-brand-700 text-white border-brand-700 cursor-default'
+                        : 'border-gray-300 text-gray-600 cursor-pointer hover:border-brand-700 hover:text-brand-700'
+                    }`}
+                  >
+                    {loc === 'en' ? 'EN' : '中文'}
+                  </button>
+                );
+              })}
             </div>
 
             <button
