@@ -2,6 +2,16 @@
 
 澳門科技實踐促進會 (Association of Promotion of Science and Technology Practice in Macau) 官方網站及其子網站。
 
+## 開發注意：不要頻繁 push 到 `master`
+
+主站部署在 Netlify。`master` 是 production 分支，**每次成功部署到正式站會消耗 15 credits**。免費方案每月約 **300 credits**（大約 **20 次**正式上線）；額度用完後全站會暫停，要等下個週期才恢復，且無法加購。
+
+- 日常開發請用 **分支或 PR**（Deploy Preview 不扣 credits），確認後再合進 `master`
+- 不要把 `master` 當存檔鍵；一天多次 push 到 `master` 會很快用完額度
+- 免費方案通常同時只能跑 1 個 build，連續推送會排隊
+- 只改 `apps/robot` 等與主站無關的檔案時，`apps/main/netlify.toml` 的 `ignore` 可能會跳過本次 build；改 `apps/main`、`packages/` 或 lockfile 仍會部署並扣 credits
+- 用量在 Netlify → Team → Billing / Usage 查看
+
 ## Tech Stack
 
 - **Monorepo**: Turborepo + pnpm workspace
