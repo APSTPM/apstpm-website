@@ -1,0 +1,12 @@
+# 主站 Netlify 設定。路徑相對於 repo 根目錄（Base directory 請留空）。
+# Dashboard：Package directory = apps/main；不要設 Base directory。
+# Next.js adapter 由 Netlify 自動套用，不要 pin @netlify/plugin-nextjs。
+
+[build]
+  command = "pnpm --filter main build"
+  publish = "apps/main/.next"
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- apps/main packages pnpm-lock.yaml package.json pnpm-workspace.yaml turbo.json"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NODE_OPTIONS = "--max-old-space-size=4096"
