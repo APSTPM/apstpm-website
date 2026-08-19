@@ -38,32 +38,40 @@ export default function Navigation({locale}: {locale: string}) {
     <nav
       className={`bg-white border-b border-gray-200 sticky top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-md' : 'shadow-sm'}`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center min-h-16 py-2 gap-2">
+          {/* Logo + full name */}
+          <Link
+            href="/"
+            aria-label={t('siteName')}
+            className="flex items-center gap-2 min-w-0 justify-self-start z-10 group"
+          >
             <Image
               src="/images/logo.png"
-              alt="APSTPM"
+              alt=""
               width={40}
               height={41}
-              className="h-10 w-auto"
+              className="h-9 w-9 sm:h-10 sm:w-10 shrink-0"
               priority
             />
-            <span className="text-brand-800 font-bold text-xl font-display">
-              APSTPM
+            <span
+              className={`min-w-0 font-display font-bold text-brand-800 leading-snug text-[13px] sm:text-sm lg:text-base ${
+                locale === 'zh-TW' ? 'whitespace-nowrap' : 'text-balance'
+              }`}
+            >
+              {t('siteName')}
             </span>
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1">
+          {/* Desktop Nav — centered in the bar */}
+          <div className="hidden lg:flex items-center justify-center gap-1">
             {navLinks.map((link) => {
               const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  className={`relative px-3 xl:px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap ${
                     isActive ? 'text-brand-700 font-semibold' : 'text-gray-600 hover:text-brand-700'
                   }`}
                 >
@@ -80,15 +88,14 @@ export default function Navigation({locale}: {locale: string}) {
             })}
           </div>
 
-          {/* Right side: locale + mobile menu */}
-          <div className="flex items-center gap-3">
-            {/* Locale Switcher */}
+          {/* Language switcher — far right */}
+          <div className="flex items-center justify-end gap-1.5 sm:gap-3 justify-self-end z-10">
             <div className="flex gap-1">
               {(['en', 'zh-TW'] as const).map((loc) => (
                 <button
                   key={loc}
                   onClick={() => switchLocale(loc)}
-                  className={`border rounded-md px-3 py-1.5 text-xs font-semibold transition-all duration-300 ${
+                  className={`border rounded-md px-2 sm:px-3 py-1.5 text-xs font-semibold transition-all duration-300 ${
                     locale === loc
                       ? 'bg-brand-700 text-white border-brand-700'
                       : 'border-gray-300 text-gray-600'
@@ -99,10 +106,11 @@ export default function Navigation({locale}: {locale: string}) {
               ))}
             </div>
 
-            {/* Mobile menu button */}
             <button
-              className="md:hidden p-2 rounded-lg text-gray-600"
+              className="lg:hidden p-2 rounded-lg text-gray-600"
               onClick={() => setMobileOpen(!mobileOpen)}
+              aria-expanded={mobileOpen}
+              aria-label="Menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {mobileOpen ? (
@@ -123,7 +131,7 @@ export default function Navigation({locale}: {locale: string}) {
             initial={{opacity: 0, height: 0}}
             animate={{opacity: 1, height: 'auto'}}
             exit={{opacity: 0, height: 0}}
-            className="md:hidden overflow-hidden bg-white border-t border-gray-200"
+            className="lg:hidden overflow-hidden bg-white border-t border-gray-200"
           >
             <div className="px-4 py-4 space-y-2">
               {navLinks.map((link) => (
