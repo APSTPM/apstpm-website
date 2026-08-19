@@ -2,7 +2,8 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/routing';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 
 interface HeroProps {
   locale: string;
@@ -18,10 +19,11 @@ export default function Hero({ locale: _locale }: HeroProps) {
   const t = useTranslations('hero');
   const locale = useLocale();
   const isZh = locale === 'zh-TW';
+  const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="bg-white min-h-[85vh] flex items-center">
-      <div className="max-w-7xl mx-auto px-6 lg:px-16 py-12 w-full">
+    <section className="relative bg-white min-h-[85vh] flex items-center">
+      <div className="max-w-7xl mx-auto px-6 lg:px-16 py-12 pb-24 w-full">
         <div className="relative z-10 text-center">
           {/* Badge */}
           <motion.div
@@ -86,6 +88,23 @@ export default function Hero({ locale: _locale }: HeroProps) {
           </motion.div>
         </div>
       </div>
+
+      <motion.a
+        href="#home-events"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.7, duration: 0.5 }}
+        className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 flex flex-col items-center text-brand-700 hover:text-brand-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 rounded-full p-2"
+        aria-label={t('scrollHint')}
+      >
+        <motion.span
+          animate={prefersReducedMotion ? undefined : { y: [0, 8, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+          aria-hidden="true"
+        >
+          <ChevronDown className="w-8 h-8" strokeWidth={1.75} />
+        </motion.span>
+      </motion.a>
     </section>
   );
 }
