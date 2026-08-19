@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function Footer() {
   const t = useTranslations('footer');
@@ -48,7 +49,14 @@ export default function Footer() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <Link href="/" className="inline-block mb-4">
+              <Link href="/" className="inline-flex items-center gap-3 mb-4">
+                <Image
+                  src="/images/logo.png"
+                  alt="APSTPM"
+                  width={48}
+                  height={49}
+                  className="h-12 w-auto"
+                />
                 <span className="text-white text-3xl font-bold font-display">
                   APSTPM
                 </span>

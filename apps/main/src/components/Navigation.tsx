@@ -4,6 +4,7 @@ import {useTranslations} from 'next-intl';
 import {Link, usePathname} from '@/i18n/routing';
 import {useTransition, useState, useEffect} from 'react';
 import {motion, AnimatePresence} from 'framer-motion';
+import Image from 'next/image';
 
 export default function Navigation({locale}: {locale: string}) {
   const t = useTranslations('nav');
@@ -41,6 +42,14 @@ export default function Navigation({locale}: {locale: string}) {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
+            <Image
+              src="/images/logo.png"
+              alt="APSTPM"
+              width={40}
+              height={41}
+              className="h-10 w-auto"
+              priority
+            />
             <span className="text-brand-800 font-bold text-xl font-display">
               APSTPM
             </span>
