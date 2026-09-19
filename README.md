@@ -4,6 +4,8 @@
 
 ## 開發注意：不要頻繁 push 到 `master`
 
+**使用** `pnpm --filter main dev` **開啟主站測試服務器。**
+
 主站部署在 Netlify。`master` 是 production 分支，**每次成功部署到正式站會消耗 15 credits**。免費方案每月約 **300 credits**（大約 **20 次**正式上線）；額度用完後全站會暫停，要等下個週期才恢復，且無法加購。
 
 - 日常開發請用 **分支或 PR**（Deploy Preview 不扣 credits），確認後再合進 `master`

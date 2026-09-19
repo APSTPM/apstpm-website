@@ -55,7 +55,7 @@ export default function Navigation({locale}: {locale: string}) {
               priority
             />
             <span
-              className={`min-w-0 font-display font-bold text-brand-800 leading-snug text-[13px] sm:text-sm lg:text-base ${
+              className={`min-w-0 font-display font-bold text-brand-800 leading-snug text-[11px] min-[375px]:text-[13px] sm:text-sm lg:text-base ${
                 locale === 'zh-TW' ? 'whitespace-nowrap' : 'text-balance'
               }`}
             >

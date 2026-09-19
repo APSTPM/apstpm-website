@@ -210,9 +210,47 @@
       "privacy": "隱私政策",
       "terms": "服務條款",
       "cookies": "Cookie 政策"
-    }
+    },
+    "admin": "管理員入口",
+    "records": "活動紀錄"
   },
   "timeline": {
     "now": "進行中"
+  },
+  "homeIntro": {
+    "headline": "推動科技實踐，服務澳門社會",
+    "about": "認識協會",
+    "contact": "聯絡我們",
+    "recordsTitle": "過往活動"
+  },
+  "admin": {
+    "title": "管理員控制台",
+    "status": "待啟用",
+    "description": "此入口預留作協會資訊管理之用。日後管理員可在控制台更新協會介紹、活動紀錄及最新消息。",
+    "availability": "控制台尚未開放，目前不提供登入、內容編輯或發布功能。",
+    "back": "返回首頁"
+  },
+  "carousel": {
+    "label": "活動焦點",
+    "role": "輪播",
+    "slideRole": "投影片",
+    "position": "第 {current} 張，共 {total} 張",
+    "goTo": "顯示：{title}",
+    "previous": "上一張",
+    "next": "下一張",
+    "credit": "圖片：勞工事務局",
+    "youthSkills": {
+      "title": "世界青年技能日暨技能滿FUN嘉年華",
+      "meta": "2025 · 過往活動 · 本會代表出席",
+      "date": "2025.07",
+      "alt": "2025 世界青年技能日活動開幕式合照",
+      "link": "活動報道"
+    },
+    "robotics": {
+      "title": "澳門青少年綜合機械人科普活動選拔大賽",
+      "meta": "2024/2025 學年 · 過往活動 · 本會承辦",
+      "date": "2025.05",
+      "link": "賽事章程（PDF）"
+    }
   }
 }

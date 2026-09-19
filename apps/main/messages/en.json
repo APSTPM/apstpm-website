@@ -198,7 +198,7 @@
       "contact": "Contact Us",
       "sponsors": "Sponsors",
       "press": "Press",
-      "careers": "Careers"
+      "careers": "Join us"
     },
     "newsletter": {
       "title": "Stay Updated",
@@ -210,9 +210,47 @@
       "privacy": "Privacy Policy",
       "terms": "Terms of Service",
       "cookies": "Cookie Policy"
-    }
+    },
+    "admin": "Administrator",
+    "records": "Activity records"
   },
   "timeline": {
     "now": "NOW"
+  },
+  "homeIntro": {
+    "headline": "Science and technology in practice",
+    "about": "About the association",
+    "contact": "Contact us",
+    "recordsTitle": "Past activities"
+  },
+  "admin": {
+    "title": "Administrator console",
+    "status": "Not yet available",
+    "description": "This entrance is reserved for managing association information. The future console will let administrators update the association profile, activity records and news.",
+    "availability": "The console is not yet open. Sign-in, editing and publishing are currently unavailable.",
+    "back": "Back to home"
+  },
+  "carousel": {
+    "label": "Activity highlights",
+    "role": "carousel",
+    "slideRole": "slide",
+    "position": "Slide {current} of {total}",
+    "goTo": "Show: {title}",
+    "previous": "Previous slide",
+    "next": "Next slide",
+    "credit": "Photo: Labour Affairs Bureau",
+    "youthSkills": {
+      "title": "World Youth Skills Day & Skills Carnival",
+      "meta": "2025 · Past activity · Representatives attended",
+      "date": "2025.07",
+      "alt": "Group photo at the 2025 World Youth Skills Day opening ceremony",
+      "link": "Event report (Chinese)"
+    },
+    "robotics": {
+      "title": "Macau Youth Robotics Science Selection Competition",
+      "meta": "2024/2025 · Past activity · Event delivery by APSTPM",
+      "date": "2025.05",
+      "link": "Competition rules (PDF, Chinese)"
+    }
   }
 }
