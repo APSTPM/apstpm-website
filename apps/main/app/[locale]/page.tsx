@@ -1,6 +1,7 @@
 import {getTranslations} from 'next-intl/server';
 import {ArrowUpRight} from 'lucide-react';
 import Hero from '@/components/Hero';
+import HomeSections from '@/components/HomeSections';
 import {homeSources} from '@/data/home';
 
 export default async function HomePage() {
@@ -22,6 +23,7 @@ export default async function HomePage() {
           ))}
         </div>
       </section>
+      <HomeSections />
     </div>
   );
 }
