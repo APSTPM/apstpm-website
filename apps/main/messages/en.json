@@ -4,7 +4,7 @@
     "home": "Home",
     "about": "About",
     "competitions": "Competitions",
-    "news": "News",
+    "news": "Activities",
     "gallery": "Gallery",
     "contact": "Contact"
   },
@@ -110,16 +110,16 @@
     }
   },
   "news": {
-    "title": "News",
-    "subtitle": "Latest Updates from APSTPM",
-    "readMore": "Read More",
-    "publishedOn": "Published on",
+    "title": "Activities",
+    "subtitle": "Activities organised or joined by APSTPM",
+    "role": "Our role",
+    "competitionDetails": "Competition details",
+    "source": "Source",
+    "chineseOnly": "Activity details are available in Traditional Chinese only.",
     "categories": {
       "all": "All",
-      "announcements": "Announcements",
-      "events": "Events",
-      "research": "Research",
-      "industry": "Industry"
+      "organized": "Organised by APSTPM",
+      "partnered": "Partnerships"
     }
   },
   "gallery": {

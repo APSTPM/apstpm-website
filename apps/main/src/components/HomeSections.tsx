@@ -4,7 +4,7 @@ import {getLocale, getTranslations} from 'next-intl/server';
 import {ArrowRight, BookOpen, HeartHandshake, Lightbulb} from 'lucide-react';
 import {Link} from '@/i18n/routing';
 import {competitions} from '@/data/competitions';
-import {newsData} from '@/data/news';
+import {activities} from '@/data/activities';
 import {galleryItems} from '@/data/gallery';
 
 const previewLimit = 3;
@@ -71,16 +71,16 @@ export default async function HomeSections() {
 
       <PreviewSection id="home-news" title={nav('news')} href="/news" moreLabel={t('viewMore')}>
         <div className={gridClassName}>
-          {newsData.slice(0, previewLimit).map(item => (
+          {activities.slice(0, previewLimit).map(item => (
             <Link key={item.id} href={`/news#${item.id}`} className={linkClassName}>
               <PreviewImage src={item.image} />
-              <div className="p-5 sm:p-6">
+              <div lang="zh-Hant" className="p-5 sm:p-6">
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">
-                  <span className="rounded-md bg-brand-50 px-2 py-1 font-medium text-brand-800">{news(`categories.${item.category}`)}</span>
-                  <time dateTime={item.date} className="tabular-nums text-gray-500">{item.date}</time>
+                  <span lang={locale} className="rounded-md bg-brand-50 px-2 py-1 font-medium text-brand-800">{news(`categories.${item.category}`)}</span>
+                  <time dateTime={item.date} className="tabular-nums text-gray-500">{item.period}</time>
                 </div>
-                <h3 className="mt-3 text-lg font-semibold leading-snug text-gray-900 group-hover:text-brand-800">{localized(item.title)}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-gray-600">{localized(item.excerpt)}</p>
+                <h3 className="mt-3 text-lg font-semibold leading-snug text-gray-900 group-hover:text-brand-800">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-gray-600">{item.summary}</p>
               </div>
             </Link>
           ))}

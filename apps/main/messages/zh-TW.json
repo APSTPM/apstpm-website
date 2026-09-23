@@ -4,7 +4,7 @@
     "home": "首頁",
     "about": "關於",
     "competitions": "競賽",
-    "news": "新聞",
+    "news": "活動",
     "gallery": "媒體庫",
     "contact": "聯絡"
   },
@@ -110,16 +110,16 @@
     }
   },
   "news": {
-    "title": "新聞",
-    "subtitle": "APSTPM 最新資訊",
-    "readMore": "閱讀更多",
-    "publishedOn": "發布日期",
+    "title": "活動",
+    "subtitle": "本會承辦及參與的活動紀錄",
+    "role": "本會角色",
+    "competitionDetails": "比賽詳情",
+    "source": "資料來源",
+    "chineseOnly": "Activity details are available in Traditional Chinese only.",
     "categories": {
       "all": "全部",
-      "announcements": "公告",
-      "events": "活動",
-      "research": "研究",
-      "industry": "產業"
+      "organized": "本會承辦",
+      "partnered": "協作參與"
     }
   },
   "gallery": {
