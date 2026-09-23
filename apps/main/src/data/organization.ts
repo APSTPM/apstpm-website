@@ -1,5 +1,5 @@
 // 協會組織架構：會員大會、理事會、監事會
-// 有照片後把檔案放到 public/images/organization/，再填入 photo（例如 '/images/organization/president.jpg'）
+// 照片放在 public/images/organization/，目前四張取自各人任職大學的官方頁面
 // affiliation／bio／link 只填有公開來源可核實的，其餘待本人提供
 
 type Localized = {en: string; 'zh-TW': string};
@@ -75,21 +75,37 @@ export const organizationGroups: OrganizationGroup[] = [
   {
     key: 'generalAssembly',
     members: [
-      {id: 'president', name: zh('李銘源'), position: {en: 'President', 'zh-TW': '會長'}, duties: duties.president},
+      {
+        id: 'president',
+        name: {en: 'Simon Lee Ming-yuen', 'zh-TW': '李銘源'},
+        photo: '/images/organization/lee-ming-yuen.jpg',
+        position: {en: 'President', 'zh-TW': '會長'},
+        affiliation: {
+          en: 'Chair Professor of Biomedical Sciences, The Hong Kong Polytechnic University; formerly Professor, Institute of Chinese Medical Sciences, University of Macau',
+          'zh-TW': '香港理工大學生物醫學講座教授，曾任澳門大學中華醫藥研究院教授',
+        },
+        bio: {
+          en: 'Researches natural-product and Chinese-medicine drug discovery, neurodegenerative diseases and neuroprotection. At the University of Macau the team built a zebrafish-based high-throughput drug screening platform on microfluidic chips, which received a Technological Invention Award in the 2020 Macao Science and Technology Awards. Also President of the Macao Pharmacology Association.',
+          'zh-TW': '研究天然產物與中藥新藥研發、神經退行性疾病及神經保護機制。在澳門大學期間帶領團隊建立基於微流控芯片的斑馬魚高通量藥物篩選平台，獲2020年澳門科學技術獎勵技術發明獎。現任澳門藥理學會會長。',
+        },
+        duties: duties.president,
+        link: 'https://www.polyu.edu.hk/fsn/people/academic-staff/prof-lee-mingyuen-simon/',
+      },
       {
         id: 'vice-president',
         name: {en: 'Ip Weng Fai', 'zh-TW': '葉穎暉'},
+        photo: '/images/organization/ip-weng-fai.jpg',
         position: {en: 'Vice President', 'zh-TW': '副會長'},
         affiliation: {
-          en: 'Assistant Professor, Faculty of Science and Technology, University of Macau',
-          'zh-TW': '澳門大學科技學院助理教授',
+          en: 'Assistant Professor, Faculty of Science, University of Macau',
+          'zh-TW': '澳門大學理學院助理教授',
         },
         bio: {
-          en: 'A physical chemist researching surface and corrosion chemistry, with applications in electrochemical energy conversion and storage, and a multiple-time team leader of the Macao school team at the Chinese Chemistry Olympiad (national final).',
-          'zh-TW': '物理化學學者，研究表面及腐蝕化學，應用於電化學能量轉換與儲存。多次擔任澳門學界代表隊領隊，出戰中國化學奧林匹克（決賽）。',
+          en: 'Researches surface and corrosion chemistry, with applications in electrochemical energy conversion and storage, and oversees the chemistry laboratory. Has co-organised the chemistry competition for Macao secondary school students since 2007, and has led the Macao school team at the Chinese Chemistry Olympiad (national final) several times.',
+          'zh-TW': '研究表面及腐蝕化學，應用於電化學能量轉換與儲存，並負責澳大化學實驗室。自2007年起協辦澳門中學生化學比賽，多次擔任澳門學界代表隊領隊，出戰中國化學奧林匹克（決賽）。',
         },
         duties: duties.vicePresident,
-        link: 'https://www.fst.um.edu.mo/people/andyip/',
+        link: 'https://personal.fsc.um.edu.mo/andyip/',
       },
       {id: 'secretary-general', name: zh('林展揚'), position: {en: 'Secretary-General', 'zh-TW': '秘書長'}, duties: duties.secretaryGeneral},
     ],
@@ -97,7 +113,22 @@ export const organizationGroups: OrganizationGroup[] = [
   {
     key: 'board',
     members: [
-      {id: 'board-chairman', name: zh('黃志文'), position: {en: 'Chairman', 'zh-TW': '理事長'}, duties: duties.boardChairman},
+      {
+        id: 'board-chairman',
+        name: {en: 'Matthew Vong Chi Man', 'zh-TW': '黃志文'},
+        photo: '/images/organization/vong-chi-man.jpg',
+        position: {en: 'Chairman', 'zh-TW': '理事長'},
+        affiliation: {
+          en: 'Associate Professor, Department of Computer and Information Science, Faculty of Information Science and Computing, University of Macau',
+          'zh-TW': '澳門大學信息學院電腦及資訊科學系副教授',
+        },
+        bio: {
+          en: 'Researches intelligent systems and machine learning, and teaches artificial intelligence. Served as Associate Head of the Department of Computer and Information Science from 2017 to 2025. An IEEE Senior Member and a repeat winner of the University of Macau Best Teaching Award.',
+          'zh-TW': '研究智能系統與機器學習，教授人工智能課程。2017至2025年任電腦及資訊科學系副系主任，IEEE高級會員，多次獲澳門大學最佳教學獎。',
+        },
+        duties: duties.boardChairman,
+        link: 'https://personal.fic.um.edu.mo/cmvong/',
+      },
       {
         id: 'board-vice-chairman-treasurer',
         name: zh('戴景欽'),
@@ -112,7 +143,22 @@ export const organizationGroups: OrganizationGroup[] = [
   {
     key: 'supervisory',
     members: [
-      {id: 'supervisory-chairman', name: zh('王百鍵'), position: {en: 'Chief Supervisor', 'zh-TW': '監事長'}, duties: duties.supervisoryChairman},
+      {
+        id: 'supervisory-chairman',
+        name: {en: 'Wong Pak Kin', 'zh-TW': '王百鍵'},
+        photo: '/images/organization/wong-pak-kin.jpg',
+        position: {en: 'Chief Supervisor', 'zh-TW': '監事長'},
+        affiliation: {
+          en: 'Professor, Department of Electromechanical Engineering, and Dean of the Graduate School, University of Macau',
+          'zh-TW': '澳門大學機電工程系教授、研究生院院長',
+        },
+        bio: {
+          en: 'Researches automotive engines and powertrains, vehicle dynamics and control, fluid power and intelligent medical engineering. Formerly Head of the Department of Electromechanical Engineering and Associate Dean of the Faculty of Science and Technology, leading the professional accreditation of its engineering and computer science degrees. A Fellow of the Hong Kong Institution of Engineers.',
+          'zh-TW': '研究汽車引擎與動力系統、車輛動力學與控制、流體動力及智能醫學工程。曾任機電工程系主任及科技學院副院長，主導學院工程及電腦科學學位的專業認證。香港工程師學會資深會員。',
+        },
+        duties: duties.supervisoryChairman,
+        link: 'https://personal.feg.um.edu.mo/fstpkw/',
+      },
       {
         id: 'supervisory-vice-chairman',
         name: zh('黃威特'),
