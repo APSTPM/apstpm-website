@@ -77,6 +77,13 @@
       "sustainability": "服務社會",
       "sustainabilityDesc": "推動會員自身發展，以及服務社會。"
     },
+    "organizationTitle": "組織架構",
+    "organizationSubtitle": "本會由會員大會、理事會及監事會組成",
+    "organization": {
+      "generalAssembly": "會員大會",
+      "board": "理事會",
+      "supervisory": "監事會"
+    },
     "teamTitle": "聯絡我們",
     "teamDescription": "會址：澳門黑沙環勞動節大馬路222號裕華大廈第七座4樓A室"
   },

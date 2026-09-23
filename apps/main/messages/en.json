@@ -77,6 +77,13 @@
       "sustainability": "Community Service",
       "sustainabilityDesc": "Supporting member development and serving the community."
     },
+    "organizationTitle": "Organization",
+    "organizationSubtitle": "The association consists of the General Assembly, the Board of Directors and the Supervisory Board",
+    "organization": {
+      "generalAssembly": "General Assembly",
+      "board": "Board of Directors",
+      "supervisory": "Supervisory Board"
+    },
     "teamTitle": "Contact Us",
     "teamDescription": "Address: Unit A, 4/F, Tower 7, U Wa Building, No. 222, Avenida 1.º de Maio, Areia Preta, Macau"
   },
