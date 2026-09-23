@@ -1,65 +1,93 @@
 'use client';
 
+import {useEffect, useRef, useState} from 'react';
 import {useTranslations} from 'next-intl';
 import {motion} from 'framer-motion';
-import ContactForm from '@/components/ContactForm';
+import {Check, Copy, Mail, MapPin} from 'lucide-react';
+
+const EMAIL = 'apstpm@hotmail.com';
+
+function CopyButton({value, label, copiedLabel}: {value: string; label: string; copiedLabel: string}) {
+  const [copied, setCopied] = useState(false);
+  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  useEffect(() => () => clearTimeout(timer.current), []);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(value);
+    } catch {
+      // 非安全上下文或權限被拒時，退回舊式複製
+      const textarea = document.createElement('textarea');
+      textarea.value = value;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    }
+    setCopied(true);
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleCopy}
+      aria-label={copied ? copiedLabel : label}
+      className={`shrink-0 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
+        copied
+          ? 'border-brand-200 bg-brand-50 text-brand-700'
+          : 'border-gray-200 bg-white text-gray-600 hover:border-brand-300 hover:text-brand-700'
+      }`}
+    >
+      {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+      <span aria-live="polite">{copied ? copiedLabel : label}</span>
+    </button>
+  );
+}
 
 export default function ContactPage() {
   const t = useTranslations('contact');
 
   const contactInfo = [
-    {icon: '📍', label: t('info.address'), value: '123 Energy Innovation Center, Singapore 138589'},
-    {icon: '📞', label: t('info.phone'), value: '+65 6123 4567'},
-    {icon: '✉️', label: t('info.email'), value: 'info@apstpm.org'},
-  ];
-
-  const offices = [
-    {name: t('offices.hk'), email: 'hongkong@apstpm.org'},
-    {name: t('offices.tw'), email: 'taiwan@apstpm.org'},
-    {name: t('offices.sg'), email: 'singapore@apstpm.org'},
-    {name: t('offices.jp'), email: 'japan@apstpm.org'},
+    {icon: Mail, label: t('info.email'), value: EMAIL, href: `mailto:${EMAIL}`},
+    {icon: MapPin, label: t('info.address'), value: t('info.addressValue')},
   ];
 
   return (
     <div>
       <h1 className="sr-only">{t('title')}</h1>
 
-      <section className="bg-gray-50 px-4 pt-10 pb-16 sm:pt-12">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12">
-          {/* Info Side */}
-          <div className="lg:col-span-2 space-y-8">
-            <motion.div initial={{opacity: 0, x: -20}} whileInView={{opacity: 1, x: 0}} viewport={{once: true}}>
-              <h2 className="text-2xl font-bold text-brand-700 font-display mb-8">{t('info.title')}</h2>
-              <div className="space-y-6">
-                {contactInfo.map((info, i) => (
-                  <div key={i} className="bg-white rounded-xl p-5 flex items-start gap-4 border border-gray-100 shadow-sm">
-                    <span className="text-2xl">{info.icon}</span>
-                    <div>
-                      <h4 className="text-brand-700 text-sm font-semibold mb-1">{info.label}</h4>
-                      <p className="text-gray-600 text-sm">{info.value}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+      <section className="bg-gray-50 px-4 pt-10 pb-20 sm:pt-12">
+        <div className="max-w-3xl mx-auto">
+          <motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}}>
+            <h2 className="text-2xl font-bold text-brand-700 font-display mb-2">{t('info.title')}</h2>
+            <p className="text-gray-600 mb-8">{t('info.description')}</p>
 
-            <motion.div initial={{opacity: 0, x: -20}} whileInView={{opacity: 1, x: 0}} viewport={{once: true}} transition={{delay: 0.2}}>
-              <h3 className="text-xl font-bold text-brand-700 font-display mb-4">{t('offices.title')}</h3>
-              <div className="grid grid-cols-2 gap-3">
-                {offices.map((office, i) => (
-                  <div key={i} className="bg-white rounded-lg p-4 border border-gray-100">
-                    <h4 className="text-brand-700 text-sm font-semibold mb-1">{office.name}</h4>
-                    <p className="text-gray-500 text-xs">{office.email}</p>
+            <div className="space-y-4">
+              {contactInfo.map(({icon: Icon, label, value, href}) => (
+                <div key={label} className="bg-white rounded-xl p-5 flex items-start gap-4 border border-gray-100 shadow-sm">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-700">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-brand-700 text-sm font-semibold mb-1">{label}</h3>
+                    {href ? (
+                      <a href={href} className="text-gray-700 break-all hover:text-brand-700 hover:underline">
+                        {value}
+                      </a>
+                    ) : (
+                      <p className="text-gray-700">{value}</p>
+                    )}
                   </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Form Side */}
-          <div className="lg:col-span-3">
-            <ContactForm />
-          </div>
+                  <CopyButton value={value} label={t('copy')} copiedLabel={t('copied')} />
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>

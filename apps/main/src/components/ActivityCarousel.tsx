@@ -6,7 +6,7 @@ import Image from 'next/image';
 import {ArrowRight, ChevronLeft, ChevronRight, Pause, Play} from 'lucide-react';
 import {Link} from '@/i18n/routing';
 import {competitions} from '@/data/competitions';
-import {activities} from '@/data/activities';
+import {activities, activityHref} from '@/data/activities';
 
 // 每張停留時間（毫秒）
 const interval = 6000;
@@ -31,7 +31,7 @@ const slides = [
     image: item.image,
     imageCredit: item.imageCredit,
     label: {ns: 'news', key: `categories.${item.category}`},
-    href: `/news#${item.id}`,
+    href: activityHref(item),
   })),
 ];
 

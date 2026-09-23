@@ -104,6 +104,7 @@
     },
     "detail": {
       "overview": "Overview",
+      "gallery": "Photos",
       "highlights": "Key Facts",
       "organizers": "Organisers",
       "sources": "Sources"
@@ -120,7 +121,8 @@
       "all": "All",
       "organized": "Organised by APSTPM",
       "partnered": "Partnerships"
-    }
+    },
+    "readMore": "Read more"
   },
   "gallery": {
     "title": "Media Gallery",
@@ -133,50 +135,14 @@
   "contact": {
     "title": "Contact Us",
     "subtitle": "Get in Touch with APSTPM",
-    "form": {
-      "name": "Name",
-      "email": "Email",
-      "subject": "Subject",
-      "message": "Message",
-      "submit": "Send Message",
-      "success": "Message sent successfully!",
-      "error": "Failed to send message. Please try again.",
-      "sending": "Sending...",
-      "category": "Category",
-      "categories": {
-        "general": "General Inquiry",
-        "support": "Technical Support",
-        "sponsorship": "Sponsorship",
-        "press": "Press Inquiry",
-        "other": "Other"
-      },
-      "errors": {
-        "name": "Please enter your name",
-        "emailRequired": "Please enter your email",
-        "emailInvalid": "Please enter a valid email",
-        "subject": "Please enter a subject",
-        "message": "Please enter a message",
-        "messageShort": "Message must be at least 10 characters"
-      },
-      "placeholders": {
-        "name": "Your name",
-        "email": "your@email.com",
-        "subject": "Message subject",
-        "message": "Please describe your needs in detail..."
-      }
-    },
+    "copy": "Copy",
+    "copied": "Copied",
     "info": {
       "title": "Contact Information",
+      "description": "For enquiries or collaboration, please reach us by email.",
+      "email": "Email",
       "address": "Address",
-      "phone": "Phone",
-      "email": "Email"
-    },
-    "offices": {
-      "title": "Regional Offices",
-      "hk": "Hong Kong",
-      "tw": "Taiwan",
-      "sg": "Singapore",
-      "jp": "Japan"
+      "addressValue": "Building E11, University of Macau, Avenida da Universidade, Taipa, Macau"
     }
   },
   "footer": {

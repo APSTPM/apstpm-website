@@ -4,7 +4,7 @@ import {getLocale, getTranslations} from 'next-intl/server';
 import {ArrowRight, BookOpen, HeartHandshake, Lightbulb} from 'lucide-react';
 import {Link} from '@/i18n/routing';
 import {competitions} from '@/data/competitions';
-import {activities} from '@/data/activities';
+import {activities, activityHref} from '@/data/activities';
 import {galleryItems} from '@/data/gallery';
 
 const previewLimit = 3;
@@ -72,7 +72,7 @@ export default async function HomeSections() {
       <PreviewSection id="home-news" title={nav('news')} href="/news" moreLabel={t('viewMore')}>
         <div className={gridClassName}>
           {activities.slice(0, previewLimit).map(item => (
-            <Link key={item.id} href={`/news#${item.id}`} className={linkClassName}>
+            <Link key={item.id} href={activityHref(item)} className={linkClassName}>
               <PreviewImage src={item.image} />
               <div lang="zh-Hant" className="p-5 sm:p-6">
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">

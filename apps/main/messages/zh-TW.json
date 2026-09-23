@@ -104,6 +104,7 @@
     },
     "detail": {
       "overview": "概覽",
+      "gallery": "活動相片",
       "highlights": "重點數據",
       "organizers": "主辦及承辦單位",
       "sources": "資料來源"
@@ -120,7 +121,8 @@
       "all": "全部",
       "organized": "本會承辦",
       "partnered": "協作參與"
-    }
+    },
+    "readMore": "閱讀全文"
   },
   "gallery": {
     "title": "媒體庫",
@@ -133,50 +135,14 @@
   "contact": {
     "title": "聯絡我們",
     "subtitle": "與 APSTPM 取得聯繫",
-    "form": {
-      "name": "姓名",
-      "email": "電子郵件",
-      "subject": "主旨",
-      "message": "訊息",
-      "submit": "發送訊息",
-      "success": "訊息發送成功！",
-      "error": "訊息發送失敗，請重試。",
-      "sending": "發送中...",
-      "category": "類別",
-      "categories": {
-        "general": "一般諮詢",
-        "support": "技術支援",
-        "sponsorship": "贊助合作",
-        "press": "媒體合作",
-        "other": "其他"
-      },
-      "errors": {
-        "name": "請輸入姓名",
-        "emailRequired": "請輸入電子郵件",
-        "emailInvalid": "請輸入有效的電子郵件",
-        "subject": "請輸入主旨",
-        "message": "請輸入訊息",
-        "messageShort": "訊息至少需要10個字"
-      },
-      "placeholders": {
-        "name": "您的姓名",
-        "email": "your@email.com",
-        "subject": "訊息主旨",
-        "message": "請詳細描述您的需求..."
-      }
-    },
+    "copy": "複製",
+    "copied": "已複製",
     "info": {
       "title": "聯絡資訊",
+      "description": "如有任何查詢或合作意向，歡迎通過電子郵件與本會聯繫。",
+      "email": "電子郵件",
       "address": "地址",
-      "phone": "電話",
-      "email": "電子郵件"
-    },
-    "offices": {
-      "title": "地區辦事處",
-      "hk": "香港",
-      "tw": "台灣",
-      "sg": "新加坡",
-      "jp": "日本"
+      "addressValue": "澳門氹仔大學大馬路澳門大學 E11"
     }
   },
   "footer": {

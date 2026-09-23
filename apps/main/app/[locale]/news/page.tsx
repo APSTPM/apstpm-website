@@ -7,7 +7,7 @@ import {motion, AnimatePresence} from 'framer-motion';
 import {ArrowRight, ArrowUpRight} from 'lucide-react';
 
 import {Link} from '@/i18n/routing';
-import {activities, type ActivityCategory} from '@/data/activities';
+import {activities, activityHref, type ActivityCategory} from '@/data/activities';
 
 const categories = ['all', 'organized', 'partnered'] as const;
 
@@ -45,7 +45,7 @@ export default function NewsPage() {
                 <motion.article key={item.id} id={item.id} layout initial={{opacity: 0, y: 20}} animate={{opacity: 1, y: 0}} exit={{opacity: 0, scale: 0.9}} transition={{delay: i * 0.05}}
                   className="scroll-mt-24 flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
                   <div className="relative">
-                    <Image src={item.image} alt="" width={800} height={500} unoptimized className="aspect-[8/5] w-full bg-gray-100 object-cover" />
+                    <Image src={item.image} alt={item.imageAlt ?? ''} width={800} height={500} unoptimized className="aspect-[8/5] w-full bg-gray-100 object-cover" />
                     <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-700">{t(`categories.${item.category}`)}</span>
                     {item.imageCredit && (
                       <span lang="zh-Hant" className="absolute bottom-2 right-2 rounded bg-black/70 px-2 py-1 text-[10px] text-white">{item.imageCredit}</span>
@@ -53,16 +53,16 @@ export default function NewsPage() {
                   </div>
                   <div lang="zh-Hant" className="flex flex-1 flex-col p-6">
                     <time dateTime={item.date} className="text-gray-500 text-xs tabular-nums">{item.period}</time>
-                    <h2 className="mt-2 text-gray-900 text-lg font-semibold leading-snug">{item.title}</h2>
+                    <h2 className="mt-2 text-gray-900 text-lg font-semibold leading-snug">
+                      <Link href={activityHref(item)} className="hover:text-brand-800 hover:underline">{item.title}</Link>
+                    </h2>
                     <p className="mt-2 text-sm text-brand-800"><span lang={locale}>{t('role')}</span>：{item.role}</p>
                     <p className="mt-3 text-gray-600 text-sm leading-relaxed">{item.summary}</p>
                     <div lang={locale} className="mt-auto flex flex-wrap gap-x-5 gap-y-2 pt-5 text-sm font-semibold">
-                      {item.competitionId && (
-                        <Link href={`/competitions/${item.competitionId}`} className="inline-flex items-center gap-1 text-brand-800 hover:underline">
-                          {t('competitionDetails')}<ArrowRight aria-hidden="true" className="h-4 w-4" />
-                        </Link>
-                      )}
-                      <a href={item.source.url} target="_blank" rel="noopener noreferrer" title={item.source.label} className="inline-flex items-center gap-1 text-gray-600 hover:text-brand-800 hover:underline">
+                      <Link href={activityHref(item)} className="inline-flex items-center gap-1 text-brand-800 hover:underline">
+                        {item.competitionId ? t('competitionDetails') : t('readMore')}<ArrowRight aria-hidden="true" className="h-4 w-4" />
+                      </Link>
+                      <a href={item.sources[0].url} target="_blank" rel="noopener noreferrer" title={item.sources[0].label} className="inline-flex items-center gap-1 text-gray-600 hover:text-brand-800 hover:underline">
                         {t('source')}<ArrowUpRight aria-hidden="true" className="h-4 w-4" />
                       </a>
                     </div>

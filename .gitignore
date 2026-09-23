@@ -44,3 +44,5 @@ supabase/.temp/
 *.log
 
 .claude/launch.json
+# 活動圖片不入庫
+apps/main/public/images/activities/
