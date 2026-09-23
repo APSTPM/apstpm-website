@@ -22,3 +22,14 @@ export interface Highlight {
   label: string;
   value: string;
 }
+
+export interface Video {
+  // 本地視頻放 public/videos/ 下填路徑；也可以直接填 YouTube 鏈接
+  src: string;
+  // 視頻標題，同時用作播放器的無障礙名稱
+  title: string;
+  // 封面圖；YouTube 不填時自動取縮略圖，本地視頻不填時顯示第一幀
+  poster?: string;
+  caption?: string;
+  credit?: string;
+}

@@ -1,5 +1,5 @@
 // 首頁預覽、比賽列表與詳情頁共用；比賽資料只有繁中，切換英文時照樣顯示中文
-import type {Highlight, Organizer, Photo, SourceLink} from './types';
+import type {Highlight, Organizer, Photo, SourceLink, Video} from './types';
 
 export type CompetitionStatus = 'ongoing' | 'upcoming' | 'ended';
 
@@ -23,6 +23,7 @@ export interface Competition {
   imageCredit?: string;
   // 詳情頁相冊，不含封面
   gallery?: Photo[];
+  videos?: Video[];
   sources: SourceLink[];
 }
 

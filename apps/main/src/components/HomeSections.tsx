@@ -5,7 +5,7 @@ import {ArrowRight, ArrowUpRight, BookOpen, HeartHandshake, Lightbulb} from 'luc
 import {Link} from '@/i18n/routing';
 import {competitions} from '@/data/competitions';
 import {activities, activityHref} from '@/data/activities';
-import {galleryItems} from '@/data/gallery';
+import {albums} from '@/data/gallery';
 import {partners} from '@/data/partners';
 
 const previewLimit = 3;
@@ -46,7 +46,6 @@ export default async function HomeSections() {
   const about = await getTranslations('about');
   const home = await getTranslations('home');
   const news = await getTranslations('news');
-  const localized = (value: Record<string, string>) => value[locale] || value.en;
   const partnerLocale = locale === 'en' ? 'en' : 'zh-TW';
   const values = [
     {key: 'innovation', Icon: Lightbulb},
@@ -91,10 +90,13 @@ export default async function HomeSections() {
 
       <PreviewSection id="home-gallery" title={nav('gallery')} href="/gallery" moreLabel={t('viewMore')} muted>
         <div className={gridClassName}>
-          {galleryItems.slice(0, previewLimit).map(item => (
-            <Link key={item.id} href={`/gallery#photo-${item.id}`} className={linkClassName}>
-              <PreviewImage src={item.image} />
-              <h3 className="p-5 text-base font-semibold text-gray-900 group-hover:text-brand-800">{localized(item.title)}</h3>
+          {albums.filter(album => album.cover).slice(0, previewLimit).map(album => (
+            <Link key={album.id} href={`/gallery#album-${album.id}`} className={linkClassName}>
+              <PreviewImage src={album.cover!} />
+              <div lang="zh-Hant" className="p-5 sm:p-6">
+                <time dateTime={album.date} className="text-xs tabular-nums text-gray-500">{album.period}</time>
+                <h3 className="mt-2 text-base font-semibold leading-snug text-gray-900 group-hover:text-brand-800">{album.title}</h3>
+              </div>
             </Link>
           ))}
         </div>

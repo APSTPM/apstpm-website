@@ -106,6 +106,7 @@
     "detail": {
       "overview": "Overview",
       "gallery": "Photos",
+      "media": "Photos & Videos",
       "highlights": "Key Facts",
       "organizers": "Organisers",
       "sources": "Sources"
@@ -127,11 +128,18 @@
   },
   "gallery": {
     "title": "Media Gallery",
-    "subtitle": "Explore Our Photo and Video Collection",
-    "photos": "Photos",
-    "videos": "Videos",
-    "viewAll": "View All",
-    "allCategories": "All"
+    "subtitle": "Photos and videos from our competitions and activities",
+    "chineseOnly": "Captions are available in Traditional Chinese only.",
+    "filters": {
+      "all": "All",
+      "image": "Photos",
+      "video": "Videos"
+    },
+    "viewDetails": "View details",
+    "playVideo": "Play video",
+    "previous": "Previous",
+    "next": "Next",
+    "close": "Close"
   },
   "contact": {
     "title": "Contact Us",

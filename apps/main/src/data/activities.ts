@@ -1,7 +1,7 @@
 // 活動頁與首頁共用；只收錄有政府公開資料可查的活動，本會角色照原文寫，不要擴大
 // 內容只有繁中，切換英文時照樣顯示中文
 import {competitions, dsedjPhoto} from './competitions';
-import type {Highlight, Organizer, Photo, SourceLink} from './types';
+import type {Highlight, Organizer, Photo, SourceLink, Video} from './types';
 
 export type ActivityCategory = 'organized' | 'partnered';
 
@@ -26,6 +26,7 @@ export interface Activity {
   imageCredit?: string;
   // 詳情頁相冊，不含封面
   gallery: Photo[];
+  videos?: Video[];
   sources: SourceLink[];
   // 有比賽詳情頁的活動直接連過去，不另設活動詳情頁
   competitionId?: string;
@@ -57,6 +58,7 @@ const fromCompetition = (id: string): Activity => {
     imageAlt: competition.imageAlt,
     imageCredit: competition.imageCredit,
     gallery: competition.gallery ?? [],
+    videos: competition.videos,
     sources: competition.sources,
     competitionId: competition.id,
   };

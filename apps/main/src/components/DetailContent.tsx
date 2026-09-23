@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import type {Highlight, Organizer, Photo, SourceLink} from '@/data/types';
+import {youtubeId} from '@/data/gallery';
+import type {Highlight, Organizer, Photo, SourceLink, Video} from '@/data/types';
 
 // 比賽詳情與活動詳情共用的各個區塊；內容只有繁中，所以正文一律標 lang="zh-Hant"
 // 概況固定用灰底，其後的區塊由頁面傳 muted 讓底色灰白交替
@@ -25,11 +26,33 @@ export function OverviewSection({title, cover, paragraphs}: {title: string; cove
   );
 }
 
-export function GallerySection({title, photos, muted = false}: {title: string; photos: Photo[]; muted?: boolean}) {
+function VideoPlayer({video}: {video: Video}) {
+  const id = youtubeId(video.src);
+  const className = 'aspect-video w-full rounded-xl bg-black';
+  if (id) {
+    return <iframe src={`https://www.youtube-nocookie.com/embed/${id}?rel=0`} title={video.title} loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowFullScreen className={className} />;
+  }
+  return <video src={video.src} poster={video.poster} controls preload="metadata" playsInline aria-label={video.title} className={className} />;
+}
+
+export function GallerySection({title, photos, videos = [], muted = false}: {title: string; photos: Photo[]; videos?: Video[]; muted?: boolean}) {
   return (
     <section id="gallery" className={`scroll-mt-16 py-16 px-4 ${muted ? 'bg-gray-50' : 'bg-white'}`}>
       <div className="max-w-4xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-900 font-display mb-8">{title}</h2>
+        {videos.length > 0 && (
+          <div className={`grid grid-cols-1 gap-6 ${photos.length > 0 ? 'mb-10' : ''}`}>
+            {videos.map(video => (
+              <figure key={video.src} className="min-w-0">
+                <VideoPlayer video={video} />
+                <figcaption lang="zh-Hant" className="mt-2 flex flex-wrap justify-between gap-x-3 text-sm text-gray-600">
+                  <span>{video.caption ?? video.title}</span>
+                  {video.credit && <span className="text-xs text-gray-400">{video.credit}</span>}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        )}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {photos.map(photo => (
             <figure key={photo.src} className="min-w-0">

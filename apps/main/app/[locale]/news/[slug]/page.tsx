@@ -22,11 +22,13 @@ export default async function ActivityDetailPage({params}: {params: Promise<{slu
   const t = await getTranslations('news');
   const tDetail = await getTranslations('competitions.detail');
   const tCommon = await getTranslations('common');
-  const hasGallery = activity.gallery.length > 0;
+  const videos = activity.videos ?? [];
+  const hasGallery = activity.gallery.length > 0 || videos.length > 0;
+  const mediaLabel = videos.length > 0 ? tDetail('media') : tDetail('gallery');
 
   const navItems = [
     {id: 'overview', label: tDetail('overview')},
-    ...(hasGallery ? [{id: 'gallery', label: tDetail('gallery')}] : []),
+    ...(hasGallery ? [{id: 'gallery', label: mediaLabel}] : []),
     {id: 'highlights', label: tDetail('highlights')},
     {id: 'organizers', label: tDetail('organizers')},
     {id: 'sources', label: tDetail('sources')},
@@ -58,7 +60,7 @@ export default async function ActivityDetailPage({params}: {params: Promise<{slu
       </PageHeader>
 
       <OverviewSection title={tDetail('overview')} cover={{src: activity.image, alt: activity.imageAlt ?? '', credit: activity.imageCredit}} paragraphs={activity.overview} />
-      {hasGallery && <GallerySection title={tDetail('gallery')} photos={activity.gallery} />}
+      {hasGallery && <GallerySection title={mediaLabel} photos={activity.gallery} videos={videos} />}
       <HighlightsSection title={tDetail('highlights')} items={activity.highlights} muted={hasGallery} />
       <OrganizersSection title={tDetail('organizers')} items={activity.organizers} muted={!hasGallery} />
       <SourcesSection title={tDetail('sources')} items={activity.sources} muted={hasGallery} />

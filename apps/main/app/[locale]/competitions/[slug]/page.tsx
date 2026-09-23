@@ -26,9 +26,12 @@ export default async function CompetitionDetailPage({params}: {params: Promise<{
   const tCommon = await getTranslations('common');
 
   const gallery = competition.gallery ?? [];
+  const videos = competition.videos ?? [];
+  const hasMedia = gallery.length > 0 || videos.length > 0;
+  const mediaLabel = videos.length > 0 ? t('detail.media') : t('detail.gallery');
   const navItems = [
     {id: 'overview', label: t('detail.overview')},
-    ...(gallery.length > 0 ? [{id: 'gallery', label: t('detail.gallery')}] : []),
+    ...(hasMedia ? [{id: 'gallery', label: mediaLabel}] : []),
     {id: 'highlights', label: t('detail.highlights')},
     {id: 'organizers', label: t('detail.organizers')},
     {id: 'sources', label: t('detail.sources')},
@@ -64,10 +67,10 @@ export default async function CompetitionDetailPage({params}: {params: Promise<{
       </PageHeader>
 
       <OverviewSection title={t('detail.overview')} cover={{src: competition.image, alt: competition.imageAlt ?? '', credit: competition.imageCredit}} paragraphs={competition.overview} />
-      {gallery.length > 0 && <GallerySection title={t('detail.gallery')} photos={gallery} />}
-      <HighlightsSection title={t('detail.highlights')} items={competition.highlights} muted={gallery.length > 0} />
-      <OrganizersSection title={t('detail.organizers')} items={competition.organizers} muted={gallery.length === 0} />
-      <SourcesSection title={t('detail.sources')} items={competition.sources} muted={gallery.length > 0} />
+      {hasMedia && <GallerySection title={mediaLabel} photos={gallery} videos={videos} />}
+      <HighlightsSection title={t('detail.highlights')} items={competition.highlights} muted={hasMedia} />
+      <OrganizersSection title={t('detail.organizers')} items={competition.organizers} muted={!hasMedia} />
+      <SourcesSection title={t('detail.sources')} items={competition.sources} muted={hasMedia} />
     </div>
   );
 }
