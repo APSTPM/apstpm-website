@@ -44,9 +44,9 @@ export default function CompetitionsPage() {
 
       {/* Current */}
       {currentComps.length > 0 && (
-        <section className="bg-gray-50 px-4 pt-10 pb-20 sm:pt-12">
+        <section className="bg-gray-50 px-4 pt-10 pb-12 sm:pt-12">
           <div className="max-w-7xl mx-auto">
-            <motion.h2 initial={{opacity: 0}} whileInView={{opacity: 1}} viewport={{once: true}} className="text-3xl font-bold text-brand-700 font-display mb-12">
+            <motion.h2 initial={{opacity: 0}} whileInView={{opacity: 1}} viewport={{once: true}} className="text-3xl font-bold text-brand-700 font-display mb-8">
               {t('current')}
             </motion.h2>
             <CompetitionGrid items={currentComps} />
@@ -56,9 +56,9 @@ export default function CompetitionsPage() {
 
       {/* Past */}
       {pastComps.length > 0 && (
-        <section className={`bg-white px-4 pb-20 ${currentComps.length > 0 ? 'pt-20' : 'pt-10 sm:pt-12'}`}>
+        <section className={`bg-white px-4 pb-20 ${currentComps.length > 0 ? 'pt-12' : 'pt-10 sm:pt-12'}`}>
           <div className="max-w-7xl mx-auto">
-            <motion.h2 initial={{opacity: 0}} whileInView={{opacity: 1}} viewport={{once: true}} className="text-3xl font-bold text-gray-400 font-display mb-12">
+            <motion.h2 initial={{opacity: 0}} whileInView={{opacity: 1}} viewport={{once: true}} className="text-3xl font-bold text-gray-400 font-display mb-8">
               {t('past')}
             </motion.h2>
             <CompetitionGrid items={pastComps} />
