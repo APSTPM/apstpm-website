@@ -69,7 +69,6 @@
     "missionDescription": "本會為非牟利團體，宗旨是研究及協助提升澳門對科技實踐的認識和提高運用科技作教學及推廣的能力，推動本會會員的自身發展，以及服務社會。",
     "historyTitle": "會員資格",
     "historyDescription": "凡從事與科技相關的研究、管理、技術、教育之專業工作者，願意遵守本會章程，由其本人提出申請、遞交申請表及繳納入會會費，經理事會審核和批准後，可成為本會會員。",
-    "valuesTitle": "核心價值",
     "values": {
       "innovation": "科技實踐",
       "innovationDesc": "提升澳門對科技實踐的認識和運用能力。",
@@ -84,9 +83,7 @@
       "generalAssembly": "會員大會",
       "board": "理事會",
       "supervisory": "監事會"
-    },
-    "teamTitle": "聯絡我們",
-    "teamDescription": "會址：澳門黑沙環勞動節大馬路222號裕華大廈第七座4樓A室"
+    }
   },
   "competitions": {
     "title": "競賽",

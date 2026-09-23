@@ -1,7 +1,6 @@
 'use client';
 
 import {useTranslations, useLocale} from 'next-intl';
-import {Link} from '@/i18n/routing';
 import Image from 'next/image';
 import {motion} from 'framer-motion';
 import {UserRound} from 'lucide-react';
@@ -14,19 +13,11 @@ export default function AboutPage() {
   const tCommon = useTranslations('common');
   const locale = useLocale() as 'en' | 'zh-TW';
 
-  const values = [
-    {key: 'innovation', icon: '💡'},
-    {key: 'collaboration', icon: '🤝'},
-    {key: 'sustainability', icon: '🌱'},
-  ];
-
   const navItems = [
     {id: 'mission', label: t('missionTitle')},
     {id: 'membership', label: t('historyTitle')},
-    {id: 'values', label: t('valuesTitle')},
     {id: 'organization', label: t('organizationTitle')},
     ...organizationGroups.map(group => ({id: `organization-${group.key}`, label: t(`organization.${group.key}`), level: 2 as const})),
-    {id: 'contact', label: t('teamTitle')},
   ];
 
   return (
@@ -54,37 +45,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values */}
-      <section id="values" className="scroll-mt-16 bg-gray-50 py-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2 initial={{opacity: 0}} whileInView={{opacity: 1}} viewport={{once: true}} className="text-4xl font-bold text-gray-900 font-display text-center mb-16">
-            {t('valuesTitle')}
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {values.map((v, i) => (
-              <motion.div
-                key={v.key}
-                initial={{opacity: 0, y: 30}}
-                whileInView={{opacity: 1, y: 0}}
-                viewport={{once: true}}
-                transition={{delay: i * 0.15}}
-                className="group bg-white rounded-2xl p-8 text-center border border-gray-100 shadow-sm hover:shadow-md transition-all duration-500"
-              >
-                <div className="text-5xl mb-6">{v.icon}</div>
-                <h3 className="text-brand-700 font-display font-bold text-xl mb-3">
-                  {t(`values.${v.key}`)}
-                </h3>
-                <p className="text-gray-500 text-sm">
-                  {t(`values.${v.key}Desc`)}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Organization */}
-      <section id="organization" className="scroll-mt-16 bg-white py-20 px-4">
+      <section id="organization" className="scroll-mt-16 bg-gray-50 py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} viewport={{once: true}} className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 font-display mb-4">{t('organizationTitle')}</h2>
@@ -121,22 +83,6 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Team CTA */}
-      <section id="contact" className="scroll-mt-16 bg-gray-50 py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}}>
-            <h2 className="text-3xl font-bold text-gray-900 font-display mb-4">{t('teamTitle')}</h2>
-            <p className="text-lg text-gray-600 mb-8">{t('teamDescription')}</p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center bg-brand-700 hover:bg-brand-800 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
-            >
-              {tCommon('contactUs')}
-            </Link>
-          </motion.div>
         </div>
       </section>
     </div>
