@@ -1,3 +1,4 @@
+import type {Metadata} from 'next';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
@@ -12,6 +13,15 @@ export function generateStaticParams() {
 }
 
 export const dynamicParams = false;
+
+export async function generateMetadata({params}: {params: Promise<{slug: string; locale: string}>}): Promise<Metadata> {
+  const {slug, locale} = await params;
+  const activity = getActivity(slug);
+  if (!activity) return {};
+  const t = await getTranslations({locale, namespace: 'nav'});
+  // 上層 layout 已設字符串標題，模板傳不到這一層，這裡直接拼完整標題
+  return {title: {absolute: `${activity.title} | ${t('siteName')}`}, description: activity.summary};
+}
 
 export default async function ActivityDetailPage({params}: {params: Promise<{slug: string; locale: string}>}) {
   const {slug, locale} = await params;

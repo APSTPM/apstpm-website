@@ -2,6 +2,9 @@ import {getTranslations, setRequestLocale} from 'next-intl/server';
 
 import GalleryGrid from '@/components/GalleryGrid';
 import {albums} from '@/data/gallery';
+import {navTitle} from '@/lib/metadata';
+
+export const generateMetadata = navTitle('gallery');
 
 export default async function GalleryPage({params}: {params: Promise<{locale: string}>}) {
   const {locale} = await params;

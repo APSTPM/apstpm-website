@@ -1,3 +1,4 @@
+import type {Metadata} from 'next';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
@@ -14,6 +15,15 @@ const statusClasses: Record<string, string> = {
 
 export function generateStaticParams() {
   return competitions.map(item => ({slug: item.id}));
+}
+
+export async function generateMetadata({params}: {params: Promise<{slug: string; locale: string}>}): Promise<Metadata> {
+  const {slug, locale} = await params;
+  const competition = getCompetition(slug);
+  if (!competition) return {};
+  const t = await getTranslations({locale, namespace: 'nav'});
+  // 上層 layout 已設字符串標題，模板傳不到這一層，這裡直接拼完整標題
+  return {title: {absolute: `${competition.title} | ${t('siteName')}`}, description: competition.summary};
 }
 
 export default async function CompetitionDetailPage({params}: {params: Promise<{slug: string; locale: string}>}) {
