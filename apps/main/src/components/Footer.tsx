@@ -23,7 +23,7 @@ export default function Footer() {
             <p className="mb-3 text-sm font-semibold">{t('links.about')}</p>
             <ul className="space-y-3 text-sm text-gray-300">
               <li><Link href="/about" className="hover:text-white hover:underline">{tNav('about')}</Link></li>
-              <li><Link href="/#home-events" className="hover:text-white hover:underline">{t('records')}</Link></li>
+              <li><Link href="/news" className="hover:text-white hover:underline">{t('records')}</Link></li>
             </ul>
           </div>
           <div>

@@ -225,8 +225,7 @@
     "viewMore": "View more",
     "headline": "Science and technology in practice",
     "about": "About the association",
-    "contact": "Contact us",
-    "recordsTitle": "Past activities"
+    "contact": "Contact us"
   },
   "admin": {
     "title": "Administrator console",
@@ -243,19 +242,8 @@
     "goTo": "Show: {title}",
     "previous": "Previous slide",
     "next": "Next slide",
-    "credit": "Photo: Labour Affairs Bureau",
-    "youthSkills": {
-      "title": "World Youth Skills Day & Skills Carnival",
-      "meta": "2025 · Past activity · Representatives attended",
-      "date": "2025.07",
-      "alt": "Group photo at the 2025 World Youth Skills Day opening ceremony",
-      "link": "Event report (Chinese)"
-    },
-    "robotics": {
-      "title": "Macau Youth Robotics Science Selection Competition",
-      "meta": "2024/2025 · Past activity · Event delivery by APSTPM",
-      "date": "2025.05",
-      "link": "Competition rules (PDF, Chinese)"
-    }
+    "details": "View details",
+    "play": "Play slideshow",
+    "pause": "Pause slideshow"
   }
 }
