@@ -4,6 +4,7 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
+    "dev:main": "pnpm --filter main dev",
     "lint": "turbo lint",
     "clean": "turbo clean"
   },

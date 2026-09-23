@@ -35,7 +35,7 @@
 
 ```bash
 pnpm install
-pnpm --filter main dev    # 主站 http://localhost:3001
+pnpm dev:main             # 主站 http://localhost:3001
 pnpm --filter main build
 pnpm lint
 ```
