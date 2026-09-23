@@ -60,6 +60,10 @@
       "title": "Join Us",
       "description": "Professionals in science and technology related research, management, technical, and education fields are welcome to join APSTPM.",
       "button": "Contact Us"
+    },
+    "partnersSection": {
+      "title": "Partners",
+      "description": "We thank the following organisations for working with us on competitions and science education."
     }
   },
   "about": {

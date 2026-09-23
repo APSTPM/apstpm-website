@@ -1,11 +1,12 @@
 import type {ReactNode} from 'react';
 import Image from 'next/image';
 import {getLocale, getTranslations} from 'next-intl/server';
-import {ArrowRight, BookOpen, HeartHandshake, Lightbulb} from 'lucide-react';
+import {ArrowRight, ArrowUpRight, BookOpen, HeartHandshake, Lightbulb} from 'lucide-react';
 import {Link} from '@/i18n/routing';
 import {competitions} from '@/data/competitions';
 import {activities, activityHref} from '@/data/activities';
 import {galleryItems} from '@/data/gallery';
+import {partners} from '@/data/partners';
 
 const previewLimit = 3;
 const gridClassName = 'grid grid-cols-1 gap-5 md:grid-cols-3 lg:gap-6';
@@ -46,6 +47,7 @@ export default async function HomeSections() {
   const home = await getTranslations('home');
   const news = await getTranslations('news');
   const localized = (value: Record<string, string>) => value[locale] || value.en;
+  const partnerLocale = locale === 'en' ? 'en' : 'zh-TW';
   const values = [
     {key: 'innovation', Icon: Lightbulb},
     {key: 'collaboration', Icon: BookOpen},
@@ -110,6 +112,26 @@ export default async function HomeSections() {
           ))}
         </div>
       </PreviewSection>
+
+      <section aria-labelledby="home-partners-title" className="bg-gray-50">
+        <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 sm:py-12 lg:py-14">
+          <h2 id="home-partners-title" className="text-2xl font-bold text-gray-900">{home('partnersSection.title')}</h2>
+          <p className="mt-3 mb-6 max-w-3xl text-sm leading-relaxed text-gray-600 sm:text-base">{home('partnersSection.description')}</p>
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+            {partners.map(partner => (
+              <li key={partner.id}>
+                <a href={partner.url} target="_blank" rel="noopener noreferrer" className="group flex h-full items-start justify-between gap-4 rounded-xl border border-gray-200 bg-white p-5 transition-colors hover:border-brand-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-800">
+                  <div className="min-w-0">
+                    <h3 className="font-semibold leading-snug text-gray-900 group-hover:text-brand-800">{partner.name[partnerLocale]}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-gray-600">{partner.relation[partnerLocale]}</p>
+                  </div>
+                  <ArrowUpRight aria-hidden="true" className="h-4 w-4 shrink-0 text-gray-400 group-hover:text-brand-800" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       <section aria-labelledby="home-contact-title" className="border-y border-brand-100 bg-brand-50">
         <div className="mx-auto flex max-w-7xl flex-col items-start gap-6 px-5 py-10 sm:px-8 md:flex-row md:items-center md:justify-between">
