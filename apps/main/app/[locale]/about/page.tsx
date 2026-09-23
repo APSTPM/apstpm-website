@@ -20,21 +20,11 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="pt-16">
-      {/* Hero Header */}
-      <section className="relative py-24 px-4 bg-white">
-        <div className="relative max-w-4xl mx-auto text-center">
-          <motion.div initial={{opacity: 0, y: 30}} animate={{opacity: 1, y: 0}} transition={{duration: 0.8}}>
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 font-display mb-4">
-              {t('title')}
-            </h1>
-            <p className="text-xl text-gray-600">{t('subtitle')}</p>
-          </motion.div>
-        </div>
-      </section>
+    <div>
+      <h1 className="sr-only">{t('title')}</h1>
 
       {/* Mission */}
-      <section className="bg-gray-50 py-20 px-4">
+      <section className="bg-gray-50 px-4 pt-10 pb-20 sm:pt-12">
         <div className="max-w-4xl mx-auto">
           <motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}} className="bg-white rounded-2xl p-8 md:p-12 border border-gray-100 shadow-sm">
             <h2 className="text-3xl font-bold text-gray-900 font-display mb-6">{t('missionTitle')}</h2>

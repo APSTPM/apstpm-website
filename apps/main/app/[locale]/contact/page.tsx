@@ -21,18 +21,10 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="pt-16">
-      {/* Header */}
-      <section className="relative py-24 px-4 bg-white">
-        <div className="relative max-w-4xl mx-auto text-center">
-          <motion.div initial={{opacity: 0, y: 30}} animate={{opacity: 1, y: 0}}>
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 font-display mb-4">{t('title')}</h1>
-            <p className="text-xl text-gray-600">{t('subtitle')}</p>
-          </motion.div>
-        </div>
-      </section>
+    <div>
+      <h1 className="sr-only">{t('title')}</h1>
 
-      <section className="bg-gray-50 py-16 px-4">
+      <section className="bg-gray-50 px-4 pt-10 pb-16 sm:pt-12">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12">
           {/* Info Side */}
           <div className="lg:col-span-2 space-y-8">
