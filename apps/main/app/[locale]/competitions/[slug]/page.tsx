@@ -1,8 +1,8 @@
 import {getTranslations, setRequestLocale} from 'next-intl/server';
-import {Link} from '@/i18n/routing';
 import {notFound} from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
 import SectionNav from '@/components/SectionNav';
+import BackButton from '@/components/BackButton';
 import {GallerySection, HighlightsSection, OrganizersSection, OverviewSection, SourcesSection} from '@/components/DetailContent';
 import {competitions, getCompetition} from '@/data/competitions';
 
@@ -36,15 +36,15 @@ export default async function CompetitionDetailPage({params}: {params: Promise<{
 
   return (
     <div>
+      <BackButton href="/competitions" label={tCommon('back')} />
       <SectionNav items={navItems} label={tCommon('onThisPage')} />
       <PageHeader
         narrow
         title={<span lang="zh-Hant">{competition.title}</span>}
         eyebrow={
           <>
-            <Link href="/competitions" className="inline-flex items-center gap-2 mb-6 text-sm font-medium text-brand-700 hover:text-brand-800 transition-colors">
-              ← {tCommon('back')}
-            </Link>
+            {/* 給懸浮返回按鈕留位，xl 起按鈕移到左側留白 */}
+            <div aria-hidden className="h-8 xl:hidden" />
             <div className="flex flex-wrap items-center gap-3 mb-4">
               <span className={`px-3 py-1 rounded-full text-xs font-semibold ${statusClasses[competition.status]}`}>
                 {t(`status.${competition.status}`)}

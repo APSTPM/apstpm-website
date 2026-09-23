@@ -1,8 +1,8 @@
 import {getTranslations, setRequestLocale} from 'next-intl/server';
-import {Link} from '@/i18n/routing';
 import {notFound} from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
 import SectionNav from '@/components/SectionNav';
+import BackButton from '@/components/BackButton';
 import {GallerySection, HighlightsSection, OrganizersSection, OverviewSection, SourcesSection} from '@/components/DetailContent';
 import {activities, getActivity} from '@/data/activities';
 
@@ -34,15 +34,15 @@ export default async function ActivityDetailPage({params}: {params: Promise<{slu
 
   return (
     <div>
+      <BackButton href="/news" label={tCommon('back')} />
       <SectionNav items={navItems} label={tCommon('onThisPage')} />
       <PageHeader
         narrow
         title={<span lang="zh-Hant">{activity.title}</span>}
         eyebrow={
           <>
-            <Link href="/news" className="inline-flex items-center gap-2 mb-6 text-sm font-medium text-brand-700 hover:text-brand-800 transition-colors">
-              ← {tCommon('back')}
-            </Link>
+            {/* 給懸浮返回按鈕留位，xl 起按鈕移到左側留白 */}
+            <div aria-hidden className="h-8 xl:hidden" />
             <div className="flex flex-wrap items-center gap-3 mb-4">
               <span className="px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-700">{t(`categories.${activity.category}`)}</span>
               <span lang="zh-Hant" className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-700">{activity.role}</span>
