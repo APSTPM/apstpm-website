@@ -28,7 +28,7 @@
 ## 技術棧
 
 - Monorepo：Turborepo + pnpm workspace
-- `apps/main`：Next.js 15 App Router、React 19、Tailwind CSS 4、next-intl（`en` / `zh-TW`）
+- `apps/main`：Next.js 16 App Router、React 19、Tailwind CSS 4、next-intl 4（`en` / `zh-TW`）；路由中間件是 `proxy.ts`，服務端頁面要調用 `setRequestLocale` 才能保持靜態渲染
 - 共用包：`packages/ui`、`packages/i18n`、`packages/utils`、`packages/tsconfig`
 
 ## 常用指令

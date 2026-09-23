@@ -17,9 +17,9 @@
 ## Tech Stack
 
 - **Monorepo**: Turborepo + pnpm workspace
-- **Frontend**: Next.js 15 (App Router) + React 19
+- **Frontend**: Next.js 16 (App Router, 主站) + React 19
 - **Styling**: Tailwind CSS 4 + Framer Motion
-- **i18n**: next-intl
+- **i18n**: next-intl 4
 - **Database**: Supabase (PostgreSQL + Auth + RLS)
 - **Email**: Resend (optional, for QA notifications)
 - **Fonts**: Space Grotesk (display) + Inter (body) + Noto Sans TC (中文)
@@ -191,7 +191,7 @@ Robot 站採用扁平路由，僅支援 zh-TW 繁體中文。
 
 | Package   | Name                       | Description                                     |
 | --------- | -------------------------- | ----------------------------------------------- |
-| Main App  | `apps/main`                | Next.js 15 主站應用                             |
+| Main App  | `apps/main`                | Next.js 16 主站應用                             |
 | Robot App | `apps/robot`               | Next.js 15 機器人競賽分站                       |
 | UI        | `@apstpm-website/ui`       | 共享 UI 組件庫                                  |
 | Database  | `@apstpm/database`         | Supabase 客戶端封裝 (browser/server/middleware) |

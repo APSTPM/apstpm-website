@@ -1,5 +1,5 @@
 import {NextIntlClientProvider} from 'next-intl';
-import {getMessages} from 'next-intl/server';
+import {getMessages, setRequestLocale} from 'next-intl/server';
 import {routing} from '@/i18n/routing';
 import {notFound} from 'next/navigation';
 import Navigation from '@/components/Navigation';
@@ -24,6 +24,9 @@ export default async function LocaleLayout({
   if (!resolvedLocale) {
     notFound();
   }
+
+  // next-intl 4 不調用這個就會讀請求頭，整站變成動態渲染；每個服務端頁面也要各自調用
+  setRequestLocale(resolvedLocale);
 
   const messages = await getMessages();
 

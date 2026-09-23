@@ -1,10 +1,13 @@
-import {getTranslations} from 'next-intl/server';
+import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {ArrowUpRight} from 'lucide-react';
 import Hero from '@/components/Hero';
 import HomeSections from '@/components/HomeSections';
 import {homeSources} from '@/data/home';
 
-export default async function HomePage() {
+export default async function HomePage({params}: {params: Promise<{locale: string}>}) {
+  const {locale} = await params;
+  setRequestLocale(locale);
+
   const t = await getTranslations('homeIntro');
   const carousel = await getTranslations('carousel');
 

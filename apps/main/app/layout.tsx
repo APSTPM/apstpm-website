@@ -23,7 +23,7 @@ const notoSansTC = Noto_Sans_TC({
 
 export default function RootLayout({children}: {children?: React.ReactNode}) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body className={`${inter.variable} ${spaceGrotesk.variable} ${notoSansTC.variable} antialiased`}>
         {children}
       </body>

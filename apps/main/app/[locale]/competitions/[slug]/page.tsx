@@ -1,4 +1,4 @@
-import {getTranslations} from 'next-intl/server';
+import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {Link} from '@/i18n/routing';
 import {notFound} from 'next/navigation';
 
@@ -89,6 +89,7 @@ const statusClasses: Record<string, string> = {
 
 export default async function CompetitionDetailPage({params}: {params: Promise<{slug: string; locale: string}>}) {
   const {slug, locale} = await params;
+  setRequestLocale(locale);
   const competition = competitions[slug];
   if (!competition) notFound();
 
