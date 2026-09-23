@@ -89,13 +89,11 @@
   },
   "competitions": {
     "title": "競賽",
-    "subtitle": "展現您的能源創新實力",
-    "upcoming": "即將舉辦",
+    "subtitle": "本會承辦及參與的科普、學科與職業技能比賽",
+    "current": "進行中及即將舉辦",
     "past": "過往競賽",
-    "register": "立即報名",
-    "learnMore": "了解更多",
-    "participants": "參賽者",
     "viewDetails": "查看詳情",
+    "chineseOnly": "",
     "status": {
       "open": "報名中",
       "upcoming": "即將開始",
@@ -105,11 +103,9 @@
     },
     "detail": {
       "overview": "概覽",
-      "schedule": "日程",
-      "prizes": "獎項",
-      "requirements": "參賽要求",
-      "registration": "報名資訊",
-      "contactOrganizer": "聯繫主辦單位"
+      "highlights": "重點數據",
+      "organizers": "主辦及承辦單位",
+      "sources": "資料來源"
     }
   },
   "news": {

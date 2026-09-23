@@ -4,77 +4,64 @@ import {useTranslations, useLocale} from 'next-intl';
 import {motion} from 'framer-motion';
 import CompetitionCard from '@/components/CompetitionCard';
 
-import {competitions} from '@/data/competitions';
+import {competitions, type Competition} from '@/data/competitions';
+
+function CompetitionGrid({items}: {items: Competition[]}) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {items.map((comp) => (
+        <CompetitionCard
+          key={comp.id}
+          id={comp.id}
+          title={comp.title}
+          summary={comp.summary}
+          image={comp.image}
+          date={comp.date}
+          period={comp.period}
+          status={comp.status}
+          category={comp.category}
+        />
+      ))}
+    </div>
+  );
+}
 
 export default function CompetitionsPage() {
   const t = useTranslations('competitions');
   const locale = useLocale();
 
-  const upcomingComps = competitions.filter(c => c.status !== 'ended');
+  const currentComps = competitions.filter(c => c.status !== 'ended');
   const pastComps = competitions.filter(c => c.status === 'ended');
 
   return (
-    <div className="pt-16">
-      {/* Header */}
-      <section className="relative py-24 px-4 bg-white">
-        <div className="relative max-w-4xl mx-auto text-center">
-          <motion.div initial={{opacity: 0, y: 30}} animate={{opacity: 1, y: 0}} transition={{duration: 0.8}}>
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 font-display mb-4">
-              {t('title')}
-            </h1>
-            <p className="text-xl text-gray-600">{t('subtitle')}</p>
-          </motion.div>
+    <div>
+      <h1 className="sr-only">{t('title')}</h1>
+      {locale !== 'zh-TW' && (
+        <div className="border-b border-gray-200 bg-[#fafcf9] px-4">
+          <p className="mx-auto max-w-7xl py-3 text-sm text-gray-600">{t('chineseOnly')}</p>
         </div>
-      </section>
+      )}
 
-      {/* Upcoming */}
-      <section className="bg-gray-50 py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <motion.h2 initial={{opacity: 0}} whileInView={{opacity: 1}} viewport={{once: true}} className="text-3xl font-bold text-brand-700 font-display mb-12">
-            {t('upcoming')}
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {upcomingComps.map((comp) => (
-              <CompetitionCard
-                key={comp.id}
-                id={comp.id}
-                title={(comp.title as Record<string, string>)[locale] || comp.title.en}
-                description={(comp.description as Record<string, string>)[locale] || comp.description.en}
-                image={comp.image}
-                date={comp.date}
-                prize={comp.prize}
-                participants={comp.participants}
-                status={comp.status}
-                category={comp.category}
-              />
-            ))}
+      {/* Current */}
+      {currentComps.length > 0 && (
+        <section className="bg-gray-50 px-4 pt-10 pb-20 sm:pt-12">
+          <div className="max-w-7xl mx-auto">
+            <motion.h2 initial={{opacity: 0}} whileInView={{opacity: 1}} viewport={{once: true}} className="text-3xl font-bold text-brand-700 font-display mb-12">
+              {t('current')}
+            </motion.h2>
+            <CompetitionGrid items={currentComps} />
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Past */}
       {pastComps.length > 0 && (
-        <section className="bg-white py-20 px-4">
+        <section className={`bg-white px-4 pb-20 ${currentComps.length > 0 ? 'pt-20' : 'pt-10 sm:pt-12'}`}>
           <div className="max-w-7xl mx-auto">
             <motion.h2 initial={{opacity: 0}} whileInView={{opacity: 1}} viewport={{once: true}} className="text-3xl font-bold text-gray-400 font-display mb-12">
               {t('past')}
             </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {pastComps.map((comp) => (
-                <CompetitionCard
-                  key={comp.id}
-                  id={comp.id}
-                  title={(comp.title as Record<string, string>)[locale] || comp.title.en}
-                  description={(comp.description as Record<string, string>)[locale] || comp.description.en}
-                  image={comp.image}
-                  date={comp.date}
-                  prize={comp.prize}
-                  participants={comp.participants}
-                  status={comp.status}
-                  category={comp.category}
-                />
-              ))}
-            </div>
+            <CompetitionGrid items={pastComps} />
           </div>
         </section>
       )}

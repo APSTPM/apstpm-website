@@ -59,10 +59,10 @@ export default async function HomeSections() {
           {competitions.slice(0, previewLimit).map(item => (
             <Link key={item.id} href={`/competitions/${item.id}`} className={linkClassName}>
               <PreviewImage src={item.image} />
-              <div className="p-5 sm:p-6">
-                <time dateTime={item.date} className="text-xs tabular-nums text-gray-500">{item.date}</time>
-                <h3 className="mt-2 text-lg font-semibold leading-snug text-gray-900 group-hover:text-brand-800">{localized(item.title)}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-gray-600">{localized(item.description)}</p>
+              <div lang="zh-Hant" className="p-5 sm:p-6">
+                <time dateTime={item.date} className="text-xs tabular-nums text-gray-500">{item.period}</time>
+                <h3 className="mt-2 text-lg font-semibold leading-snug text-gray-900 group-hover:text-brand-800">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-gray-600">{item.summary}</p>
               </div>
             </Link>
           ))}

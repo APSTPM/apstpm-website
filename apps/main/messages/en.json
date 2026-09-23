@@ -89,13 +89,11 @@
   },
   "competitions": {
     "title": "Competitions",
-    "subtitle": "Showcase Your Skills in Energy Innovation",
-    "upcoming": "Upcoming Competitions",
+    "subtitle": "Science, academic and vocational skills competitions organised or joined by APSTPM",
+    "current": "Ongoing & Upcoming",
     "past": "Past Competitions",
-    "register": "Register Now",
-    "learnMore": "Learn More",
-    "participants": "Participants",
     "viewDetails": "View Details",
+    "chineseOnly": "Competition details are available in Traditional Chinese only.",
     "status": {
       "open": "Registration Open",
       "upcoming": "Coming Soon",
@@ -105,11 +103,9 @@
     },
     "detail": {
       "overview": "Overview",
-      "schedule": "Schedule",
-      "prizes": "Prizes",
-      "requirements": "Requirements",
-      "registration": "Registration",
-      "contactOrganizer": "Contact Organizer"
+      "highlights": "Key Facts",
+      "organizers": "Organisers",
+      "sources": "Sources"
     }
   },
   "news": {
