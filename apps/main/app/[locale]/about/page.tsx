@@ -14,8 +14,8 @@ export default function AboutPage() {
   const locale = useLocale() as 'en' | 'zh-TW';
 
   const navItems = [
+    // 宗旨與會員資格在桌面端同一行，目錄合併為一項
     {id: 'mission', label: t('missionTitle')},
-    {id: 'membership', label: t('historyTitle')},
     {id: 'organization', label: t('organizationTitle')},
     ...organizationGroups.map(group => ({id: `organization-${group.key}`, label: t(`organization.${group.key}`), level: 2 as const})),
   ];
@@ -25,37 +25,40 @@ export default function AboutPage() {
       <h1 className="sr-only">{t('title')}</h1>
       <SectionNav items={navItems} label={tCommon('onThisPage')} />
 
-      {/* Mission */}
-      <section id="mission" className="scroll-mt-24 bg-gray-50 px-4 pt-10 pb-20 sm:pt-12">
-        <div className="max-w-4xl mx-auto">
-          <motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}} className="bg-white rounded-2xl p-8 md:p-12 border border-gray-100 shadow-sm">
-            <h2 className="text-3xl font-bold text-gray-900 font-display mb-6">{t('missionTitle')}</h2>
-            <p className="text-lg text-gray-600 leading-relaxed">{t('missionDescription')}</p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* History */}
-      <section id="membership" className="scroll-mt-16 bg-white py-20 px-4">
-        <div className="max-w-4xl mx-auto">
-          <motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}} className="bg-white rounded-2xl p-8 md:p-12 border border-gray-100 shadow-sm">
-            <h2 className="text-3xl font-bold text-brand-700 font-display mb-6">{t('historyTitle')}</h2>
-            <p className="text-lg text-gray-600 leading-relaxed">{t('historyDescription')}</p>
-          </motion.div>
+      {/* 宗旨與會員資格：兩段都很短，桌面端並排成兩欄，避免各佔一整屏 */}
+      <section id="mission" className="scroll-mt-24 bg-gray-50 px-4 py-10 sm:py-12">
+        <div className="max-w-6xl mx-auto grid gap-6 md:grid-cols-2">
+          {[
+            {key: 'mission', title: t('missionTitle'), body: t('missionDescription')},
+            {key: 'membership', anchor: 'membership', title: t('historyTitle'), body: t('historyDescription')},
+          ].map((card, i) => (
+            <motion.div
+              key={card.key}
+              id={card.anchor}
+              initial={{opacity: 0, y: 20}}
+              whileInView={{opacity: 1, y: 0}}
+              viewport={{once: true}}
+              transition={{delay: i * 0.08}}
+              className="scroll-mt-24 bg-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm"
+            >
+              <h2 className="text-2xl font-bold text-brand-700 font-display mb-3">{card.title}</h2>
+              <p className="text-base md:text-lg text-gray-600 leading-relaxed">{card.body}</p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
       {/* Organization */}
-      <section id="organization" className="scroll-mt-16 bg-gray-50 py-20 px-4">
+      <section id="organization" className="scroll-mt-16 bg-white py-12 sm:py-16 px-4">
         <div className="max-w-6xl mx-auto">
-          <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} viewport={{once: true}} className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 font-display mb-4">{t('organizationTitle')}</h2>
+          <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} viewport={{once: true}} className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 font-display mb-3">{t('organizationTitle')}</h2>
             <p className="text-lg text-gray-600">{t('organizationSubtitle')}</p>
           </motion.div>
-          <div className="space-y-16">
+          <div className="space-y-12">
             {organizationGroups.map(group => (
               <div key={group.key} id={`organization-${group.key}`} className="scroll-mt-28">
-                <h3 className="text-2xl font-bold text-brand-700 font-display text-center mb-8">
+                <h3 className="text-2xl font-bold text-brand-700 font-display text-center mb-6">
                   {t(`organization.${group.key}`)}
                 </h3>
                 <div className="flex flex-wrap justify-center gap-6 md:gap-8">
