@@ -5,7 +5,8 @@
 [build]
   command = "pnpm --filter main build"
   publish = "apps/main/.next"
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- apps/main packages pnpm-lock.yaml package.json pnpm-workspace.yaml turbo.json"
+  # 緩存丟失時 CACHED_COMMIT_REF 會等於 COMMIT_REF，此時強制構建
+  ignore = '[ "$CACHED_COMMIT_REF" != "$COMMIT_REF" ] && git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- apps/main packages pnpm-lock.yaml package.json pnpm-workspace.yaml turbo.json'
 
 [build.environment]
   NODE_VERSION = "20"
