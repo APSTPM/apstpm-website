@@ -87,6 +87,14 @@
       "generalAssembly": "會員大會",
       "board": "理事會",
       "supervisory": "監事會"
+    },
+    "member": {
+      "affiliation": "本職",
+      "bio": "簡介",
+      "duties": "會內工作",
+      "homepage": "個人主頁",
+      "close": "關閉",
+      "viewProfile": "查看{name}的介紹"
     }
   },
   "competitions": {

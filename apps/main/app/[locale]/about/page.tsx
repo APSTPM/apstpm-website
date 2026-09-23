@@ -1,17 +1,21 @@
 'use client';
 
+import {useState} from 'react';
 import {useTranslations, useLocale} from 'next-intl';
 import Image from 'next/image';
 import {motion} from 'framer-motion';
 import {UserRound} from 'lucide-react';
 
+import MemberDialog from '@/components/MemberDialog';
 import SectionNav from '@/components/SectionNav';
-import {organizationGroups} from '@/data/organization';
+import {organizationGroups, type OrganizationGroup, type OrganizationMember} from '@/data/organization';
 
 export default function AboutPage() {
   const t = useTranslations('about');
   const tCommon = useTranslations('common');
   const locale = useLocale() as 'en' | 'zh-TW';
+  // 當前打開彈窗的成員及其所屬組別
+  const [selected, setSelected] = useState<{member: OrganizationMember; group: OrganizationGroup['key']} | null>(null);
 
   const navItems = [
     // 宗旨與會員資格在桌面端同一行，目錄合併為一項
@@ -71,15 +75,22 @@ export default function AboutPage() {
                       transition={{delay: i * 0.08}}
                       className="w-[calc(50%-0.75rem)] sm:w-44 text-center"
                     >
-                      <div className="aspect-[3/4] relative rounded-2xl overflow-hidden bg-gray-100 border border-gray-100 flex items-center justify-center mb-4">
-                        {m.photo ? (
-                          <Image src={m.photo} alt={m.name[locale]} fill sizes="(min-width: 640px) 176px, 50vw" className="object-cover" />
-                        ) : (
-                          <UserRound className="w-16 h-16 text-gray-300" strokeWidth={1.5} aria-hidden />
-                        )}
-                      </div>
-                      <p className="font-display font-bold text-gray-900">{m.name[locale]}</p>
-                      <p className="text-sm text-gray-500 mt-1">{m.position[locale]}</p>
+                      <button
+                        type="button"
+                        onClick={() => setSelected({member: m, group: group.key})}
+                        aria-label={t('member.viewProfile', {name: m.name[locale]})}
+                        className="group block w-full rounded-2xl text-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-800"
+                      >
+                        <div className="aspect-[3/4] relative rounded-2xl overflow-hidden bg-gray-100 border border-gray-100 flex items-center justify-center mb-4 transition-shadow group-hover:shadow-md group-hover:border-brand-200">
+                          {m.photo ? (
+                            <Image src={m.photo} alt={m.name[locale]} fill sizes="(min-width: 640px) 176px, 50vw" className="object-cover" />
+                          ) : (
+                            <UserRound className="w-16 h-16 text-gray-300" strokeWidth={1.5} aria-hidden />
+                          )}
+                        </div>
+                        <p className="font-display font-bold text-gray-900 transition-colors group-hover:text-brand-700">{m.name[locale]}</p>
+                        <p className="text-sm text-gray-500 mt-1">{m.position[locale]}</p>
+                      </button>
                     </motion.div>
                   ))}
                 </div>
@@ -88,6 +99,13 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <MemberDialog
+        member={selected?.member ?? null}
+        groupLabel={selected ? t(`organization.${selected.group}`) : ''}
+        locale={locale}
+        onClose={() => setSelected(null)}
+      />
     </div>
   );
 }

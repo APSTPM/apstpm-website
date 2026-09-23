@@ -87,6 +87,14 @@
       "generalAssembly": "General Assembly",
       "board": "Board of Directors",
       "supervisory": "Supervisory Board"
+    },
+    "member": {
+      "affiliation": "Affiliation",
+      "bio": "About",
+      "duties": "Role in the association",
+      "homepage": "Personal page",
+      "close": "Close",
+      "viewProfile": "View profile of {name}"
     }
   },
   "competitions": {
