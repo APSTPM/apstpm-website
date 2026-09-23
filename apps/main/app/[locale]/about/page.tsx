@@ -6,6 +6,7 @@ import Image from 'next/image';
 import {motion} from 'framer-motion';
 import {UserRound} from 'lucide-react';
 
+import SectionNav from '@/components/SectionNav';
 import {organizationGroups} from '@/data/organization';
 
 export default function AboutPage() {
@@ -19,12 +20,22 @@ export default function AboutPage() {
     {key: 'sustainability', icon: '🌱'},
   ];
 
+  const navItems = [
+    {id: 'mission', label: t('missionTitle')},
+    {id: 'membership', label: t('historyTitle')},
+    {id: 'values', label: t('valuesTitle')},
+    {id: 'organization', label: t('organizationTitle')},
+    ...organizationGroups.map(group => ({id: `organization-${group.key}`, label: t(`organization.${group.key}`), level: 2 as const})),
+    {id: 'contact', label: t('teamTitle')},
+  ];
+
   return (
     <div>
       <h1 className="sr-only">{t('title')}</h1>
+      <SectionNav items={navItems} label={tCommon('onThisPage')} />
 
       {/* Mission */}
-      <section className="bg-gray-50 px-4 pt-10 pb-20 sm:pt-12">
+      <section id="mission" className="scroll-mt-24 bg-gray-50 px-4 pt-10 pb-20 sm:pt-12">
         <div className="max-w-4xl mx-auto">
           <motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}} className="bg-white rounded-2xl p-8 md:p-12 border border-gray-100 shadow-sm">
             <h2 className="text-3xl font-bold text-gray-900 font-display mb-6">{t('missionTitle')}</h2>
@@ -34,7 +45,7 @@ export default function AboutPage() {
       </section>
 
       {/* History */}
-      <section className="bg-white py-20 px-4">
+      <section id="membership" className="scroll-mt-16 bg-white py-20 px-4">
         <div className="max-w-4xl mx-auto">
           <motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}} className="bg-white rounded-2xl p-8 md:p-12 border border-gray-100 shadow-sm">
             <h2 className="text-3xl font-bold text-brand-700 font-display mb-6">{t('historyTitle')}</h2>
@@ -44,7 +55,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="bg-gray-50 py-20 px-4">
+      <section id="values" className="scroll-mt-16 bg-gray-50 py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.h2 initial={{opacity: 0}} whileInView={{opacity: 1}} viewport={{once: true}} className="text-4xl font-bold text-gray-900 font-display text-center mb-16">
             {t('valuesTitle')}
@@ -73,7 +84,7 @@ export default function AboutPage() {
       </section>
 
       {/* Organization */}
-      <section className="bg-white py-20 px-4">
+      <section id="organization" className="scroll-mt-16 bg-white py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} viewport={{once: true}} className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 font-display mb-4">{t('organizationTitle')}</h2>
@@ -81,7 +92,7 @@ export default function AboutPage() {
           </motion.div>
           <div className="space-y-16">
             {organizationGroups.map(group => (
-              <div key={group.key}>
+              <div key={group.key} id={`organization-${group.key}`} className="scroll-mt-28">
                 <h3 className="text-2xl font-bold text-brand-700 font-display text-center mb-8">
                   {t(`organization.${group.key}`)}
                 </h3>
@@ -114,7 +125,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team CTA */}
-      <section className="bg-gray-50 py-20 px-4">
+      <section id="contact" className="scroll-mt-16 bg-gray-50 py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}}>
             <h2 className="text-3xl font-bold text-gray-900 font-display mb-4">{t('teamTitle')}</h2>

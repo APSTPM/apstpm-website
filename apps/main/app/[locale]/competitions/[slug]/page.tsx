@@ -3,6 +3,7 @@ import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {Link} from '@/i18n/routing';
 import {notFound} from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
+import SectionNav from '@/components/SectionNav';
 import {competitions, getCompetition} from '@/data/competitions';
 
 const statusClasses: Record<string, string> = {
@@ -24,8 +25,16 @@ export default async function CompetitionDetailPage({params}: {params: Promise<{
   const t = await getTranslations('competitions');
   const tCommon = await getTranslations('common');
 
+  const navItems = [
+    {id: 'overview', label: t('detail.overview')},
+    {id: 'highlights', label: t('detail.highlights')},
+    {id: 'organizers', label: t('detail.organizers')},
+    {id: 'sources', label: t('detail.sources')},
+  ];
+
   return (
     <div>
+      <SectionNav items={navItems} label={tCommon('onThisPage')} />
       <PageHeader
         narrow
         title={<span lang="zh-Hant">{competition.title}</span>}
@@ -53,7 +62,7 @@ export default async function CompetitionDetailPage({params}: {params: Promise<{
       </PageHeader>
 
       {/* Overview */}
-      <section className="bg-gray-50 py-16 px-4">
+      <section id="overview" className="scroll-mt-16 bg-gray-50 py-16 px-4">
         <div className="max-w-4xl mx-auto bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <Image src={competition.image} alt="" width={1280} height={800} unoptimized className="aspect-[8/5] w-full bg-gray-100 object-cover" />
           <div className="p-8">
@@ -66,7 +75,7 @@ export default async function CompetitionDetailPage({params}: {params: Promise<{
       </section>
 
       {/* Highlights */}
-      <section className="bg-white py-16 px-4">
+      <section id="highlights" className="scroll-mt-16 bg-white py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold text-gray-900 font-display mb-8">{t('detail.highlights')}</h2>
           <dl lang="zh-Hant" className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -81,7 +90,7 @@ export default async function CompetitionDetailPage({params}: {params: Promise<{
       </section>
 
       {/* Organizers */}
-      <section className="bg-gray-50 py-16 px-4">
+      <section id="organizers" className="scroll-mt-16 bg-gray-50 py-16 px-4">
         <div className="max-w-4xl mx-auto bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
           <h2 className="text-2xl font-bold text-gray-900 font-display mb-6">{t('detail.organizers')}</h2>
           <dl lang="zh-Hant" className="space-y-4">
@@ -96,7 +105,7 @@ export default async function CompetitionDetailPage({params}: {params: Promise<{
       </section>
 
       {/* Sources */}
-      <section className="bg-white py-16 px-4">
+      <section id="sources" className="scroll-mt-16 bg-white py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold text-gray-900 font-display mb-6">{t('detail.sources')}</h2>
           <ul lang="zh-Hant" className="space-y-3">

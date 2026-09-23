@@ -6,3 +6,4 @@ export { default as Timeline } from './Timeline';
 export { default as GalleryGrid } from './GalleryGrid';
 export { default as ContactForm } from './ContactForm';
 export { default as PageHeader } from './PageHeader';
+export { default as SectionNav } from './SectionNav';
