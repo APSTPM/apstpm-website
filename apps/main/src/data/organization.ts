@@ -1,5 +1,5 @@
 // 協會組織架構：會員大會、理事會、監事會
-// 照片放在 public/images/organization/，目前四張取自各人任職大學的官方頁面
+// 照片放在 public/images/organization/，其中四張取自各人任職大學的官方頁面
 // affiliation／bio／link 只填有公開來源可核實的，其餘待本人提供
 
 type Localized = {en: string; 'zh-TW': string};
@@ -136,8 +136,20 @@ export const organizationGroups: OrganizationGroup[] = [
         duties: duties.boardViceChairmanTreasurer,
       },
       {id: 'board-vice-chairman', name: zh('吳建迪'), position: {en: 'Vice Chairman', 'zh-TW': '副理事長'}, duties: duties.boardViceChairman},
-      {id: 'board-director-1', name: zh('黎健恆'), position: {en: 'Director', 'zh-TW': '理事'}, duties: duties.director},
-      {id: 'board-director-2', name: zh('杜加威'), position: {en: 'Director', 'zh-TW': '理事'}, duties: duties.director},
+      {
+        id: 'board-director-1',
+        name: zh('黎健恆'),
+        photo: '/images/organization/li-jian-heng.jpg',
+        position: {en: 'Director', 'zh-TW': '理事'},
+        duties: duties.director,
+      },
+      {
+        id: 'board-director-2',
+        name: zh('杜加威'),
+        photo: '/images/organization/du-jia-wei.jpg',
+        position: {en: 'Director', 'zh-TW': '理事'},
+        duties: duties.director,
+      },
     ],
   },
   {
